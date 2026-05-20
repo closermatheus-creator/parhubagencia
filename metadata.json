@@ -1,0 +1,6 @@
+{
+  "name": "PAR HUB",
+  "description": "Landing page profissional e altamente interativa para a PAR HUB Agência de Tráfego Pago e Social Seller.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
