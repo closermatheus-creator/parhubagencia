@@ -949,11 +949,11 @@
 
 
     <!-- 10. INTERACTIVE GROWTH DIAGNOSIS WIZARD MODAL POPUP -->
-    <div id="diagnosis-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-zinc-950/80 backdrop-blur-xs">
-      <div class="w-full max-w-2xl rounded-3xl border border-slate-200 dark:border-zinc-850 bg-white dark:bg-zinc-900 text-slate-900 dark:text-white shadow-2xl relative overflow-hidden flex flex-col justify-between max-h-[92vh]">
+    <div id="diagnosis-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-2 sm:p-4 bg-zinc-950/80 backdrop-blur-xs">
+      <div class="w-full max-w-2xl rounded-3xl border border-slate-200 dark:border-zinc-850 bg-white dark:bg-zinc-900 text-slate-900 dark:text-white shadow-2xl relative overflow-hidden flex flex-col justify-between max-h-[95vh] sm:max-h-[92vh]">
         
         <!-- Modal Top Header Row -->
-        <div class="flex items-center justify-between p-6 border-b border-slate-100 dark:border-zinc-800">
+        <div class="flex items-center justify-between p-4 sm:p-6 border-b border-slate-100 dark:border-zinc-800">
           <div class="flex items-center gap-2">
             <span class="flex h-2.5 w-2.5 rounded-full bg-brand-blue animate-pulse"></span>
             <span id="diagnostic-phase-title" class="font-mono text-[10px] uppercase tracking-widest text-slate-400 font-bold">
@@ -967,7 +967,7 @@
         </div>
 
         <!-- Scrollable Modal Content area -->
-        <div class="p-6 sm:p-8 overflow-y-auto flex-1 modal-scrollbar" id="modal-content-container">
+        <div class="p-4 sm:p-8 overflow-y-auto flex-1 modal-scrollbar" id="modal-content-container">
           
           <!-- Wizard Select Question view screen -->
           <div id="modal-wizard-screen" class="space-y-6">
@@ -998,11 +998,11 @@
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="space-y-1">
                   <label class="text-[10px] uppercase font-bold text-slate-500 dark:text-zinc-400 leading-none">Seu Nome *</label>
-                  <input type="text" id="lead-name" placeholder="Ex: Pedro Henrique" required class="w-full px-3.5 py-2.5 rounded-xl text-xs border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-450 dark:placeholder-zinc-500 font-medium focus:outline-none focus:ring-1 focus:ring-brand-blue focus:border-brand-blue" />
+                  <input type="text" id="lead-name" oninput="onLeadFormInput()" placeholder="Ex: Pedro Henrique" required class="w-full px-3.5 py-2.5 rounded-xl text-xs border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-450 dark:placeholder-zinc-500 font-medium focus:outline-none focus:ring-1 focus:ring-brand-blue focus:border-brand-blue" />
                 </div>
                 <div class="space-y-1">
                   <label class="text-[10px] uppercase font-bold text-slate-500 dark:text-zinc-400 leading-none">WhatsApp de Contato *</label>
-                  <input type="text" id="lead-whatsapp" placeholder="Ex: (11) 99999-9999" required class="w-full px-3.5 py-2.5 rounded-xl text-xs border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-450 dark:placeholder-zinc-500 font-medium focus:outline-none focus:ring-1 focus:ring-brand-blue focus:border-brand-blue" />
+                  <input type="text" id="lead-whatsapp" oninput="onLeadFormInput()" placeholder="Ex: (11) 99999-9999" required class="w-full px-3.5 py-2.5 rounded-xl text-xs border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-450 dark:placeholder-zinc-500 font-medium focus:outline-none focus:ring-1 focus:ring-brand-blue focus:border-brand-blue" />
                 </div>
               </div>
               <!-- Trigger computation -->
@@ -1085,7 +1085,7 @@
         </div>
 
         <!-- Modal Bottom Actions buttons Row -->
-        <div class="p-6 border-t border-slate-100 dark:border-zinc-800 flex items-center justify-between gap-4 bg-slate-50/50 dark:bg-zinc-950/30">
+        <div class="p-4 sm:p-6 border-t border-slate-100 dark:border-zinc-800 flex items-center justify-between gap-4 bg-slate-50/50 dark:bg-zinc-950/30">
           <button onclick="handleModalBack()" id="modal-back-btn" class="flex items-center gap-1.5 py-2.5 px-4 font-mono text-[10px] uppercase font-bold text-slate-400 dark:text-zinc-550 hover:text-slate-600 dark:hover:text-zinc-300 cursor-pointer">
             <i data-lucide="arrow-left" class="h-3.5 w-3.5"></i> Voltar
           </button>
@@ -1105,8 +1105,8 @@
 
 
     <!-- PLANS SELECTION NOTIFY CLIENT MODAL -->
-    <div id="plans-checkout-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-zinc-950/70 backdrop-blur-xs">
-      <div class="w-full max-w-md rounded-3xl border border-slate-200 dark:border-zinc-850 bg-white dark:bg-zinc-900 p-6 space-y-4 shadow-xl">
+    <div id="plans-checkout-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-2 sm:p-4 bg-zinc-950/70 backdrop-blur-xs animate-in fade-in duration-200">
+      <div class="w-full max-w-md rounded-3xl border border-slate-200 dark:border-zinc-850 bg-white dark:bg-zinc-900 p-4 sm:p-6 space-y-4 shadow-xl max-h-[95vh] sm:max-h-[92vh] overflow-y-auto modal-scrollbar">
         <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-zinc-800">
           <h4 id="checkout-plan-title" class="font-display font-black text-lg text-slate-900 dark:text-white">Opção Comercial</h4>
           <button onclick="closePlansCheckout()" class="flex items-center gap-1 px-2.5 py-1 rounded-full border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 text-slate-600 dark:text-zinc-300 hover:bg-slate-100 dark:hover:bg-zinc-700 hover:text-slate-900 dark:hover:text-white transition-colors text-[9px] uppercase font-mono font-bold tracking-wider cursor-pointer">
@@ -1342,6 +1342,22 @@
         if (currentStep < 4) {
           currentStep++;
           renderStep();
+        } else if (currentStep === 4) {
+          submitLeadsAndCalculate();
+        }
+      }
+
+      function onLeadFormInput() {
+        if (currentStep === 4 && selectedHistory) {
+          const nameVal = document.getElementById('lead-name').value.trim();
+          const whatsappVal = document.getElementById('lead-whatsapp').value.trim();
+          if (nameVal && whatsappVal) {
+            nextBtn.removeAttribute('disabled');
+            nextBtn.classList.remove('opacity-40');
+          } else {
+            nextBtn.setAttribute('disabled', 'true');
+            nextBtn.classList.add('opacity-40');
+          }
         }
       }
 
@@ -1367,6 +1383,14 @@
             currentStep++;
             renderStep();
           }, 200);
+        } else if (currentStep === 4 && selectedHistory) {
+          // If on step 4, scroll the container down to reveal registration form and calculate button smoothly on mobile!
+          setTimeout(() => {
+            const container = document.getElementById('modal-content-container');
+            if (container) {
+              container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+            }
+          }, 100);
         }
       }
 
@@ -1403,21 +1427,34 @@
           `;
         });
 
-        // Hide or show Next button
-        if (selectionVal) {
-          nextBtn.removeAttribute('disabled');
-          nextBtn.classList.remove('opacity-40');
+        if (currentStep === 4) {
+          const nameVal = document.getElementById('lead-name').value.trim();
+          const whatsappVal = document.getElementById('lead-whatsapp').value.trim();
+          if (selectionVal && nameVal && whatsappVal) {
+            nextBtn.removeAttribute('disabled');
+            nextBtn.classList.remove('opacity-40');
+          } else {
+            nextBtn.setAttribute('disabled', 'true');
+            nextBtn.classList.add('opacity-40');
+          }
         } else {
-          nextBtn.setAttribute('disabled', 'true');
-          nextBtn.classList.add('opacity-40');
+          if (selectionVal) {
+            nextBtn.removeAttribute('disabled');
+            nextBtn.classList.remove('opacity-40');
+          } else {
+            nextBtn.setAttribute('disabled', 'true');
+            nextBtn.classList.add('opacity-40');
+          }
         }
 
         // Handle step 4 custom footer forms showing
         if (currentStep === 4 && selectedHistory) {
           leadForm.classList.remove('hidden');
-          nextBtn.classList.add('hidden'); // submit handled by calculate btn inside the register box
+          nextBtn.classList.remove('hidden'); // submit handled by calculate btn inside the register box and sticky footer now!
+          nextBtn.innerHTML = `Calcular <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i>`;
         } else {
           leadForm.classList.add('hidden');
+          nextBtn.innerHTML = `Continuar <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i>`;
           if (currentStep < 4) {
             nextBtn.classList.remove('hidden');
           }
