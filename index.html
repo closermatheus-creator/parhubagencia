@@ -156,7 +156,7 @@
             Responder Form de Briefing
           </a>
         </div>
-        <p class="text-[9px] sm:text-[10px] text-slate-400 dark:text-zinc-500 uppercase tracking-widest font-mono">
+        <p class="text-[9px] sm:text-[10px] text-slate-500 dark:text-zinc-400 uppercase tracking-widest font-mono font-bold">
           Sem compromisso &bull; Call rápida de 15 min com especialista
         </p>
       </div>
@@ -960,8 +960,9 @@
               Diagnóstico Comercial &bull; Fase 01 de 04
             </span>
           </div>
-          <button onclick="closeDiagnosis()" class="p-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-400 hover:text-slate-600 cursor-pointer">
-            <i data-lucide="x" class="h-5 w-5"></i>
+          <button onclick="closeDiagnosis()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 text-slate-600 dark:text-zinc-300 hover:bg-slate-100 dark:hover:bg-zinc-700 hover:text-slate-900 dark:hover:text-white transition-colors text-[10px] uppercase font-mono font-bold tracking-wider cursor-pointer">
+            <span>Fechar</span>
+            <i data-lucide="x" class="h-3.5 w-3.5"></i>
           </button>
         </div>
 
@@ -996,12 +997,12 @@
               </div>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="space-y-1">
-                  <label class="text-[10px] uppercase font-bold text-slate-400 leading-none">Seu Nome *</label>
-                  <input type="text" id="lead-name" placeholder="Ex: Pedro Henrique" required class="w-full px-3.5 py-2 rounded-xl text-xs border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-1 focus:ring-brand-blue focus:border-brand-blue" />
+                  <label class="text-[10px] uppercase font-bold text-slate-500 dark:text-zinc-400 leading-none">Seu Nome *</label>
+                  <input type="text" id="lead-name" placeholder="Ex: Pedro Henrique" required class="w-full px-3.5 py-2.5 rounded-xl text-xs border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-450 dark:placeholder-zinc-500 font-medium focus:outline-none focus:ring-1 focus:ring-brand-blue focus:border-brand-blue" />
                 </div>
                 <div class="space-y-1">
-                  <label class="text-[10px] uppercase font-bold text-slate-400 leading-none">WhatsApp de Contato *</label>
-                  <input type="text" id="lead-whatsapp" placeholder="Ex: (11) 99999-9999" required class="w-full px-3.5 py-2 rounded-xl text-xs border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-1 focus:ring-brand-blue focus:border-brand-blue" />
+                  <label class="text-[10px] uppercase font-bold text-slate-500 dark:text-zinc-400 leading-none">WhatsApp de Contato *</label>
+                  <input type="text" id="lead-whatsapp" placeholder="Ex: (11) 99999-9999" required class="w-full px-3.5 py-2.5 rounded-xl text-xs border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 placeholder-slate-450 dark:placeholder-zinc-500 font-medium focus:outline-none focus:ring-1 focus:ring-brand-blue focus:border-brand-blue" />
                 </div>
               </div>
               <!-- Trigger computation -->
@@ -1108,8 +1109,9 @@
       <div class="w-full max-w-md rounded-3xl border border-slate-200 dark:border-zinc-850 bg-white dark:bg-zinc-900 p-6 space-y-4 shadow-xl">
         <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-zinc-800">
           <h4 id="checkout-plan-title" class="font-display font-black text-lg text-slate-900 dark:text-white">Opção Comercial</h4>
-          <button onclick="closePlansCheckout()" class="p-1 rounded-full text-slate-400 hover:text-slate-600">
-            <i data-lucide="x" class="h-4.5 w-4.5"></i>
+          <button onclick="closePlansCheckout()" class="flex items-center gap-1 px-2.5 py-1 rounded-full border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 text-slate-600 dark:text-zinc-300 hover:bg-slate-100 dark:hover:bg-zinc-700 hover:text-slate-900 dark:hover:text-white transition-colors text-[9px] uppercase font-mono font-bold tracking-wider cursor-pointer">
+            <span>Fechar</span>
+            <i data-lucide="x" class="h-3.5 w-3.5"></i>
           </button>
         </div>
         <div class="space-y-4">
@@ -1118,12 +1120,12 @@
           </p>
           <div class="space-y-3">
             <div class="space-y-1">
-              <label class="text-[9px] uppercase font-bold text-slate-400">Seu Nome *</label>
-              <input type="text" id="chk-name" required placeholder="Ex: Pedro Henrique" class="w-full px-3.5 py-2.5 rounded-xl text-xs border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 focus:outline-none focus:ring-1 focus:ring-brand-blue focus:border-brand-blue" />
+              <label class="text-[9px] uppercase font-bold text-slate-500 dark:text-zinc-400">Seu Nome *</label>
+              <input type="text" id="chk-name" required placeholder="Ex: Pedro Henrique" class="w-full px-3.5 py-2.5 rounded-xl text-xs border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-slate-900 dark:text-zinc-100 placeholder-slate-450 dark:placeholder-zinc-500 font-medium focus:outline-none focus:ring-1 focus:ring-brand-blue focus:border-brand-blue" />
             </div>
             <div class="space-y-1">
-              <label class="text-[9px] uppercase font-bold text-slate-400">WhatsApp de Trabalho *</label>
-              <input type="text" id="chk-whatsapp" required placeholder="Ex: (11) 99999-9999" class="w-full px-3.5 py-2.5 rounded-xl text-xs border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 focus:outline-none focus:ring-1 focus:ring-brand-blue focus:border-brand-blue" />
+              <label class="text-[9px] uppercase font-bold text-slate-500 dark:text-zinc-400">WhatsApp de Trabalho *</label>
+              <input type="text" id="chk-whatsapp" required placeholder="Ex: (11) 99999-9999" class="w-full px-3.5 py-2.5 rounded-xl text-xs border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-slate-900 dark:text-zinc-100 placeholder-slate-450 dark:placeholder-zinc-500 font-medium focus:outline-none focus:ring-1 focus:ring-brand-blue focus:border-brand-blue" />
             </div>
           </div>
           <button onclick="submitPlansCheckout()" class="w-full text-center py-3.5 rounded-xl text-xs font-bold tracking-widest uppercase bg-brand-blue text-white hover:bg-brand-blue-hover transition-colors">
