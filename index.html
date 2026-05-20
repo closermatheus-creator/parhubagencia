@@ -20,9 +20,26 @@
         --color-brand-blue-hover: #1d4ed8;
         --color-brand-accent: #3b82f6;
       }
-      @variant dark (.dark &);
+      @variant dark (.never-match-dark-mode &);
     </style>
     <style>
+      /* Fallback classes for custom brand colors in case of compiles or device dark themes */
+      .bg-brand-blue {
+        background-color: #2563eb !important;
+      }
+      .bg-brand-blue-hover, .hover\:bg-brand-blue-hover:hover {
+        background-color: #1d4ed8 !important;
+      }
+      .text-brand-blue {
+        color: #2563eb !important;
+      }
+      .hover\:text-brand-blue-hover:hover {
+        color: #1d4ed8 !important;
+      }
+      .border-brand-blue {
+        border-color: #2563eb !important;
+      }
+
       /* Smooth manual overrides of custom components transitions */
       .modal-scrollbar::-webkit-scrollbar {
         width: 6px;
@@ -39,29 +56,27 @@
       }
     </style>
   </head>
-  <body class="min-h-screen bg-white dark:bg-zinc-950 text-slate-900 dark:text-zinc-100 font-sans antialiased transition-colors duration-500 overflow-x-hidden selection:bg-brand-blue/15 selection:text-brand-blue">
+  <body class="min-h-screen bg-white text-slate-900 font-sans antialiased overflow-x-hidden selection:bg-[#2563eb]/15 selection:text-[#2563eb]">
 
     <!-- 1. NAVIGATION HEADER BAR -->
     <nav class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-100 transition-colors duration-500">
       <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <!-- Brand Logo Block with precision SVG Monogram -->
         <a href="#agencia" class="flex items-center gap-2 group">
-          <svg viewBox="45 10 90 90" class="h-9 w-9 transition-all group-hover:scale-105" xmlns="http://www.w3.org/2000/svg">
-            <!-- Left vertical stem (P) -->
-            <rect x="50" y="15" width="10" height="90" rx="3" fill="#112347"/>
-            <!-- Center vertical stem (H-left) -->
-            <rect x="85" y="15" width="10" height="90" rx="3" fill="#112347"/>
-            <!-- Right vertical stem (H-right) -->
-            <rect x="120" y="15" width="10" height="90" rx="3" fill="#112347"/>
-            <!-- Infinity loop overlay -->
-            <path d="M 55 60 
-                     C 55 35, 85 35, 102.5 60 
-                     C 120 85, 125 60, 125 60 
-                     C 125 60, 120 35, 102.5 60 
-                     C 85 85, 55 85, 55 60 Z" 
+          <svg viewBox="0 0 100 100" class="h-9 w-9 transition-all group-hover:scale-105" xmlns="http://www.w3.org/2000/svg">
+            {/* Left vertical stem (p) */}
+            <rect x="33" y="10" width="8" height="80" rx="3.5" fill="#112347"/>
+            {/* Right vertical stem (h) */}
+            <rect x="59" y="10" width="8" height="80" rx="3.5" fill="#112347"/>
+            {/* Infinity loop overlay */}
+            <path d="M 50 50
+                     C 57 32, 76 32, 76 50
+                     C 76 68, 57 68, 50 50
+                     C 43 32, 24 32, 24 50
+                     C 24 68, 43 68, 50 50 Z" 
                   fill="none" 
                   stroke="#112347" 
-                  stroke-width="10" 
+                  stroke-width="9" 
                   stroke-linejoin="round" 
                   stroke-linecap="round"/>
           </svg>
@@ -88,8 +103,8 @@
           <a href="https://wa.me/5531984943305" target="_blank" rel="noopener noreferrer" class="text-[11px] uppercase tracking-[0.12rem] font-bold text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-1">
             <i data-lucide="phone" class="h-3 w-3 inline"></i> (31) 98494-3305
           </a>
-          <a href="https://www.instagram.com/parhub_agencia/" target="_blank" rel="noopener noreferrer" class="text-[11px] uppercase tracking-[0.12rem] font-bold text-rose-600 hover:text-rose-700 transition-colors flex items-center gap-1">
-            <i data-lucide="instagram" class="h-3 w-3 inline"></i> @parhub_agencia
+          <a href="https://www.instagram.com/parhub_agencia/" target="_blank" rel="noopener noreferrer" class="text-[11px] uppercase tracking-[0.12rem] font-bold text-slate-500 hover:text-slate-700 transition-colors flex items-center gap-1">
+            <i data-lucide="instagram" class="h-3 w-3 inline text-slate-400"></i> @parhub_agencia
           </a>
         </div>
 
@@ -122,8 +137,8 @@
           <a href="https://wa.me/5531984943305" target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()" class="text-xs uppercase tracking-widest font-black py-2.5 text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-2">
             <i data-lucide="phone" class="h-4 w-4"></i> WhatsApp: (31) 98494-3305
           </a>
-          <a href="https://www.instagram.com/parhub_agencia/" target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()" class="text-xs uppercase tracking-widest font-black py-2.5 text-rose-600 hover:text-rose-700 transition-colors flex items-center gap-2">
-            <i data-lucide="instagram" class="h-4 w-4"></i> Instagram: @parhub_agencia
+          <a href="https://www.instagram.com/parhub_agencia/" target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()" class="text-xs uppercase tracking-widest font-black py-2.5 text-slate-500 hover:text-slate-700 transition-colors flex items-center gap-2">
+            <i data-lucide="instagram" class="h-4 w-4 text-slate-400"></i> Instagram: @parhub_agencia
           </a>
           <button onclick="toggleMobileMenu(); openDiagnosis();" class="w-full text-center py-3 rounded-full text-[11px] font-bold tracking-widest uppercase bg-brand-blue text-white hover:bg-brand-blue-hover transition-colors">
             Diagnóstico Grátis
@@ -375,18 +390,33 @@
 
             <!-- Custom Interactive Visual Static Graph -->
             <div class="space-y-4">
-              <span class="text-[10px] uppercase font-mono text-slate-400 font-bold block">Taxa de Conversão Mensal</span>
+              <span class="text-[10px] uppercase font-mono text-slate-400 font-bold block">Evolução do Faturamento & ROAS Real</span>
               <div class="h-32 flex items-end gap-2.5 pt-4">
-                <div class="flex-1 bg-brand-blue/10 hover:bg-brand-blue/20 transition-all rounded-t-md h-[40%]" title="Semana 1"></div>
-                <div class="flex-1 bg-brand-blue/20 hover:bg-brand-blue/35 transition-all rounded-t-md h-[65%]" title="Semana 2"></div>
-                <div class="flex-1 bg-brand-blue/40 hover:bg-brand-blue/55 transition-all rounded-t-md h-[50%]" title="Semana 3"></div>
-                <div class="flex-1 bg-brand-blue hover:bg-brand-blue-hover transition-all rounded-t-md h-[95%]" title="Semana 4"></div>
+                <!-- Semana 1: Setup da conta -->
+                <div class="flex-1 border-2 border-dashed border-slate-200 dark:border-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-900/60 transition-all rounded-t-md h-[18%] flex flex-col justify-center items-center" title="Semana 1: Setup & Estudo de Público">
+                  <span class="text-[7.5px] font-mono leading-none text-slate-400 font-bold uppercase tracking-tighter">Setup</span>
+                </div>
+                <!-- Semana 2: Resultados mínimos começam -->
+                <div class="flex-1 bg-brand-blue/30 hover:bg-brand-blue/45 transition-all rounded-t-md h-[45%] flex flex-col justify-end items-center pb-1.5" title="Semana 2: Primeiras Conversões e Leads (+1.2x ROAS)">
+                  <span class="text-[9px] font-mono font-bold text-slate-700 leading-none mb-0.5">ROAS</span>
+                  <span class="text-[10px] font-mono font-bold text-brand-blue leading-none">+1.2x</span>
+                </div>
+                <!-- Semana 3: Resultados otimizados -->
+                <div class="flex-1 bg-brand-blue/60 hover:bg-brand-blue/75 transition-all rounded-t-md h-[75%] flex flex-col justify-end items-center pb-2" title="Semana 3: Otimização de Criativos (+3.4x ROAS)">
+                  <span class="text-[9px] font-mono font-bold text-slate-800 leading-none mb-0.5">ROAS</span>
+                  <span class="text-[11px] font-mono font-bold text-brand-blue leading-none">+3.4x</span>
+                </div>
+                <!-- Semana 4: Escala completa -->
+                <div class="flex-1 bg-brand-blue hover:bg-brand-blue-hover transition-all rounded-t-md h-[100%] flex flex-col justify-end items-center pb-2.5 shadow-xs" title="Semana 4 (Atual): Escala e Estabilização (+5.4x ROAS)">
+                  <span class="text-[9px] font-mono font-bold text-white/80 leading-none mb-0.5">ROAS</span>
+                  <span class="text-[11px] font-mono font-bold text-white leading-none">+5.4x</span>
+                </div>
               </div>
               <div class="flex justify-between text-[9px] font-mono text-slate-400">
-                <span>Semana 01</span>
-                <span>Semana 02</span>
-                <span>Semana 03</span>
-                <span>Semana 04 (Atual)</span>
+                <span>Semana 01 (Setup)</span>
+                <span>Semana 02 (Início)</span>
+                <span>Semana 03 (Otimização)</span>
+                <span>Semana 04 (Escala)</span>
               </div>
             </div>
           </div>
@@ -608,29 +638,33 @@
                 <span class="font-mono text-xs text-slate-400">&bull; mês</span>
               </div>
 
-              <p class="text-xs text-slate-500 dark:text-zinc-400 font-light leading-relaxed">Para quem quer volume previsível e qualificado de novos contatos e clientes diariamente.</p>
+              <p class="text-sm sm:text-base text-slate-600 font-light leading-relaxed">Para quem quer volume previsível e qualificado de novos contatos e clientes diariamente.</p>
 
               <!-- Bullets -->
               <div class="space-y-3 pt-2">
-                <div class="flex items-start gap-2.5 text-xs text-slate-600 dark:text-zinc-300">
-                  <i data-lucide="check" class="h-3.5 w-3.5 mt-0.5 text-brand-blue shrink-0"></i>
+                <div class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                  <i data-lucide="check" class="h-4 w-4 mt-1 text-brand-blue shrink-0"></i>
                   <span>Gestão completa de campanhas (Meta Ads ou Google Ads)</span>
                 </div>
-                <div class="flex items-start gap-2.5 text-xs text-slate-600 dark:text-zinc-300">
-                  <i data-lucide="check" class="h-3.5 w-3.5 mt-0.5 text-brand-blue shrink-0"></i>
+                <div class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                  <i data-lucide="check" class="h-4 w-4 mt-1 text-brand-blue shrink-0"></i>
                   <span>Captação e Roteirização de Criativos</span>
                 </div>
-                <div class="flex items-start gap-2.5 text-xs text-slate-600 dark:text-zinc-300">
-                  <i data-lucide="check" class="h-3.5 w-3.5 mt-0.5 text-brand-blue shrink-0"></i>
+                <div class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                  <i data-lucide="check" class="h-4 w-4 mt-1 text-brand-blue shrink-0"></i>
                   <span>Edição de Imagens e Vídeo de alta atração</span>
                 </div>
-                <div class="flex items-start gap-2.5 text-xs text-slate-600 dark:text-zinc-300">
-                  <i data-lucide="check" class="h-3.5 w-3.5 mt-0.5 text-brand-blue shrink-0"></i>
+                <div class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                  <i data-lucide="check" class="h-4 w-4 mt-1 text-brand-blue shrink-0"></i>
                   <span>Pixel e API de Conversão Meta inclusa</span>
                 </div>
-                <div class="flex items-start gap-2.5 text-xs text-slate-600 dark:text-zinc-300">
-                  <i data-lucide="check" class="h-3.5 w-3.5 mt-0.5 text-brand-blue shrink-0"></i>
+                <div class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                  <i data-lucide="check" class="h-4 w-4 mt-1 text-brand-blue shrink-0"></i>
                   <span>Relatórios com foco em ROI real</span>
+                </div>
+                <div class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                  <i data-lucide="check" class="h-4 w-4 mt-1 text-brand-blue shrink-0"></i>
+                  <span>Suporte direto com os sócios fundadores</span>
                 </div>
               </div>
             </div>
@@ -657,28 +691,28 @@
                 <span class="font-mono text-xs text-slate-400">&bull; mês</span>
               </div>
 
-              <p class="text-xs text-slate-500 dark:text-zinc-400 font-light leading-relaxed">A solução de marketing de ponta a ponta. Atração em massa + fechamento ativo no seu Instagram.</p>
+              <p class="text-sm sm:text-base text-slate-600 font-light leading-relaxed">A solução de marketing de ponta a ponta. Atração em massa + fechamento ativo no seu Instagram.</p>
 
               <!-- Bullets -->
               <div class="space-y-3 pt-2">
-                <div class="flex items-start gap-2.5 text-xs text-slate-600 dark:text-zinc-300">
-                  <i data-lucide="check" class="h-3.5 w-3.5 mt-0.5 text-brand-blue shrink-0"></i>
+                <div class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                  <i data-lucide="check" class="h-4 w-4 mt-1 text-brand-blue shrink-0"></i>
                   <span>Gestão integrada (Meta Ads + Google Ads)</span>
                 </div>
-                <div class="flex items-start gap-2.5 text-xs text-slate-600 dark:text-zinc-300">
-                  <i data-lucide="check" class="h-3.5 w-3.5 mt-0.5 text-brand-blue shrink-0"></i>
+                <div class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                  <i data-lucide="check" class="h-4 w-4 mt-1 text-brand-blue shrink-0"></i>
                   <span>Roteirização e Edição Premium Contínua</span>
                 </div>
-                <div class="flex items-start gap-2.5 text-xs text-slate-600 dark:text-zinc-300">
-                  <i data-lucide="check" class="h-3.5 w-3.5 mt-0.5 text-brand-blue shrink-0"></i>
+                <div class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                  <i data-lucide="check" class="h-4 w-4 mt-1 text-brand-blue shrink-0"></i>
                   <span>Atendimento ativo humano de Inbox (Social Seller)</span>
                 </div>
-                <div class="flex items-start gap-2.5 text-xs text-slate-600 dark:text-zinc-300">
-                  <i data-lucide="check" class="h-3.5 w-3.5 mt-0.5 text-brand-blue shrink-0"></i>
+                <div class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                  <i data-lucide="check" class="h-4 w-4 mt-1 text-brand-blue shrink-0"></i>
                   <span>Configuração de Automações e Atendente Inteligente</span>
                 </div>
-                <div class="flex items-start gap-2.5 text-xs text-slate-600 dark:text-zinc-300">
-                  <i data-lucide="check" class="h-3.5 w-3.5 mt-0.5 text-brand-blue shrink-0"></i>
+                <div class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                  <i data-lucide="check" class="h-4 w-4 mt-1 text-brand-blue shrink-0"></i>
                   <span>Suporte VIP e direto com os sócios fundadores</span>
                 </div>
               </div>
@@ -702,29 +736,33 @@
                 <span class="font-mono text-xs text-slate-400">&bull; mês</span>
               </div>
 
-              <p class="text-xs text-slate-500 dark:text-zinc-400 font-light leading-relaxed">Transforme o seu Instagram em um canal ativo e rápido de captação e acolhimento direto.</p>
+              <p class="text-sm sm:text-base text-slate-600 font-light leading-relaxed">Transforme o seu Instagram em um canal ativo e rápido de captação e acolhimento direto.</p>
 
               <!-- Bullets -->
               <div class="space-y-3 pt-2">
-                <div class="flex items-start gap-2.5 text-xs text-slate-600 dark:text-zinc-300">
-                  <i data-lucide="check" class="h-3.5 w-3.5 mt-0.5 text-brand-blue shrink-0"></i>
+                <div class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                  <i data-lucide="check" class="h-4 w-4 mt-1 text-brand-blue shrink-0"></i>
                   <span>Abordagem ativa e humanizada de seguidores e curtidas</span>
                 </div>
-                <div class="flex items-start gap-2.5 text-xs text-slate-600 dark:text-zinc-300">
-                  <i data-lucide="check" class="h-3.5 w-3.5 mt-0.5 text-brand-blue shrink-0"></i>
+                <div class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                  <i data-lucide="check" class="h-4 w-4 mt-1 text-brand-blue shrink-0"></i>
                   <span>Triagem ágil de leads dentro do direct</span>
                 </div>
-                <div class="flex items-start gap-2.5 text-xs text-slate-600 dark:text-zinc-300">
-                  <i data-lucide="check" class="h-3.5 w-3.5 mt-0.5 text-brand-blue shrink-0"></i>
+                <div class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                  <i data-lucide="check" class="h-4 w-4 mt-1 text-brand-blue shrink-0"></i>
                   <span>Roteirização integrada focada em Stories</span>
                 </div>
-                <div class="flex items-start gap-2.5 text-xs text-slate-600 dark:text-zinc-300">
-                  <i data-lucide="check" class="h-3.5 w-3.5 mt-0.5 text-brand-blue shrink-0"></i>
+                <div class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                  <i data-lucide="check" class="h-4 w-4 mt-1 text-brand-blue shrink-0"></i>
                   <span>Encaminhamento rápido qualificado ao WhatsApp</span>
                 </div>
-                <div class="flex items-start gap-2.5 text-xs text-slate-600 dark:text-zinc-300">
-                  <i data-lucide="check" class="h-3.5 w-3.5 mt-0.5 text-brand-blue shrink-0"></i>
+                <div class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                  <i data-lucide="check" class="h-4 w-4 mt-1 text-brand-blue shrink-0"></i>
                   <span>Relatórios de interações comerciais periódicos</span>
+                </div>
+                <div class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                  <i data-lucide="check" class="h-4 w-4 mt-1 text-brand-blue shrink-0"></i>
+                  <span>Suporte direto com os sócios fundadores</span>
                 </div>
               </div>
             </div>
@@ -881,22 +919,20 @@
         <div class="border-t border-slate-200 dark:border-zinc-900 pt-12 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <div class="space-y-4">
             <div class="flex items-center justify-center md:justify-start gap-3">
-              <svg viewBox="45 10 90 90" class="h-8 w-8" xmlns="http://www.w3.org/2000/svg">
-                <!-- Left vertical stem (P) -->
-                <rect x="50" y="15" width="10" height="90" rx="3" fill="#112347"/>
-                <!-- Center vertical stem (H-left) -->
-                <rect x="85" y="15" width="10" height="90" rx="3" fill="#112347"/>
-                <!-- Right vertical stem (H-right) -->
-                <rect x="120" y="15" width="10" height="90" rx="3" fill="#112347"/>
-                <!-- Infinity loop overlay -->
-                <path d="M 55 60 
-                         C 55 35, 85 35, 102.5 60 
-                         C 120 85, 125 60, 125 60 
-                         C 125 60, 120 35, 102.5 60 
-                         C 85 85, 55 85, 55 60 Z" 
+              <svg viewBox="0 0 100 100" class="h-8 w-8" xmlns="http://www.w3.org/2000/svg">
+                {/* Left vertical stem (p) */}
+                <rect x="33" y="10" width="8" height="80" rx="3.5" fill="#112347"/>
+                {/* Right vertical stem (h) */}
+                <rect x="59" y="10" width="8" height="80" rx="3.5" fill="#112347"/>
+                {/* Infinity loop overlay */}
+                <path d="M 50 50
+                         C 57 32, 76 32, 76 50
+                         C 76 68, 57 68, 50 50
+                         C 43 32, 24 32, 24 50
+                         C 24 68, 43 68, 50 50 Z" 
                       fill="none" 
                       stroke="#112347" 
-                      stroke-width="10" 
+                      stroke-width="9" 
                       stroke-linejoin="round" 
                       stroke-linecap="round"/>
               </svg>
@@ -914,8 +950,8 @@
               <a href="https://wa.me/5531984943305" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600 transition-colors flex items-center gap-1.5 bg-slate-50 dark:bg-zinc-900 rounded-lg px-3 py-1.5 border border-slate-100 dark:border-zinc-850">
                 <i data-lucide="phone" class="h-4 w-4 text-emerald-500"></i> WhatsApp: (31) 98494-3305
               </a>
-              <a href="https://www.instagram.com/parhub_agencia/" target="_blank" rel="noopener noreferrer" class="hover:text-rose-600 transition-colors flex items-center gap-1.5 bg-slate-50 dark:bg-zinc-900 rounded-lg px-3 py-1.5 border border-slate-100 dark:border-zinc-850">
-                <i data-lucide="instagram" class="h-4 w-4 text-rose-500"></i> Instagram: @parhub_agencia
+              <a href="https://www.instagram.com/parhub_agencia/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-700 transition-colors flex items-center gap-1.5 bg-slate-50 dark:bg-zinc-900 rounded-lg px-3 py-1.5 border border-slate-100 dark:border-zinc-850 text-slate-500">
+                <i data-lucide="instagram" class="h-4 w-4 text-slate-400"></i> Instagram: @parhub_agencia
               </a>
               <a href="https://forms.gle/vvavPtZy8QTyksmY8" target="_blank" rel="noopener noreferrer" class="hover:text-brand-blue transition-colors flex items-center gap-1.5 bg-slate-50 dark:bg-zinc-900 rounded-lg px-3 py-1.5 border border-slate-100 dark:border-zinc-850">
                 <i data-lucide="file-text" class="h-4 w-4 text-brand-blue"></i> Responder Briefing
