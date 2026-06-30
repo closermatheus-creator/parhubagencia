@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zentrip · Amanda Araujo · PAR HUB</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Jost:wght@300;400;500;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f2f6f0;
+      --panel: #ffffff;
+      --glass: rgba(255, 255, 255, 0.55);
+      --glass-strong: rgba(255, 255, 255, 0.78);
+      --glass-border: rgba(255, 255, 255, 0.65);
+
+      --text: #1e2a1e;
+      --text-dim: #3f4f3a;
+      --text-faint: #7a8a72;
+
+      --verde-agua: #b8d4cf;
+      --verde-musgo: #3a5a3a;
+      --laranja-vibrante: #e07a3a;
+      --terracota: #b55a3a;
+      --verde-petroleo: #1a2e2a;
+
+      --sage: #6d8060;
+      --sage-soft: rgba(109, 128, 96, 0.08);
+      --rose: #d9b8a8;
+      --rose-deep: #c08070;
+      --gold: #c9a87c;
+      --gold-soft: rgba(201, 168, 124, 0.12);
+      --border: rgba(80, 100, 70, 0.12);
+      --border-strong: rgba(80, 100, 70, 0.25);
+    }
+
+    body {
+      background: var(--bg);
+      background-image:
+        radial-gradient(circle at 10% 10%, rgba(184, 212, 207, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 90% 20%, rgba(58, 90, 58, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 30% 90%, rgba(224, 122, 58, 0.10) 0%, transparent 50%),
+        radial-gradient(circle at 80% 85%, rgba(181, 90, 58, 0.06) 0%, transparent 40%);
+      background-attachment: fixed;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 13.5px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .float {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.25;
+      animation: floatAnim 22s ease-in-out infinite alternate;
+    }
+    .float.f1 { width: 320px; height: 320px; top: -80px; left: -120px; background: radial-gradient(circle, var(--verde-agua), transparent 70%); }
+    .float.f2 { width: 260px; height: 260px; bottom: -60px; right: -100px; background: radial-gradient(circle, var(--verde-musgo), transparent 70%); animation-delay: 4s; }
+    .float.f3 { width: 200px; height: 200px; top: 40%; right: -80px; background: radial-gradient(circle, var(--laranja-vibrante), transparent 70%); animation-delay: 7s; }
+
+    @keyframes floatAnim {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(25px, -35px) scale(1.12); }
+    }
+
+    .wrap {
+      max-width: 440px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 28px 0 48px;
+      position: relative;
+      z-index: 2;
+      background: var(--glass-strong);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 30px 70px rgba(60, 80, 50, 0.10), 0 2px 0 rgba(255, 255, 255, 0.6) inset;
+      border-radius: 32px;
+      overflow: hidden;
+    }
+    .wrap::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--verde-agua), var(--laranja-vibrante), var(--verde-musgo), var(--terracota));
+      background-size: 300% 100%;
+      animation: flowBar 12s ease-in-out infinite;
+    }
+    @keyframes flowBar { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.08);
+    }
+    .topbar .live { display: flex; align-items: center; gap: 8px; }
+    .topbar .dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--laranja-vibrante);
+      box-shadow: 0 0 12px var(--laranja-vibrante);
+      animation: pulse 2.8s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity: 0.5; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.3); } }
+
+    /* MENSAGEM DESTAQUE */
+    .msg-block {
+      margin: 20px 24px 0;
+      padding: 20px 22px;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+      border-left: 3px solid var(--laranja-vibrante);
+      border-radius: 20px;
+      box-shadow: 0 6px 24px rgba(60, 80, 50, 0.05);
+      position: relative;
+    }
+    .msg-block .msg-label {
+      font-size: 8.5px;
+      letter-spacing: 0.2em;
+      color: var(--terracota);
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .msg-block .msg-text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .msg-block .msg-client { color: var(--terracota); font-weight: 500; }
+    .msg-block .msg-return {
+      margin-top: 12px; padding-top: 12px;
+      border-top: 1px solid rgba(80,100,70,0.10);
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .msg-block .msg-return-text {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--text);
+    }
+    .msg-block .msg-return-text span {
+      display: block;
+      font-weight: 300;
+      font-size: 9.5px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    .hero {
+      padding: 24px 24px 16px;
+      text-align: center;
+    }
+
+    /* PENA ANIMADA */
+    .pena-wrapper {
+      width: 80px;
+      height: 100px;
+      margin: 0 auto 14px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pena {
+      width: 32px;
+      height: 72px;
+      background: linear-gradient(180deg, var(--verde-agua), var(--verde-musgo), var(--laranja-vibrante));
+      border-radius: 0 50% 50% 50% / 0 60% 40% 60%;
+      transform: rotate(-15deg) scale(0.9);
+      box-shadow: 0 4px 20px rgba(58, 90, 58, 0.15);
+      position: relative;
+      animation: penaFlutua 4s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+    .pena::after {
+      content: '';
+      position: absolute;
+      top: 6px; left: 10px;
+      width: 14px;
+      height: 54px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 0 50% 50% 50% / 0 50% 40% 50%;
+      transform: rotate(-8deg);
+    }
+    .pena::before {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 50%;
+      width: 4px; height: 12px;
+      background: var(--verde-petroleo);
+      border-radius: 2px;
+      transform: translateX(-50%);
+    }
+    @keyframes penaFlutua {
+      0%,100% { transform: rotate(-15deg) scale(0.9) translateY(0); }
+      50% { transform: rotate(-8deg) scale(1) translateY(-8px); }
+    }
+
+    .eyebrow {
+      font-size: 8.5px;
+      letter-spacing: 0.25em;
+      color: var(--verde-musgo);
+      text-transform: uppercase;
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 26px;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 4px;
+      background: linear-gradient(120deg, var(--verde-petroleo), var(--verde-musgo) 40%, var(--terracota));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .client-sub {
+      font-size: 10px;
+      color: var(--text-faint);
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      color: var(--terracota);
+      font-size: 9.5px;
+      letter-spacing: 0.04em;
+      padding: 7px 18px;
+      text-transform: uppercase;
+      border-radius: 40px;
+      box-shadow: 0 6px 20px rgba(58, 90, 58, 0.06);
+      font-weight: 400;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 0 24px;
+    }
+    .stat {
+      background: rgba(255,255,255,0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      padding: 14px;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(60,80,50,0.04);
+      transition: transform 0.25s ease;
+    }
+    .stat .label {
+      font-size: 8px;
+      color: var(--text-faint);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .stat .value {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text);
+    }
+    .stat .value.accent { color: var(--terracota); }
+
+    .section {
+      padding: 28px 24px 4px;
+    }
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .section-num {
+      font-size: 9.5px;
+      color: var(--laranja-vibrante);
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+    .section h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: 18px;
+      color: var(--text);
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(80,100,70,0.2), transparent);
+    }
+
+    .card {
+      background: rgba(255,255,255,0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      padding: 16px 18px;
+      margin-bottom: 10px;
+      border-radius: 18px;
+      box-shadow: 0 6px 20px rgba(60,80,50,0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(60,80,50,0.06); }
+    .card.crit { border-left: 3px solid var(--laranja-vibrante); background: rgba(255, 245, 235, 0.4); }
+    .card.sol { border-left: 2px solid var(--terracota); background: rgba(181, 90, 58, 0.05); }
+    .card.sol.alt { border-left: 2px solid var(--verde-musgo); background: rgba(58, 90, 58, 0.04); }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .card-num {
+      font-size: 8px;
+      letter-spacing: 0.08em;
+      color: var(--text-faint);
+      font-weight: 500;
+    }
+    .tag {
+      font-size: 7px;
+      letter-spacing: 0.08em;
+      padding: 3px 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      border-radius: 20px;
+    }
+    .tag.critical { background: rgba(224, 122, 58, 0.12); color: var(--laranja-vibrante); }
+    .tag.solution { background: rgba(181, 90, 58, 0.12); color: var(--terracota); }
+    .tag.sage { background: rgba(58, 90, 58, 0.10); color: var(--verde-musgo); }
+
+    .card h3 {
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+    .card p {
+      font-size: 11.5px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    .frente-label {
+      margin: 16px 0 10px;
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--text-faint);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .frente-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(80,100,70,0.10);
+    }
+    .frente-label.tra { color: var(--terracota); }
+    .frente-label.con { color: var(--verde-musgo); }
+
+    .goal-wrap { padding: 0 24px; }
+    .goal-box {
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.45);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 28px 20px;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(58,90,58,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    .goal-box::before {
+      content: '';
+      position: absolute;
+      top: -30%; right: -20%;
+      width: 60%; height: 70%;
+      background: radial-gradient(circle, rgba(184, 212, 207, 0.25), transparent 70%);
+      filter: blur(24px);
+      pointer-events: none;
+    }
+    .goal-big {
+      font-family: 'Fraunces', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--verde-musgo);
+      line-height: 1.3;
+      position: relative;
+    }
+    .goal-big span {
+      font-size: 12px;
+      color: var(--text-dim);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+    }
+    .goal-desc {
+      font-size: 11.5px;
+      color: var(--text-dim);
+      margin: 10px 0 18px;
+      position: relative;
+    }
+    .goal-sub {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      position: relative;
+    }
+    .goal-sub .item {
+      background: rgba(255,255,255,0.5);
+      border: 1px solid var(--glass-border);
+      padding: 12px 8px;
+      border-radius: 14px;
+      text-align: center;
+    }
+    .goal-sub .v {
+      font-family: 'Fraunces', serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text);
+    }
+    .goal-sub .l {
+      font-size: 8px;
+      color: var(--text-faint);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* GRUPO DE ACOMPANHAMENTO DIÁRIO */
+    .daily-group {
+      margin: 16px 24px 0;
+      padding: 18px 20px;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 6px 20px rgba(58, 90, 58, 0.05);
+    }
+    .daily-group .icon {
+      font-size: 28px;
+      line-height: 1;
+      filter: drop-shadow(0 2px 8px rgba(224, 122, 58, 0.2));
+    }
+    .daily-group .info {
+      flex: 1;
+    }
+    .daily-group .info .title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--verde-musgo);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .daily-group .info .desc {
+      font-size: 11px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .daily-group .info .desc strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .invest-wrap { padding: 0 24px; }
+    .invest-box {
+      border: 1px solid var(--glass-border);
+      padding: 24px 20px;
+      background: rgba(255,255,255,0.45);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 24px;
+      box-shadow: 0 12px 32px rgba(60,80,50,0.05);
+    }
+    .invest-head {
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      color: var(--terracota);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .price {
+      font-family: 'Fraunces', serif;
+      font-size: 34px;
+      font-weight: 400;
+      background: linear-gradient(120deg, var(--verde-petroleo), var(--verde-musgo), var(--terracota));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+    .price-sub {
+      font-size: 10.5px;
+      color: var(--text-faint);
+      margin-bottom: 14px;
+    }
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(80,100,70,0.15), transparent);
+      margin-bottom: 12px;
+    }
+    .invest-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(80,100,70,0.05);
+    }
+    .invest-row:last-child { border-bottom: none; }
+    .invest-row .k { font-size: 11px; color: var(--text-dim); }
+    .invest-row .v { font-size: 10.5px; color: var(--text); font-weight: 500; }
+    .invest-row.highlight .v { color: var(--terracota); font-weight: 600; }
+
+    .detalhe-preco {
+      margin-top: 14px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.45);
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      font-size: 10.5px;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .detalhe-preco strong { color: var(--text); font-weight: 500; }
+    .detalhe-preco .item { display: flex; align-items: baseline; gap: 6px; padding: 4px 0; }
+    .detalhe-preco .item::before {
+      content: '✦';
+      color: var(--laranja-vibrante);
+      font-size: 8px;
+      margin-right: 4px;
+    }
+
+    .cta {
+      margin: 28px 24px 0;
+      border: 1px solid var(--glass-border);
+      padding: 28px 20px;
+      text-align: center;
+      background: rgba(255,255,255,0.45);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(184, 212, 207, 0.12);
+    }
+    .cta::before {
+      content: '';
+      position: absolute;
+      bottom: -40%; left: -10%;
+      width: 70%; height: 80%;
+      background: radial-gradient(circle, rgba(58, 90, 58, 0.08), transparent 70%);
+      filter: blur(28px);
+      pointer-events: none;
+    }
+    .cta h3 {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--text);
+      position: relative;
+      margin-bottom: 6px;
+    }
+    .cta p {
+      font-size: 12px;
+      color: var(--text-dim);
+      position: relative;
+    }
+    .return-highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 10px 24px;
+      background: rgba(255,255,255,0.6);
+      border: 1px solid var(--glass-border);
+      font-size: 9.5px;
+      color: var(--terracota);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+      border-radius: 40px;
+      position: relative;
+    }
+
+    .signature {
+      text-align: center;
+      margin-top: 36px;
+      padding: 0 24px;
+      font-size: 8px;
+      color: var(--text-faint);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .sig-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(80,100,70,0.15), transparent);
+      margin-bottom: 14px;
+    }
+  </style>
+</head>
+<body>
+<div class="float f1"></div>
+<div class="float f2"></div>
+<div class="float f3"></div>
+
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="live">
+      <span class="dot"></span>
+      <span>PAR HUB · Conexão & Tráfego</span>
+    </div>
+    <span id="dataAtual"></span>
+  </div>
+
+  <!-- MENSAGEM DESTAQUE -->
+  <div class="msg-block">
+    <div class="msg-label">✦ Alinhamento Estratégico</div>
+    <div class="msg-text">
+      Olá, <span class="msg-client">Amanda</span>. Desenhamos um plano com duas frentes trabalhando juntas: <strong>tráfego que atrai a pessoa certa</strong>, e <strong>atendimento humano que não deixa ninguém esfriar</strong>.
+    </div>
+    <div class="msg-return">
+      <div class="msg-return-text">
+        REUNIÃO DE ALINHAMENTO REALIZADA
+        <span>30 de junho de 2026 · Conversa via chamada</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO / PENA -->
+  <div class="hero">
+    <div class="pena-wrapper">
+      <div class="pena"></div>
+    </div>
+    <div class="eyebrow">Diagnóstico de Conexão & Conversão</div>
+    <h1>Amanda Araujo<br>Zentrip</h1>
+    <div class="client-sub">Imersões & Yoga · Chapada dos Veadeiros · Ubatuba</div>
+    <div class="status-badge">Base Quente Esfriando · Estrutura Pendente</div>
+  </div>
+
+  <!-- METRICAS -->
+  <div class="stats">
+    <div class="stat">
+      <div class="label">Contatos Frios na Base</div>
+      <div class="value accent">1.000+</div>
+    </div>
+    <div class="stat">
+      <div class="label">Comunidade Ativa</div>
+      <div class="value">~400</div>
+    </div>
+    <div class="stat">
+      <div class="label">Próxima Imersão</div>
+      <div class="value accent">Julho / 26</div>
+    </div>
+    <div class="stat">
+      <div class="label">Vitrine Digital</div>
+      <div class="value">Inexistente</div>
+    </div>
+  </div>
+
+  <!-- PONTOS CRÍTICOS -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>Pontos Críticos</h2>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="card crit">
+      <div class="card-top">
+        <span class="card-num">GARGALO 01</span>
+        <span class="tag critical">Base Parada</span>
+      </div>
+      <h3>Mais de 1.000 Contatos Esfriando</h3>
+      <p>Listas inteiras de interessados estão salvas, mas paradas desde meados do ano passado, sem nenhuma abordagem ativa de reaquecimento.</p>
+    </div>
+
+    <div class="card crit">
+      <div class="card-top">
+        <span class="card-num">GARGALO 02</span>
+        <span class="tag critical">Vitrine</span>
+      </div>
+      <h3>Nenhuma Página de Conversão no Ar</h3>
+      <p>Toda a decisão de compra acontece hoje só no calor do Instagram e WhatsApp. Sem site ou landing page, a Zentrip perde autoridade e não tem para onde direcionar o tráfego pago.</p>
+    </div>
+
+    <div class="card crit">
+      <div class="card-top">
+        <span class="card-num">GARGALO 03</span>
+        <span class="tag critical">Sobrecarga</span>
+      </div>
+      <h3>Lead Quente Perdido por Falta de Suporte</h3>
+      <p>Na ação com influenciadora, chegou uma onda de gente pronta para fechar — mas, sozinha, Amanda não deu conta de atender a tempo. Uma tentativa de terceirizar sem processo travou o WhatsApp.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <span class="card-num">GARGALO 04</span>
+        <span class="tag critical">Direção</span>
+      </div>
+      <h3>Criativo sem Direcionamento de Conversão</h3>
+      <p>A experiência anterior com agência trouxe campanhas genéricas — um caso trouxe público completamente fora do perfil. Tráfego sem estratégia de conversão queima verba e desanima.</p>
+    </div>
+  </div>
+
+  <!-- PROTOCOLO -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>Protocolo PAR HUB</h2>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="frente-label tra">Frente Tráfego</div>
+
+    <div class="card sol">
+      <div class="card-top">
+        <span class="card-num">AÇÃO 01</span>
+        <span class="tag solution">Tráfego Pago</span>
+      </div>
+      <h3>Tráfego Pago Segmentado</h3>
+      <p>Campanhas no Meta Ads desenhadas por temperatura da lista: reaquecimento de quem já demonstrou interesse, e captação de público novo qualificado para a imersão de julho.</p>
+    </div>
+
+    <div class="card sol">
+      <div class="card-top">
+        <span class="card-num">AÇÃO 02</span>
+        <span class="tag solution">Roteirização</span>
+      </div>
+      <h3>Roteirização de Criativos de Conversão</h3>
+      <p>Roteiros de 15, 30 e 60 segundos construídos a partir do material que Amanda já tem gravado, com gatilho nos primeiros segundos e CTA estruturado — feito para vender, não só para engajar.</p>
+    </div>
+
+    <div class="card sol">
+      <div class="card-top">
+        <span class="card-num">AÇÃO 03</span>
+        <span class="tag solution">Site Profissional</span>
+      </div>
+      <h3>Landing Page PAR HUB</h3>
+      <p>Uma página enxuta e objetiva: vídeo de Amanda no topo, destinos navegáveis e um caminho direto até o WhatsApp — sem a pessoa se perder em informação demais.</p>
+    </div>
+
+    <div class="frente-label con">Frente Conexão</div>
+
+    <div class="card sol alt">
+      <div class="card-top">
+        <span class="card-num">AÇÃO 04</span>
+        <span class="tag sage">CRM</span>
+      </div>
+      <h3>CRM Sob Medida PAR HUB</h3>
+      <p>Toda a base do WhatsApp organizada por etapa, destino e cidade de origem — com exportação semanal, acesso em tempo real para Amanda e histórico nunca mais perdido.</p>
+    </div>
+
+    <div class="card sol alt">
+      <div class="card-top">
+        <span class="card-num">AÇÃO 05</span>
+        <span class="tag sage">Atendente Virtual</span>
+      </div>
+      <h3>Atendimento Humanizado</h3>
+      <p>Atendimento real, no tom e na linguagem de Amanda, em horário comercial — respondendo dúvidas com calor humano, nunca com resposta seca de robô.</p>
+    </div>
+
+    <div class="card sol alt">
+      <div class="card-top">
+        <span class="card-num">AÇÃO 06</span>
+        <span class="tag sage">Social Seller</span>
+      </div>
+      <h3>Prospecção Ativa e Conexões</h3>
+      <p>Abordagem diária da base fria (30 a 50 contatos por dia) e prospecção ativa no Instagram — quem curte, comenta e interage vira conversa real, não like perdido.</p>
+    </div>
+  </div>
+
+  <!-- META -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>Meta da Imersão de Julho</h2>
+      <span class="section-line"></span>
+    </div>
+  </div>
+  <div class="goal-wrap">
+    <div class="goal-box">
+      <div class="goal-big">Lotar a Imersão<span><br>+ reativar os 1.000+ contatos</span></div>
+      <div class="goal-desc">Janela curta até julho — por isso a prioridade imediata é reaquecer quem já levantou a mão, enquanto o tráfego pago traz gente nova qualificada para as próximas turmas.</div>
+      <div class="goal-sub">
+        <div class="item">
+          <div class="v">30–50/dia</div>
+          <div class="l">Abordagens na Base Fria</div>
+        </div>
+        <div class="item">
+          <div class="v">~20 dias</div>
+          <div class="l">Para Trabalhar Toda a Lista</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRUPO DE ACOMPANHAMENTO DIÁRIO -->
+  <div class="daily-group">
+    <div class="icon">🔄</div>
+    <div class="info">
+      <div class="title">Grupo de Acompanhamento Diário</div>
+      <div class="desc">
+        <strong>Comunicação contínua e transparente.</strong> Teremos um grupo exclusivo no WhatsApp para alinhamentos diários, dúvidas, ajustes rápidos e feedbacks em tempo real — você nunca fica sem resposta.
+      </div>
+    </div>
+  </div>
+
+  <!-- INVESTIMENTO COM DETALHAMENTO -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2>Planejamento de Investimento</h2>
+      <span class="section-line"></span>
+    </div>
+  </div>
+  <div class="invest-wrap">
+    <div class="invest-box">
+      <div class="invest-head">Parceria PAR HUB Completa</div>
+      <div class="price">R$ 3.500 <span style="font-size:13px;color:var(--text-faint);font-weight:300;">/mês</span></div>
+      <div class="price-sub">Duas frentes operando juntas — tráfego e conexão humana</div>
+      <div class="divider"></div>
+
+      <div class="invest-row">
+        <span class="k">Tráfego Pago + Roteirização + Site (Bônus)</span>
+        <span class="v">R$ 1.750/mês</span>
+      </div>
+      <div class="invest-row">
+        <span class="k">Social Seller + Atendente Virtual + CRM</span>
+        <span class="v">R$ 1.750/mês</span>
+      </div>
+      <div class="invest-row highlight">
+        <span class="k">Investimento em Mídia Recomendado</span>
+        <span class="v">A partir de R$ 500/mês</span>
+      </div>
+      <div class="invest-row">
+        <span class="k">Setup Inicial</span>
+        <span class="v">48 a 72 Horas</span>
+      </div>
+
+      <!-- DETALHAMENTO CLARO PARA A CLIENTE -->
+      <div class="detalhe-preco">
+        <div style="font-weight:500; color:var(--terracota); margin-bottom:8px; letter-spacing:0.04em;">✦ O que está incluso:</div>
+        <div class="item"><strong>Tráfego Pago:</strong> gestão de campanhas Meta Ads, otimização diária e relatórios.</div>
+        <div class="item"><strong>Roteirização de Criativos:</strong> roteiros prontos para vídeos de 15″, 30″ e 60″ com foco em conversão.</div>
+        <div class="item"><strong>Site Profissional (Bônus):</strong> landing page com vídeo, destinos e CTA direto para WhatsApp.</div>
+        <div class="item"><strong>Social Seller:</strong> prospecção ativa no Instagram e abordagem diária da base fria (30–50 contatos/dia).</div>
+        <div class="item"><strong>Atendente Virtual Humanizado:</strong> respostas no tom de Amanda, em horário comercial.</div>
+        <div class="item"><strong>CRM Sob Medida:</strong> organização completa de contatos, histórico e exportação semanal.</div>
+        <div style="margin-top:8px; font-size:10px; color:var(--text-faint);">* Tudo isso com suporte e ajustes contínuos para maximizar resultados.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <h3>Conexão humana é o que converte</h3>
+    <p>Tráfego bem feito traz a pessoa certa até você. Atendimento humano é o que faz essa pessoa decidir ficar — e voltar na próxima imersão.</p>
+    <div class="return-highlight">PAR HUB · Agência Digital</div>
+  </div>
+
+  <!-- SIGNATURE -->
+  <div class="signature">
+    <div class="sig-line"></div>
+    Desenvolvido exclusivamente para Amanda Araujo · Zentrip
+  </div>
+
+</div>
+
+<script>
+  (function() {
+    const hoje = new Date();
+    const dia = String(hoje.getDate()).padStart(2, '0');
+    const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+    const ano = hoje.getFullYear();
+    document.getElementById('dataAtual').textContent = dia + '.' + mes + '.' + ano;
+  })();
+</script>
+</body>
+</html>
