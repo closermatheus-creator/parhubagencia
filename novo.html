@@ -82,6 +82,20 @@
     opacity: 0.08;
     will-change: transform;
     animation: nebulaFloat 22s ease-in-out infinite alternate;
+    transform: translateZ(0);
+  }
+  /* Mobile: blur mais leve, sem animação (evita repaint contínuo caríssimo) e uma nebulosa a menos */
+  @media (max-width: 760px) {
+    .nebula-blob {
+      filter: blur(40px);
+      animation: none;
+    }
+    .nebula-blob:nth-child(3) {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nebula-blob { animation: none; }
   }
   .nebula-blob:nth-child(1) {
     width: 50vw;
@@ -315,6 +329,12 @@
   }
   @media (min-width: 821px) {
     .nav-cta-mobile { display: none; }
+  }
+  @media (max-width: 760px) {
+    header {
+      backdrop-filter: blur(8px) saturate(1.1);
+      -webkit-backdrop-filter: blur(8px) saturate(1.1);
+    }
   }
 
   /* ============================================================
@@ -2017,13 +2037,30 @@
 (function() {
   const canvas = document.getElementById('light-lines');
   const ctx = canvas.getContext('2d');
+
+  const isMobile = window.matchMedia('(max-width: 760px)').matches;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Em telas pequenas o efeito soma pouco valor visual e custa muito processamento:
+  // desligamos o canvas de vez e deixamos só o gradiente estático de fundo.
+  if (isMobile || reduceMotion) {
+    canvas.style.display = 'none';
+    return;
+  }
+
   let w, h;
   const lines = [];
-  const LINE_COUNT = 14;
+  const LINE_COUNT = 10; // era 14 — menos objetos pra atualizar/desenhar por frame
+  const DPR = Math.min(window.devicePixelRatio || 1, 1.5); // cap no pixel ratio (retina/4K custava caro)
 
   function resize() {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = w * DPR;
+    canvas.height = h * DPR;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
   }
   window.addEventListener('resize', resize);
   resize();
@@ -2075,10 +2112,9 @@
       ctx.lineTo(endX, endY);
       ctx.strokeStyle = grad;
       ctx.lineWidth = this.width;
-      ctx.shadowColor = `rgba(210, 182, 138, ${this.currentOpacity * 0.3})`;
-      ctx.shadowBlur = 8;
+      // shadowBlur removido: é uma das operações mais caras em canvas 2D,
+      // principalmente em GPUs mobile. O brilho já vem do próprio gradiente.
       ctx.stroke();
-      ctx.shadowBlur = 0;
     }
   }
 
@@ -2086,15 +2122,30 @@
     lines.push(new LightLine());
   }
 
+  let running = true;
+  let rafId;
+
   function animate() {
+    if (!running) return;
     ctx.clearRect(0, 0, w, h);
     lines.forEach(line => {
       line.update();
       line.draw();
     });
-    requestAnimationFrame(animate);
+    rafId = requestAnimationFrame(animate);
   }
   animate();
+
+  // Pausa o loop quando a aba não está visível (economiza bateria/CPU em background)
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      running = false;
+      cancelAnimationFrame(rafId);
+    } else if (!running) {
+      running = true;
+      animate();
+    }
+  });
 
   let resizeTimeout;
   window.addEventListener('resize', () => {
