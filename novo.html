@@ -22,22 +22,24 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <style>
-  /* ===== VARIÁVEIS ===== */
+  /* ===== VARIÁVEIS (identidade Apple: fundo branco, texto preto, dobras escuras mantidas) ===== */
   :root {
-    --color-bg: #F5F5F7;
-    --color-bg-dark: #0B0B0B;
-    --color-bg-card: #FFFFFF;
+    --color-bg: #FFFFFF;
+    --color-bg-dark: #000000;
+    --color-bg-card: #F5F5F7;
     --color-text: #1D1D1F;
-    --color-text-muted: #86868B;
+    --color-text-muted: #6E6E73;
     --color-text-dark: #F5F5F7;
-    --color-border: #E5E5EA;
-    --color-border-dark: #2C2C2E;
-    --color-green: #25D366;
-    --color-green-hover: #1DA851;
-    --color-blue: #2F5AF5;
-    --color-blue-hover: #2547CC;
-    --color-green-dim: rgba(37, 211, 102, 0.12);
-    --color-blue-dim: rgba(47, 90, 245, 0.10);
+    --color-border: #D2D2D7;
+    --color-border-dark: #424245;
+    /* Verde: reservado exclusivamente para o botão do WhatsApp */
+    --color-whats: #25D366;
+    --color-whats-hover: #1DA851;
+    --color-whats-dim: rgba(37, 211, 102, 0.12);
+    /* Azul: cor de destaque principal em toda a marca (estilo Apple) */
+    --color-blue: #0071E3;
+    --color-blue-hover: #0058B9;
+    --color-blue-dim: rgba(0, 113, 227, 0.10);
   }
 
   /* ===== RESET ===== */
@@ -52,21 +54,21 @@
   .font-display { font-family: "Space Grotesk", "Inter", -apple-system, sans-serif; }
   .font-mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
 
-  ::selection { background: var(--color-green); color: #fff; }
+  ::selection { background: var(--color-blue); color: #fff; }
 
   /* ===== SCROLLBAR ===== */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--color-bg); }
-  ::-webkit-scrollbar-thumb { background: var(--color-green); border-radius: 999px; }
+  ::-webkit-scrollbar-thumb { background: var(--color-blue); border-radius: 999px; }
 
   /* ===== UTILIDADES ===== */
-  .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
-  @media (max-width: 640px) { .container { padding: 0 1.25rem; } }
+  .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.75rem; }
+  @media (max-width: 640px) { .container { padding: 0 1.5rem; } }
   @media (min-width: 1024px) { .container { padding: 0 3rem; } }
 
-  .section-padding { padding: 5rem 0; }
-  @media (min-width: 768px) { .section-padding { padding: 7rem 0; } }
-  @media (min-width: 1024px) { .section-padding { padding: 9rem 0; } }
+  .section-padding { padding: 5.5rem 0; }
+  @media (min-width: 768px) { .section-padding { padding: 7.5rem 0; } }
+  @media (min-width: 1024px) { .section-padding { padding: 9.5rem 0; } }
 
   .eyebrow {
     font-family: "JetBrains Mono", ui-monospace, monospace;
@@ -74,7 +76,7 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     font-weight: 500;
-    color: var(--color-green);
+    color: var(--color-blue);
     margin-bottom: 0.75rem;
     display: inline-block;
   }
@@ -92,31 +94,6 @@
   }
 
   /* ===== BOTÕES ===== */
-  .btn-green {
-    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-    background: var(--color-green) !important;
-    color: #fff !important;
-    font-weight: 600;
-    padding: 0.9rem 2.2rem;
-    border-radius: 9999px;
-    border: none;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    font-size: clamp(0.9rem, 2vw, 1.05rem);
-    cursor: pointer;
-    min-height: 54px;
-    min-width: 200px;
-    text-align: center;
-    box-shadow: 0 8px 28px rgba(37, 211, 102, 0.30);
-    position: relative;
-    overflow: hidden;
-  }
-  .btn-green:hover {
-    background: var(--color-green-hover) !important;
-    transform: translateY(-3px);
-    box-shadow: 0 14px 40px rgba(37, 211, 102, 0.40);
-  }
-  .btn-green:active { transform: translateY(0); }
-
   .btn-blue {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
     background: var(--color-blue) !important;
@@ -131,14 +108,40 @@
     min-height: 54px;
     min-width: 200px;
     text-align: center;
-    box-shadow: 0 8px 28px rgba(47, 90, 245, 0.25);
+    box-shadow: 0 8px 28px rgba(0, 113, 227, 0.28);
+    position: relative;
+    overflow: hidden;
   }
   .btn-blue:hover {
     background: var(--color-blue-hover) !important;
     transform: translateY(-3px);
-    box-shadow: 0 14px 40px rgba(47, 90, 245, 0.35);
+    box-shadow: 0 14px 40px rgba(0, 113, 227, 0.38);
   }
   .btn-blue:active { transform: translateY(0); }
+
+  /* Botão de WhatsApp explícito — único CTA verde da marca */
+  .btn-whats {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    background: var(--color-whats) !important;
+    color: #fff !important;
+    font-weight: 600;
+    padding: 0.9rem 2.2rem;
+    border-radius: 9999px;
+    border: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-size: clamp(0.9rem, 2vw, 1.05rem);
+    cursor: pointer;
+    min-height: 54px;
+    min-width: 200px;
+    text-align: center;
+    box-shadow: 0 8px 28px rgba(37, 211, 102, 0.30);
+  }
+  .btn-whats:hover {
+    background: var(--color-whats-hover) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(37, 211, 102, 0.40);
+  }
+  .btn-whats:active { transform: translateY(0); }
 
   .btn-ghost {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
@@ -155,7 +158,7 @@
     min-width: 180px;
     text-align: center;
   }
-  .btn-ghost:hover { border-color: var(--color-green); background: var(--color-green-dim); }
+  .btn-ghost:hover { border-color: var(--color-blue); background: var(--color-blue-dim); }
 
   .btn-ghost-dark {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
@@ -172,23 +175,30 @@
     min-width: 180px;
     text-align: center;
   }
-  .btn-ghost-dark:hover { border-color: var(--color-green); background: var(--color-green-dim); }
+  .btn-ghost-dark:hover { border-color: var(--color-blue); background: var(--color-blue-dim); }
 
   /* ===== NAV ===== */
   #nav {
     position: fixed; top: 0; inset-x: 0; z-index: 50;
-    background: rgba(245, 245, 247, 0.92);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(0,0,0,0.06);
     height: 64px;
-    display: flex;
-    align-items: center;
-    padding: 0 1.25rem;
     transition: background 0.3s ease;
   }
-  @media (min-width: 768px) { #nav { height: 72px; padding: 0 2.5rem; } }
-  #nav.scrolled { background: rgba(245, 245, 247, 0.98); }
+  @media (min-width: 768px) { #nav { height: 72px; } }
+  #nav.scrolled { background: rgba(255, 255, 255, 0.96); }
+
+  .nav-inner {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0 1.5rem;
+  }
+  @media (min-width: 768px) { .nav-inner { height: 72px; padding: 0 2.5rem; } }
 
   .nav-logo {
     color: var(--color-text);
@@ -198,59 +208,114 @@
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
     flex-shrink: 0;
   }
   .nav-logo-dot {
     display: inline-block;
     width: 9px; height: 9px;
     border-radius: 50%;
-    background: var(--color-green);
+    background: var(--color-blue);
   }
 
+  /* Links horizontais — somente desktop (>=1024px), sem scroll */
   .nav-links-wrapper {
-    display: flex;
+    display: none;
     align-items: center;
-    gap: 0.5rem;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    flex: 1;
-    padding: 0 0.5rem;
-    margin: 0 0.25rem;
+    gap: 0.35rem;
   }
-  .nav-links-wrapper::-webkit-scrollbar { display: none; }
   .nav-link {
     color: var(--color-text-muted);
     text-decoration: none;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     font-weight: 500;
     white-space: nowrap;
-    padding: 0.35rem 0.65rem;
+    padding: 0.5rem 0.85rem;
     border-radius: 999px;
     transition: all 0.2s ease;
-    flex-shrink: 0;
   }
   .nav-link:hover { color: var(--color-text); background: rgba(0,0,0,0.04); }
   .nav-link.active { color: var(--color-text); background: rgba(0,0,0,0.06); }
-  .nav-link-highlight { color: var(--color-green) !important; font-weight: 600; }
+  .nav-link-highlight { color: var(--color-blue) !important; font-weight: 600; }
 
-  .nav-actions { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
-  .nav-btn-mobile {
-    padding: 0.4rem 0.9rem;
+  .nav-actions { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
+
+  .nav-btn-cta {
+    display: none;
+    padding: 0.6rem 1.3rem;
     border-radius: 999px;
-    background: var(--color-green);
+    background: var(--color-blue);
     color: #fff;
-    font-size: 0.7rem;
+    font-size: 0.82rem;
     font-weight: 600;
     border: none;
     cursor: pointer;
     white-space: nowrap;
     transition: all 0.2s ease;
   }
-  .nav-btn-mobile:hover { background: var(--color-green-hover); }
-  @media (min-width: 640px) { .nav-btn-mobile { font-size: 0.75rem; padding: 0.5rem 1.2rem; } }
+  .nav-btn-cta:hover { background: var(--color-blue-hover); transform: translateY(-1px); }
+
+  /* Botão hamburguer — clica e expande (mobile/tablet) */
+  .nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0,0,0,0.045);
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.2s ease;
+  }
+  .nav-toggle:hover { background: rgba(0,0,0,0.08); }
+  .nav-toggle span {
+    display: block;
+    position: absolute;
+    width: 18px; height: 2px;
+    background: var(--color-text);
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .nav-toggle span:nth-child(1) { transform: translateY(-5px); }
+  .nav-toggle span:nth-child(2) { transform: translateY(0); }
+  .nav-toggle span:nth-child(3) { transform: translateY(5px); }
+  .nav-toggle.active span:nth-child(1) { transform: translateY(0) rotate(45deg); }
+  .nav-toggle.active span:nth-child(2) { opacity: 0; }
+  .nav-toggle.active span:nth-child(3) { transform: translateY(0) rotate(-45deg); }
+
+  /* Painel do menu mobile — expande abaixo do nav ao clicar */
+  .nav-mobile-panel {
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    max-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: max-height 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .nav-mobile-panel.open { max-height: 32rem; }
+  .nav-mobile-link {
+    padding: 1rem 1.5rem;
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.98rem;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    transition: background 0.2s ease;
+  }
+  .nav-mobile-link:active, .nav-mobile-link:hover { background: rgba(0,0,0,0.03); }
+  .nav-mobile-cta-wrap { padding: 1.25rem 1.5rem 1.75rem; }
+
+  @media (min-width: 1024px) {
+    .nav-links-wrapper { display: flex; }
+    .nav-btn-cta { display: inline-flex; align-items: center; justify-content: center; }
+    .nav-toggle, .nav-mobile-panel { display: none !important; }
+  }
 
   /* ===== REVEAL ===== */
   .reveal-up { opacity: 0; transform: translateY(40px); }
@@ -272,7 +337,7 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--color-green), var(--color-blue));
+    background: linear-gradient(90deg, var(--color-blue), #5AC8FA);
     opacity: 0;
     transition: opacity 0.5s ease;
   }
@@ -280,15 +345,15 @@
   .pain-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 20px 48px -16px rgba(0,0,0,0.12);
-    border-color: rgba(37, 211, 102, 0.15);
+    border-color: rgba(0, 113, 227, 0.18);
   }
   .pain-num {
     font-family: "JetBrains Mono", monospace;
     font-size: 0.8rem;
-    color: var(--color-green);
+    color: var(--color-blue);
     font-weight: 600;
     display: inline-block;
-    background: var(--color-green-dim);
+    background: var(--color-blue-dim);
     padding: 0.2rem 0.7rem;
     border-radius: 999px;
   }
@@ -318,7 +383,7 @@
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
-  .node-chip svg { width: 16px; height: 16px; color: var(--color-green); flex-shrink: 0; }
+  .node-chip svg { width: 16px; height: 16px; color: var(--color-blue); flex-shrink: 0; }
   #hub {
     position: absolute; top: 50%; left: 50%;
     transform: translate(-50%, -50%) scale(0.5);
@@ -327,9 +392,10 @@
     text-align: center;
     width: min(80vw, 380px);
     pointer-events: none;
+    transition: opacity 0.6s ease;
   }
   #hub p { color: var(--color-text-dark); }
-  #hub .eyebrow { color: var(--color-green); }
+  #hub .eyebrow { color: var(--color-blue); }
   #hub-sub { color: rgba(255,255,255,0.5); }
 
   #convergencia svg.lines-svg {
@@ -340,23 +406,22 @@
   }
   .node-line { stroke: rgba(255,255,255,0.06); stroke-width: 1.5; }
 
-  /* Mobile: lista em fila com fade in/out loop */
+  /* Mobile: todos os chips surgem em sequência, ficam juntos, somem juntos, e o ciclo se repete */
   #chip-list {
     display: none;
     position: relative;
     width: 100%;
     max-width: 320px;
     margin: 0 auto;
-    min-height: 280px;
-    display: none;
+    min-height: 300px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
+    gap: 0.85rem;
   }
   #chip-list .list-chip {
     opacity: 0;
-    transform: translateY(20px) scale(0.9);
+    transform: translateY(18px) scale(0.92);
     display: flex; align-items: center; gap: 0.6rem;
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.08);
@@ -368,19 +433,19 @@
     white-space: nowrap;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    transition: none;
+    transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     width: auto;
     min-width: 160px;
     justify-content: center;
   }
-  #chip-list .list-chip svg { width: 18px; height: 18px; color: var(--color-green); flex-shrink: 0; }
+  #chip-list .list-chip svg { width: 18px; height: 18px; color: var(--color-blue); flex-shrink: 0; }
   #chip-list .list-chip.visible {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
-  #chip-list .list-chip.hidden {
+  #chip-list .list-chip.hiding {
     opacity: 0;
-    transform: translateY(-20px) scale(0.9);
+    transform: translateY(-14px) scale(0.94);
   }
 
   @media (max-width: 767px) {
@@ -425,23 +490,23 @@
   .funil-step:hover {
     transform: translateY(-4px);
     box-shadow: 0 16px 40px -12px rgba(0,0,0,0.10);
-    border-color: var(--color-green);
+    border-color: var(--color-blue);
   }
   .funil-step .step-num {
     font-family: "JetBrains Mono", monospace;
     font-size: 2rem;
     font-weight: 700;
-    color: var(--color-green-dim);
+    color: var(--color-blue-dim);
     line-height: 1;
     margin-bottom: 0.25rem;
   }
   .funil-step .step-icon {
     width: 48px; height: 48px;
     border-radius: 9999px;
-    background: var(--color-green-dim);
+    background: var(--color-blue-dim);
     display: flex; align-items: center; justify-content: center;
     margin: 0 auto 0.5rem;
-    color: var(--color-green);
+    color: var(--color-blue);
   }
   .funil-step .step-icon svg { width: 24px; height: 24px; }
   .funil-connector {
@@ -491,7 +556,7 @@
   }
   .chat-avatar {
     width: 40px; height: 40px; border-radius: 50%;
-    background: var(--color-green);
+    background: var(--color-blue);
     display: flex; align-items: center; justify-content: center;
     font-weight: 700; font-size: 1rem; color: #fff;
     position: relative;
@@ -500,7 +565,7 @@
   .chat-avatar .online-dot {
     position: absolute; bottom: 0; right: 0;
     width: 11px; height: 11px; border-radius: 50%;
-    background: var(--color-green);
+    background: var(--color-blue);
     border: 2px solid var(--color-bg-card);
     animation: pulse-dot 2s infinite;
   }
@@ -530,7 +595,7 @@
   }
   .msg-user {
     align-self: flex-end;
-    background: var(--color-green);
+    background: var(--color-blue);
     color: #fff;
     border-bottom-right-radius: 0.15rem;
   }
@@ -586,15 +651,15 @@
   .service-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 32px -12px rgba(0,0,0,0.10);
-    border-color: var(--color-green);
+    border-color: var(--color-blue);
   }
   .service-card .icon-wrap {
     width: 44px; height: 44px;
     border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
     margin-bottom: 0.75rem;
-    background: var(--color-green-dim);
-    color: var(--color-green);
+    background: var(--color-blue-dim);
+    color: var(--color-blue);
   }
   .service-card .icon-wrap svg { width: 22px; height: 22px; }
   .service-card .service-badge {
@@ -607,8 +672,8 @@
     border-radius: 999px;
     margin-top: 0.5rem;
   }
-  .badge-incluso { background: var(--color-green-dim); color: var(--color-green); }
-  .badge-consulta { background: var(--color-blue-dim); color: var(--color-blue); }
+  .badge-incluso { background: var(--color-blue-dim); color: var(--color-blue); }
+  .badge-consulta { background: rgba(0,0,0,0.06); color: var(--color-text-muted); }
 
   .service-category-title {
     font-family: "Space Grotesk", sans-serif;
@@ -635,7 +700,7 @@
     cursor: pointer; color: var(--color-text);
     background: transparent; border: none;
   }
-  .faq-icon { transition: transform 0.3s ease; flex-shrink: 0; color: var(--color-green); }
+  .faq-icon { transition: transform 0.3s ease; flex-shrink: 0; color: var(--color-blue); }
   .faq-item.open .faq-icon { transform: rotate(45deg); }
   .faq-a {
     max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease;
@@ -680,7 +745,7 @@
   .modal-scrollbar::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 999px; }
 
   .progress-track { height: 4px; background: rgba(0,0,0,0.06); border-radius: 999px; overflow: hidden; }
-  .progress-bar { height: 100%; background: var(--color-green); border-radius: 999px; transition: width 0.5s ease; }
+  .progress-bar { height: 100%; background: var(--color-blue); border-radius: 999px; transition: width 0.5s ease; }
 
   .choice-btn {
     width: 100%; text-align: left; padding: 0.9rem 1rem; border-radius: 0.9rem;
@@ -690,10 +755,10 @@
     display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
     cursor: pointer;
   }
-  .choice-btn:hover { border-color: var(--color-green); background: var(--color-green-dim); }
-  .choice-btn.selected { border-color: var(--color-green); background: var(--color-green-dim); }
+  .choice-btn:hover { border-color: var(--color-blue); background: var(--color-blue-dim); }
+  .choice-btn.selected { border-color: var(--color-blue); background: var(--color-blue-dim); }
   .choice-btn.selected .check-dot { opacity: 1; transform: scale(1); }
-  .check-dot { opacity: 0; transform: scale(0.5); transition: all 0.25s ease; color: var(--color-green); flex-shrink:0; }
+  .check-dot { opacity: 0; transform: scale(0.5); transition: all 0.25s ease; color: var(--color-blue); flex-shrink:0; }
 
   .field-input {
     width: 100%; padding: 0.9rem 1rem; border-radius: 0.9rem;
@@ -701,21 +766,21 @@
     transition: border-color 0.25s ease;
     background: var(--color-bg); color: var(--color-text);
   }
-  .field-input:focus { border-color: var(--color-green); outline: none; }
+  .field-input:focus { border-color: var(--color-blue); outline: none; }
   .field-input::placeholder { color: var(--color-text-muted); }
 
-  /* ===== FAB ===== */
+  /* ===== FAB (único elemento verde da marca — botão de WhatsApp) ===== */
   #fab-whats {
     position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 60;
     width: 56px; height: 56px; border-radius: 9999px;
-    background: var(--color-green); color: #fff;
+    background: var(--color-whats); color: #fff;
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 8px 28px rgba(37, 211, 102, 0.40);
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
   }
-  #fab-whats:hover { transform: scale(1.08); box-shadow: 0 12px 36px rgba(37, 211, 102, 0.50); }
+  #fab-whats:hover { background: var(--color-whats-hover); transform: scale(1.08); box-shadow: 0 12px 36px rgba(37, 211, 102, 0.50); }
   #fab-whats svg { width: 26px; height: 26px; }
 
   /* ===== FOOTER ===== */
@@ -723,25 +788,25 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 640px) {
-    .section-padding { padding: 3.5rem 0; }
-    .pain-card { padding: 1.5rem 1.25rem; }
-    .btn-green, .btn-blue, .btn-ghost, .btn-ghost-dark {
-      min-height: 48px; min-width: 160px; padding: 0.7rem 1.5rem; font-size: 0.85rem;
+    .section-padding { padding: 4.5rem 0; }
+    .pain-card { padding: 1.75rem 1.5rem; }
+    .btn-blue, .btn-whats, .btn-ghost, .btn-ghost-dark {
+      min-height: 48px; min-width: 160px; padding: 0.75rem 1.6rem; font-size: 0.85rem;
     }
     .btn-ghost, .btn-ghost-dark { min-width: 140px; }
-    .cta-consultoria { padding: 2rem 1.25rem; }
+    .cta-consultoria { padding: 2.5rem 1.75rem; }
     .chat-messages { min-height: 180px; max-height: 260px; }
     .founder-photo { aspect-ratio: 1/1; }
     #fab-whats { width: 48px; height: 48px; bottom: 1rem; right: 1rem; }
     #fab-whats svg { width: 22px; height: 22px; }
-    #modal-box { padding: 1.5rem; }
-    .service-card { padding: 1.25rem 1rem; }
-    #chip-list .list-chip { font-size: 0.7rem; padding: 0.5rem 1rem; min-width: 130px; }
-    #chip-list { min-height: 220px; gap: 0.5rem; }
+    #modal-box { padding: 1.75rem; }
+    .service-card { padding: 1.5rem 1.25rem; }
+    #chip-list .list-chip { font-size: 0.75rem; padding: 0.6rem 1.1rem; min-width: 140px; }
+    #chip-list { min-height: 240px; gap: 0.65rem; }
   }
 
   @media (min-width: 641px) and (max-width: 1023px) {
-    .section-padding { padding: 4.5rem 0; }
+    .section-padding { padding: 5.5rem 0; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -764,18 +829,18 @@
   }
 
   /* ===== ATENDIMENTO MOBILE FIX ===== */
-  #atendimento .atendimento-texts { gap: 1.5rem; }
-  #atendimento .atendimento-btn { margin-top: 2rem; }
+  #atendimento .atendimento-texts { gap: 1.75rem; }
+  #atendimento .atendimento-btn { margin-top: 2.25rem; }
   @media (max-width: 640px) {
-    #atendimento .atendimento-texts { gap: 1.25rem; }
-    #atendimento .atendimento-btn { margin-top: 1.75rem; }
-    #atendimento .atendimento-texts .flex { gap: 0.75rem; }
+    #atendimento .atendimento-texts { gap: 1.5rem; }
+    #atendimento .atendimento-btn { margin-top: 2rem; }
+    #atendimento .atendimento-texts .flex { gap: 0.9rem; }
   }
 
   /* ===== TRÁFEGO CARDS MOBILE FIX ===== */
   @media (max-width: 640px) {
-    #atração .trafego-card { padding: 1.5rem 1.25rem; }
-    #atração .trafego-grid { gap: 1rem; }
+    #atração .trafego-card { padding: 1.75rem 1.5rem; }
+    #atração .trafego-grid { gap: 1.25rem; }
   }
 </style>
 </head>
@@ -783,7 +848,7 @@
 
 <!-- ===== NAV ===== -->
 <nav id="nav">
-  <div class="container flex items-center justify-between gap-2" style="padding:0;max-width:100%;">
+  <div class="nav-inner">
     <a href="#top" class="nav-logo">
       <span class="nav-logo-dot"></span>
       PAR HUB
@@ -800,8 +865,25 @@
     </div>
 
     <div class="nav-actions">
-      <button onclick="openModal()" class="nav-btn-mobile">
-        <span class="hidden sm:inline">Falar com </span>Especialista
+      <button onclick="openModal()" class="nav-btn-cta">Falar com Especialista</button>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Painel do menu mobile: clica no botão acima e expande -->
+  <div id="nav-mobile-panel" class="nav-mobile-panel">
+    <a href="#atração" class="nav-mobile-link">Atração</a>
+    <a href="#atendimento" class="nav-mobile-link">Atendimento</a>
+    <a href="#fechamento" class="nav-mobile-link">Fechamento</a>
+    <a href="#fundadores" class="nav-mobile-link">Quem Somos</a>
+    <a href="#servicos" class="nav-mobile-link">Serviços</a>
+    <a href="#faq" class="nav-mobile-link">FAQ</a>
+    <a href="#cta-final" class="nav-mobile-link nav-link-highlight">Formulário</a>
+    <div class="nav-mobile-cta-wrap">
+      <button onclick="openModal()" class="btn-blue" style="width:100%; min-width:auto;">
+        Falar com Especialista
       </button>
     </div>
   </div>
@@ -811,7 +893,7 @@
 
   <!-- ===== HERO ===== -->
   <section id="hero" class="sec-light relative min-h-screen flex items-center overflow-hidden">
-    <div class="glow-orb w-[500px] h-[500px] bg-[var(--color-green)] -top-60 -left-60 opacity-10"></div>
+    <div class="glow-orb w-[500px] h-[500px] bg-[var(--color-blue)] -top-60 -left-60 opacity-10"></div>
 
     <div class="container relative">
       <div class="max-w-4xl">
@@ -824,7 +906,7 @@
           Da captação estratégica no Tráfego Pago (Meta, Google e LinkedIn) ao fechamento no WhatsApp com SDRs e Closers — centralizamos e assumimos, total ou parcialmente, a operação comercial de mentores, infoprodutores e clínicas.
         </p>
         <div class="hero-actions mt-8 flex flex-col sm:flex-row items-center gap-3 reveal-up">
-          <button onclick="openModal()" class="btn-green">
+          <button onclick="openModal()" class="btn-blue">
             Quero Centralizar Minha Operação
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
@@ -862,7 +944,7 @@
         </p>
       </div>
 
-      <div class="mt-10 grid sm:grid-cols-2 gap-5">
+      <div class="mt-12 grid sm:grid-cols-2 gap-6">
         <div class="pain-card reveal-up" data-delay="0">
           <span class="pain-num">01</span>
           <h3 class="font-display text-lg font-semibold mt-4 mb-2">A síndrome do especialista-gargalo</h3>
@@ -954,19 +1036,19 @@
           Construímos funis de captação em Meta Ads, Google Ads e LinkedIn Ads para atrair leads de alto poder aquisitivo ou pacientes prontos para agendar — não curiosos.
         </p>
       </div>
-      <div class="lg:col-span-7 trafego-grid grid sm:grid-cols-2 gap-4">
+      <div class="lg:col-span-7 trafego-grid grid sm:grid-cols-2 gap-5">
         <div class="trafego-card p-6 rounded-2xl border border-[rgba(0,0,0,0.06)] bg-[var(--color-bg-card)] reveal-up" data-delay="0">
-          <i data-lucide="target" class="w-6 h-6 text-[var(--color-green)] mb-4"></i>
+          <i data-lucide="target" class="w-6 h-6 text-[var(--color-blue)] mb-4"></i>
           <h3 class="font-display font-semibold text-lg mb-2">Gestão multicanal</h3>
           <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">Campanhas orquestradas em Meta, Google e LinkedIn numa única estratégia.</p>
         </div>
         <div class="trafego-card p-6 rounded-2xl border border-[rgba(0,0,0,0.06)] bg-[var(--color-bg-card)] reveal-up" data-delay="0.1">
-          <i data-lucide="layers" class="w-6 h-6 text-[var(--color-green)] mb-4"></i>
+          <i data-lucide="layers" class="w-6 h-6 text-[var(--color-blue)] mb-4"></i>
           <h3 class="font-display font-semibold text-lg mb-2">Criativos de alta conversão</h3>
           <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">Roteirização de vídeos e estáticos para gerar identificação e ação.</p>
         </div>
         <div class="trafego-card p-6 rounded-2xl border border-[rgba(0,0,0,0.06)] bg-[var(--color-bg-card)] sm:col-span-2 reveal-up" data-delay="0.2">
-          <i data-lucide="settings" class="w-6 h-6 text-[var(--color-green)] mb-4"></i>
+          <i data-lucide="settings" class="w-6 h-6 text-[var(--color-blue)] mb-4"></i>
           <h3 class="font-display font-semibold text-lg mb-2">API de Conversão &amp; Pixel</h3>
           <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">Rastreamento do início ao fim para plataformas otimizarem entrega com base em quem realmente compra.</p>
         </div>
@@ -976,7 +1058,7 @@
 
   <!-- ===== ATENDIMENTO ===== -->
   <section id="atendimento" class="sec-dark section-padding relative overflow-hidden">
-    <div class="glow-orb w-[400px] h-[400px] bg-[var(--color-green)] top-1/4 -right-20 opacity-8"></div>
+    <div class="glow-orb w-[400px] h-[400px] bg-[var(--color-blue)] top-1/4 -right-20 opacity-8"></div>
     <div class="container grid lg:grid-cols-12 gap-10 items-center relative">
       <div class="lg:col-span-5 order-2 lg:order-1">
         <div class="split-photo-wrap reveal-up">
@@ -997,17 +1079,17 @@
         <p class="mt-4 text-[rgba(255,255,255,0.6)] text-[clamp(0.95rem,2.2vw,1.1rem)] leading-relaxed reveal-up">
           As pessoas não compram de robôs — compram de gente. Nossa equipe humana de SDRs e atendentes assume seu WhatsApp e Direct, com resposta em menos de 5 minutos.
         </p>
-        <div class="atendimento-texts mt-6 space-y-4 reveal-up">
+        <div class="atendimento-texts mt-7 space-y-5 reveal-up">
           <div class="flex gap-3">
-            <i data-lucide="filter" class="w-5 h-5 text-[var(--color-green)] mt-0.5 flex-shrink-0"></i>
+            <i data-lucide="filter" class="w-5 h-5 text-[var(--color-blue)] mt-0.5 flex-shrink-0"></i>
             <p class="text-[rgba(255,255,255,0.6)] text-[clamp(0.85rem,2vw,0.95rem)]"><span class="text-white font-medium">Qualificação ativa:</span> triamos curiosos e focamos em quem tem poder de compra real.</p>
           </div>
           <div class="flex gap-3">
-            <i data-lucide="eye" class="w-5 h-5 text-[var(--color-green)] mt-0.5 flex-shrink-0"></i>
+            <i data-lucide="eye" class="w-5 h-5 text-[var(--color-blue)] mt-0.5 flex-shrink-0"></i>
             <p class="text-[rgba(255,255,255,0.6)] text-[clamp(0.85rem,2vw,0.95rem)]"><span class="text-white font-medium">Monitoramento de inbox:</span> abordamos ativamente quem interage com seus stories e posts.</p>
           </div>
         </div>
-        <button onclick="openModal()" class="atendimento-btn btn-green mt-6">
+        <button onclick="openModal()" class="atendimento-btn btn-blue mt-6">
           Ativar Minha Operação Comercial
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </button>
@@ -1040,17 +1122,17 @@
           <div class="p-5 space-y-3">
             <div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--color-bg)]">
               <span class="text-sm font-medium">Novo lead — Tráfego Pago</span>
-              <span class="w-2 h-2 rounded-full bg-[var(--color-green)]"></span>
+              <span class="w-2 h-2 rounded-full bg-[var(--color-blue)]"></span>
             </div>
             <div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--color-bg)]">
               <span class="text-sm font-medium">Qualificado — SDR</span>
-              <span class="w-2 h-2 rounded-full bg-[var(--color-green)]"></span>
+              <span class="w-2 h-2 rounded-full bg-[var(--color-blue)]"></span>
             </div>
             <div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--color-bg)]">
               <span class="text-sm font-medium">Em negociação — Closer</span>
-              <span class="w-2 h-2 rounded-full bg-[var(--color-green)]"></span>
+              <span class="w-2 h-2 rounded-full bg-[var(--color-blue)]"></span>
             </div>
-            <div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--color-green)] text-white">
+            <div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--color-blue)] text-white">
               <span class="text-sm font-medium">Fechado</span>
               <i data-lucide="check-circle-2" class="w-4 h-4"></i>
             </div>
@@ -1063,7 +1145,7 @@
   <!-- ===== COMO FUNCIONA ===== -->
   <section id="como-funciona" class="sec-light section-padding">
     <div class="container">
-      <div class="text-center max-w-3xl mx-auto mb-10">
+      <div class="text-center max-w-3xl mx-auto mb-12">
         <p class="eyebrow eyebrow-blue reveal-up">Como funciona</p>
         <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
           Seu funil de vendas do zero ao resultado
@@ -1073,7 +1155,7 @@
         </p>
       </div>
 
-      <div class="flex flex-col md:flex-row items-stretch gap-3 md:gap-0">
+      <div class="flex flex-col md:flex-row items-stretch gap-4 md:gap-0">
         <div class="funil-step flex-1 reveal-up" data-delay="0">
           <div class="step-num">01</div>
           <div class="step-icon"><i data-lucide="target"></i></div>
@@ -1108,7 +1190,7 @@
   <!-- ===== FUNDADORES ===== -->
   <section id="fundadores" class="sec-light section-padding">
     <div class="container">
-      <div class="max-w-2xl mb-10">
+      <div class="max-w-2xl mb-12">
         <p class="eyebrow eyebrow-blue reveal-up">Quem assina a sua estratégia</p>
         <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
           Estratégia revisada por sócios, não por estagiários.
@@ -1118,7 +1200,7 @@
         </p>
       </div>
 
-      <div class="grid sm:grid-cols-3 gap-6">
+      <div class="grid sm:grid-cols-3 gap-8">
         <div class="founder-card reveal-up" data-delay="0">
           <div class="founder-photo">
             <img src="https://raw.githubusercontent.com/closermatheus-creator/parhubagencia/main/foto2.png"
@@ -1162,7 +1244,7 @@
   <!-- ===== CONVERSA ===== -->
   <section id="conversa" class="sec-light section-padding">
     <div class="container">
-      <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="text-center max-w-2xl mx-auto mb-12">
         <p class="eyebrow eyebrow-blue reveal-up">Atendimento real</p>
         <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
           Veja como seus leads serão atendidos
@@ -1194,7 +1276,7 @@
   <!-- ===== SERVIÇOS (NOVO) ===== -->
   <section id="servicos" class="sec-light section-padding">
     <div class="container">
-      <div class="text-center max-w-3xl mx-auto mb-10">
+      <div class="text-center max-w-3xl mx-auto mb-14">
         <p class="eyebrow eyebrow-blue reveal-up">Nossos serviços</p>
         <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
           Soluções completas para sua operação comercial
@@ -1205,12 +1287,12 @@
       </div>
 
       <!-- Categoria 1: Tecnologia & Marketing -->
-      <div class="mb-10 reveal-up">
+      <div class="mb-14 reveal-up">
         <div class="service-category-title">
           <span>⚙️ Tecnologia &amp; Marketing</span>
           <span class="line"></span>
         </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           <div class="service-card">
             <div class="icon-wrap"><i data-lucide="target"></i></div>
             <h4 class="font-display font-semibold text-base">Tráfego Pago</h4>
@@ -1244,7 +1326,7 @@
           <span>💬 Atendimento</span>
           <span class="line"></span>
         </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           <div class="service-card">
             <div class="icon-wrap"><i data-lucide="message-circle"></i></div>
             <h4 class="font-display font-semibold text-base">Atendente Virtual</h4>
@@ -1285,7 +1367,7 @@
         <p class="mt-4 text-[clamp(0.95rem,2.2vw,1.1rem)] text-[var(--color-text-muted)] leading-relaxed max-w-2xl mx-auto">
           Cada negócio tem um momento, um orçamento e uma dor diferente. Agende uma consultoria gratuita e desenhamos juntos a solução ideal para você.
         </p>
-        <button onclick="openModal()" class="btn-green mt-6">
+        <button onclick="openModal()" class="btn-blue mt-6">
           Agendar Minha Consultoria Gratuita
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </button>
@@ -1342,7 +1424,7 @@
   <div class="container flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
     <div>
       <p class="font-display text-lg font-semibold flex items-center gap-2">
-        <span class="inline-block w-2.5 h-2.5 rounded-full bg-[var(--color-green)]"></span>
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-[var(--color-blue)]"></span>
         PAR HUB
       </p>
       <p class="text-sm text-[var(--color-text-muted)] mt-1 max-w-xs">Sócio de Operação Comercial &amp; Growth para mentores, infoprodutores e clínicas.</p>
@@ -1435,7 +1517,7 @@
         <button type="button" id="btn-back" onclick="wizardBack()" class="btn-ghost !py-2.5 !px-5 !text-sm" style="min-width:auto;min-height:44px;">
           <i data-lucide="chevron-left" class="w-4 h-4"></i> Voltar
         </button>
-        <button type="button" id="btn-next" onclick="wizardNext()" class="btn-green !py-2.5 !px-6 !text-sm" style="min-width:auto;min-height:44px;">
+        <button type="button" id="btn-next" onclick="wizardNext()" class="btn-blue !py-2.5 !px-6 !text-sm" style="min-width:auto;min-height:44px;">
           Continuar <i data-lucide="chevron-right" class="w-4 h-4"></i>
         </button>
       </div>
@@ -1452,6 +1534,27 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 20);
   }, { passive: true });
+
+  // ===== NAV MOBILE (botão que clica e expande) =====
+  const navToggle = document.getElementById('nav-toggle');
+  const navPanel = document.getElementById('nav-mobile-panel');
+
+  function toggleMobileNav() {
+    const isOpen = navPanel.classList.toggle('open');
+    navToggle.classList.toggle('active', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  }
+  function closeMobileNav() {
+    navPanel.classList.remove('open');
+    navToggle.classList.remove('active');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }
+  navPanel.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMobileNav);
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) closeMobileNav();
+  });
 
   // ===== GSAP REVEALS =====
   gsap.registerPlugin(ScrollTrigger);
@@ -1502,81 +1605,75 @@
     });
 
     // ===== CHIP LIST (Mobile) =====
+    // Todos os itens surgem em sequência, ficam visíveis juntos, somem juntos, e repete.
     if (window.innerWidth < 768) {
-      const chips = document.querySelectorAll('#chip-list .list-chip');
-      let currentIndex = 0;
-      let interval;
+      const chips = Array.from(document.querySelectorAll('#chip-list .list-chip'));
+      const hub = document.getElementById('hub');
+      const listContainer = document.getElementById('chip-list');
+
+      const STEP_DELAY = 450;   // intervalo entre cada chip surgindo
+      const HOLD_DELAY = 2200;  // tempo com todos visíveis antes de sumirem
+      const RESET_DELAY = 650;  // tempo com tudo escondido antes de recomeçar
+
       let isPaused = false;
+      let timers = [];
 
-      function showChip(index) {
-        // Esconde todos
-        chips.forEach(c => {
-          c.classList.remove('visible', 'hidden');
-          c.style.opacity = '0';
-          c.style.transform = 'translateY(20px) scale(0.9)';
-        });
-
-        // Mostra o atual com animação
-        const chip = chips[index];
-        chip.style.opacity = '1';
-        chip.style.transform = 'translateY(0) scale(1)';
-        chip.classList.add('visible');
-
-        // Esconde os anteriores com fade out
-        for (let i = 0; i < index; i++) {
-          chips[i].style.opacity = '0';
-          chips[i].style.transform = 'translateY(-20px) scale(0.9)';
-          chips[i].classList.add('hidden');
-        }
+      function clearTimers() {
+        timers.forEach(t => clearTimeout(t));
+        timers = [];
       }
 
-      function nextChip() {
-        if (isPaused) return;
-        currentIndex++;
-        if (currentIndex >= chips.length) {
-          // Todos visíveis → fade out todos e reinicia
-          chips.forEach(c => {
-            c.style.opacity = '0';
-            c.style.transform = 'translateY(-30px) scale(0.85)';
-          });
-          setTimeout(() => {
-            currentIndex = 0;
-            chips.forEach(c => {
-              c.style.opacity = '0';
-              c.style.transform = 'translateY(20px) scale(0.9)';
-            });
-            showChip(0);
-          }, 800);
+      function resetAll() {
+        chips.forEach(c => c.classList.remove('visible', 'hiding'));
+        if (hub) hub.classList.remove('visible');
+      }
+
+      function runCycle() {
+        clearTimers();
+
+        if (isPaused) {
+          timers.push(setTimeout(runCycle, 400));
           return;
         }
-        showChip(currentIndex);
+
+        resetAll();
+
+        // Revela cada chip, um de cada vez, mantendo os anteriores visíveis
+        chips.forEach((chip, i) => {
+          timers.push(setTimeout(() => {
+            if (!isPaused) chip.classList.add('visible');
+          }, i * STEP_DELAY));
+        });
+
+        const afterAllChips = chips.length * STEP_DELAY + 350;
+
+        // Revela a mensagem central logo após o último chip
+        timers.push(setTimeout(() => {
+          if (hub && !isPaused) hub.classList.add('visible');
+        }, afterAllChips));
+
+        // Depois de um tempo com tudo junto na tela, some tudo ao mesmo tempo
+        const hideAt = afterAllChips + HOLD_DELAY;
+        timers.push(setTimeout(() => {
+          chips.forEach(c => { c.classList.remove('visible'); c.classList.add('hiding'); });
+          if (hub) hub.classList.remove('visible');
+        }, hideAt));
+
+        // Reinicia o loop
+        const restartAt = hideAt + RESET_DELAY;
+        timers.push(setTimeout(runCycle, restartAt));
       }
 
-      function startLoop() {
-        showChip(0);
-        interval = setInterval(nextChip, 1500);
-      }
-
-      // Pausar no hover/touch
-      const listContainer = document.getElementById('chip-list');
       if (listContainer) {
         listContainer.addEventListener('mouseenter', () => { isPaused = true; });
         listContainer.addEventListener('mouseleave', () => { isPaused = false; });
-        listContainer.addEventListener('touchstart', () => { isPaused = true; });
+        listContainer.addEventListener('touchstart', () => { isPaused = true; }, { passive: true });
         listContainer.addEventListener('touchend', () => {
           setTimeout(() => { isPaused = false; }, 1000);
         });
       }
 
-      startLoop();
-
-      // Mostrar hub após alguns ciclos
-      setTimeout(() => {
-        const hub = document.getElementById('hub');
-        hub.classList.add('visible');
-        hub.style.opacity = '1';
-        hub.style.transform = 'none';
-      }, 5000);
+      runCycle();
     }
 
     // ===== CONTADORES =====
