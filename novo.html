@@ -1,1933 +1,1922 @@
-<!doctype html>
-<html lang="pt-BR" class="scroll-smooth">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-<meta name="color-scheme" content="light" />
-<title>PAR HUB — Sócio de Operação Comercial & Growth</title>
-<meta name="description" content="Da captação no Tráfego Pago ao fechamento no WhatsApp com SDRs e Closers. A PAR HUB centraliza e assume sua operação comercial." />
-
-<!-- Tailwind CSS v4 Play CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-<!-- Fonts -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAR HUB — Sócio de Operação Comercial</title>
+<meta name="description" content="Tráfego, atendimento, CRM e fechamento em um único ecossistema. PAR HUB é o sócio de operação comercial de mentores, clínicas e negócios locais.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-
-<!-- Lucide Icons -->
-<script src="https://unpkg.com/lucide@latest"></script>
-
-<!-- GSAP + ScrollTrigger -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   /* ============================================================
-     VARIÁVEIS — IDENTIDADE VISUAL
+     PALETA DE CORES — Velvet como fundo principal
      ============================================================ */
   :root {
-    --color-bg: #FFFFFF;
-    --color-bg-dark: #000000;
-    --color-bg-card: #F5F5F7;
-    --color-text: #1D1D1F;
-    --color-text-muted: #6E6E73;
-    --color-text-dark: #F5F5F7;
-    --color-border: #D2D2D7;
-    --color-border-dark: #424245;
-    /* AZUL: cor principal da marca */
-    --color-blue: #0071E3;
-    --color-blue-hover: #0058B9;
-    --color-blue-dim: rgba(0, 113, 227, 0.10);
-    /* VERDE: reservado exclusivamente para o WhatsApp */
-    --color-whats: #25D366;
-    --color-whats-hover: #1DA851;
-    --color-whats-dim: rgba(37, 211, 102, 0.12);
-    /* Espaçamentos sistemáticos - escala única */
-    --space-xs: 0.5rem;
-    --space-sm: 0.75rem;
-    --space-md: 1.25rem;
-    --space-lg: 2rem;
-    --space-xl: 3rem;
-    --space-2xl: 5rem;
-    --space-3xl: 7rem;
+    /* Fundos — Velvet (azul petróleo) */
+    --bg-primary: #222D52;        /* Velvet — fundo principal */
+    --bg-elevated: #1A2340;       /* Velvet Dark — seções elevadas */
+    --bg-card: #1A2340;           /* Velvet Dark — cards */
+    --bg-card-hover: #2C3A66;     /* Velvet Light — hover */
+    --bg-glass: rgba(26, 35, 64, 0.78);
+
+    /* Textos */
+    --text-primary: #FDFFFF;      /* Pearl */
+    --text-secondary: #EEE5D9;    /* Silk */
+    --text-tertiary: #D2B68A;     /* Champagne */
+    --text-muted: #A8A09A;        /* Marble escuro */
+
+    /* Acento — Champagne */
+    --champagne: #D2B68A;
+    --champagne-dark: #C4A07A;
+    --champagne-soft: rgba(210, 182, 138, 0.10);
+    --champagne-border: rgba(210, 182, 138, 0.20);
+    --champagne-glow: rgba(210, 182, 138, 0.06);
+
+    /* Bordas */
+    --border-subtle: rgba(232, 228, 224, 0.06);
+    --border-soft: rgba(232, 228, 224, 0.12);
+    --border-champagne: rgba(210, 182, 138, 0.20);
+
+    /* Outros */
+    --radius: 16px;
+    --radius-sm: 10px;
+    --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
   }
 
   /* ============================================================
-     RESET E BASE
+     RESET & BASE
      ============================================================ */
-  * { -webkit-font-smoothing: antialiased; margin: 0; padding: 0; box-sizing: border-box; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: var(--color-bg);
-    color: var(--color-text);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.6;
     overflow-x: hidden;
+    min-height: 100vh;
   }
-  .font-display { font-family: "Space Grotesk", "Inter", -apple-system, sans-serif; }
-  .font-mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
-
-  ::selection { background: var(--color-blue); color: #fff; }
+  ::selection { background: var(--champagne); color: #1A2340; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
 
   /* ============================================================
-     SCROLLBAR
+     FUNDO — NEBULOSA DE CHAMPANHE SOBRE VELVET
      ============================================================ */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--color-bg); }
-  ::-webkit-scrollbar-thumb { background: var(--color-blue); border-radius: 999px; }
-
-  /* ============================================================
-     UTILIDADES
-     ============================================================ */
-  .container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--space-lg);
-  }
-  @media (max-width: 640px) { .container { padding: 0 var(--space-md); } }
-  @media (min-width: 1024px) { .container { padding: 0 var(--space-xl); } }
-
-  .section-padding {
-    padding: var(--space-2xl) 0;
-  }
-  @media (min-width: 768px) {
-    .section-padding { padding: var(--space-3xl) 0; }
-  }
-
-  .eyebrow {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: var(--color-blue);
-    margin-bottom: var(--space-sm);
-    display: inline-block;
-  }
-
-  .sec-dark { background: var(--color-bg-dark) !important; color: var(--color-text-dark) !important; }
-  .sec-light { background: var(--color-bg) !important; color: var(--color-text) !important; }
-
-  .glow-orb {
-    position: absolute;
-    border-radius: 9999px;
-    filter: blur(120px);
+  .bg-nebula {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
     pointer-events: none;
+    overflow: hidden;
+  }
+  .nebula-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
     opacity: 0.08;
+    will-change: transform;
+    animation: nebulaFloat 22s ease-in-out infinite alternate;
+  }
+  .nebula-blob:nth-child(1) {
+    width: 50vw;
+    height: 50vw;
+    top: -10%;
+    left: -10%;
+    background: radial-gradient(circle, rgba(210, 182, 138, 0.20) 0%, transparent 70%);
+    animation-duration: 24s;
+    animation-delay: 0s;
+  }
+  .nebula-blob:nth-child(2) {
+    width: 40vw;
+    height: 40vw;
+    bottom: -5%;
+    right: -5%;
+    background: radial-gradient(circle, rgba(210, 182, 138, 0.10) 0%, transparent 70%);
+    animation-duration: 28s;
+    animation-delay: -4s;
+  }
+  .nebula-blob:nth-child(3) {
+    width: 30vw;
+    height: 30vw;
+    top: 40%;
+    left: 30%;
+    background: radial-gradient(circle, rgba(232, 228, 224, 0.05) 0%, transparent 70%);
+    animation-duration: 20s;
+    animation-delay: -8s;
+  }
+
+  @keyframes nebulaFloat {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    33% { transform: translate(50px, -40px) scale(1.1) rotate(5deg); }
+    66% { transform: translate(-30px, 50px) scale(0.9) rotate(-3deg); }
+    100% { transform: translate(40px, 30px) scale(1.05) rotate(2deg); }
   }
 
   /* ============================================================
-     BOTÕES
+     LINHAS DE LUZ — Canvas
      ============================================================ */
-  .btn-blue {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-xs);
-    background: var(--color-blue) !important;
-    color: #fff !important;
-    font-weight: 600;
-    padding: 0.85rem var(--space-xl);
-    border-radius: 9999px;
-    border: none;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    font-size: clamp(0.9rem, 2vw, 1.05rem);
-    cursor: pointer;
-    min-height: 52px;
-    min-width: 180px;
-    text-align: center;
-    box-shadow: 0 8px 28px rgba(0, 113, 227, 0.25);
+  #light-lines {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
   }
-  .btn-blue:hover {
-    background: var(--color-blue-hover) !important;
-    transform: translateY(-3px);
-    box-shadow: 0 14px 40px rgba(0, 113, 227, 0.35);
-  }
-  .btn-blue:active { transform: translateY(0); }
-
-  .btn-whats {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-xs);
-    background: var(--color-whats) !important;
-    color: #fff !important;
-    font-weight: 600;
-    padding: 0.85rem var(--space-xl);
-    border-radius: 9999px;
-    border: none;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    font-size: clamp(0.9rem, 2vw, 1.05rem);
-    cursor: pointer;
-    min-height: 52px;
-    min-width: 180px;
-    text-align: center;
-    box-shadow: 0 8px 28px rgba(37, 211, 102, 0.30);
-  }
-  .btn-whats:hover {
-    background: var(--color-whats-hover) !important;
-    transform: translateY(-3px);
-    box-shadow: 0 14px 40px rgba(37, 211, 102, 0.40);
-  }
-  .btn-whats:active { transform: translateY(0); }
-
-  .btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-xs);
-    color: var(--color-text) !important;
-    border: 1.5px solid var(--color-border);
-    padding: 0.85rem var(--space-lg);
-    border-radius: 9999px;
-    font-weight: 500;
-    font-size: clamp(0.9rem, 2vw, 1rem);
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    min-height: 52px;
-    min-width: 160px;
-    text-align: center;
-  }
-  .btn-ghost:hover { border-color: var(--color-blue); background: var(--color-blue-dim); }
-
-  .btn-ghost-dark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-xs);
-    color: var(--color-text-dark) !important;
-    border: 1.5px solid rgba(255,255,255,0.2);
-    padding: 0.85rem var(--space-lg);
-    border-radius: 9999px;
-    font-weight: 500;
-    font-size: clamp(0.9rem, 2vw, 1rem);
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    min-height: 52px;
-    min-width: 160px;
-    text-align: center;
-  }
-  .btn-ghost-dark:hover { border-color: var(--color-blue); background: var(--color-blue-dim); }
 
   /* ============================================================
-     NAVEGAÇÃO — FULL-WIDTH
+     GRID SUTIL
      ============================================================ */
-  #nav {
+  .bg-grid {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 72px 72px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 20%, transparent 70%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 20%, transparent 70%);
+  }
+
+  /* ============================================================
+     WRAP
+     ============================================================ */
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ============================================================
+     HEADER / MENU
+     ============================================================ */
+  header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 50;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    height: 64px;
-    transition: background 0.3s ease;
+    z-index: 100;
+    padding: 0 20px;
+    background: var(--bg-glass);
+    backdrop-filter: blur(18px) saturate(1.2);
+    -webkit-backdrop-filter: blur(18px) saturate(1.2);
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background var(--transition);
   }
-  @media (min-width: 768px) { #nav { height: 72px; } }
-  #nav.scrolled { background: rgba(255, 255, 255, 0.96); }
-
-  .nav-inner {
+  .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
-    height: 64px;
-    padding: 0 var(--space-lg);
-    gap: var(--space-sm);
-  }
-  @media (min-width: 768px) {
-    .nav-inner { height: 72px; padding: 0 var(--space-xl); }
-  }
-  @media (min-width: 1024px) {
-    .nav-inner { padding: 0 var(--space-2xl); }
+    height: 74px;
+    max-width: 1180px;
+    margin: 0 auto;
+    gap: 20px;
   }
 
-  .nav-logo {
-    color: var(--color-text);
-    font-family: "Space Grotesk", sans-serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-decoration: none;
+  .logo {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
     flex-shrink: 0;
   }
-  .nav-logo-dot {
-    display: inline-block;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: var(--color-blue);
-  }
-
-  .nav-links-wrapper {
-    display: none;
+  .logo-mark {
+    display: flex;
+    gap: 4px;
     align-items: center;
-    gap: 0.25rem;
-    flex: 1;
-    justify-content: center;
-    padding: 0 var(--space-md);
   }
-  @media (min-width: 1024px) {
-    .nav-links-wrapper { display: flex; }
+  .logo-mark span {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--text-muted);
+    transition: background var(--transition);
   }
+  .logo-mark span:nth-child(2) { background: var(--champagne); }
+  .logo-mark span:nth-child(3) { background: var(--text-secondary); }
 
-  .nav-link {
-    color: var(--color-text-muted);
-    text-decoration: none;
-    font-size: 0.85rem;
+  .navlinks {
+    display: flex;
+    gap: 36px;
+    font-size: 14px;
     font-weight: 500;
-    padding: 0.45rem 0.9rem;
-    border-radius: 999px;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-    position: relative;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+    transition: color var(--transition);
   }
-  .nav-link::after {
+  .navlinks a {
+    position: relative;
+    transition: color var(--transition);
+  }
+  .navlinks a::after {
     content: '';
     position: absolute;
-    bottom: 0.2rem;
+    bottom: -4px;
     left: 50%;
-    transform: translateX(-50%) scaleX(0);
-    width: 70%;
-    height: 2px;
-    background: var(--color-blue);
-    transition: transform 0.3s ease;
+    width: 0;
+    height: 1.5px;
+    background: var(--champagne);
+    transition: width var(--transition), left var(--transition);
   }
-  .nav-link:hover { color: var(--color-text); }
-  .nav-link:hover::after { transform: translateX(-50%) scaleX(1); }
-  .nav-link-highlight {
-    color: var(--color-blue) !important;
-    font-weight: 600;
+  .navlinks a:hover {
+    color: var(--text-primary);
   }
-  .nav-link-highlight::after { background: var(--color-blue); }
+  .navlinks a:hover::after {
+    width: 100%;
+    left: 0;
+  }
 
   .nav-actions {
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
+    gap: 14px;
     flex-shrink: 0;
   }
-  .nav-btn-cta {
-    display: none;
-    padding: 0.5rem 1.2rem;
-    border-radius: 999px;
-    background: var(--color-blue);
-    color: #fff;
-    font-size: 0.82rem;
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 24px;
+    border-radius: 100px;
+    font-size: 14px;
     font-weight: 600;
-    border: none;
     cursor: pointer;
+    border: 1px solid transparent;
+    transition: all var(--transition);
     white-space: nowrap;
-    transition: all 0.2s ease;
+    font-family: var(--font-body);
   }
-  .nav-btn-cta:hover { background: var(--color-blue-hover); transform: translateY(-1px); }
-  @media (min-width: 1024px) {
-    .nav-btn-cta { display: inline-flex; align-items: center; justify-content: center; }
+  .btn:active { transform: scale(0.97); }
+
+  .btn-champagne {
+    background: linear-gradient(135deg, var(--champagne) 0%, var(--champagne-dark) 100%);
+    color: #1A2340;
+    border-color: var(--champagne);
+    box-shadow: 0 0 30px rgba(210, 182, 138, 0.10);
+  }
+  .btn-champagne:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 50px rgba(210, 182, 138, 0.20);
+    filter: brightness(1.06);
   }
 
-  .nav-toggle {
-    display: flex;
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-primary);
+    border-color: var(--border-soft);
+  }
+  .btn-ghost:hover {
+    border-color: var(--border-champagne);
+    color: var(--champagne);
+  }
+
+  .btn-sm { padding: 8px 18px; font-size: 13px; }
+
+  .burger {
+    display: none;
+    width: 36px;
+    height: 36px;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(0,0,0,0.045);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-sm);
     cursor: pointer;
+    color: var(--text-muted);
+    font-size: 18px;
+    background: transparent;
+    transition: border-color var(--transition);
+  }
+  .burger:hover { border-color: var(--border-champagne); }
+
+  .nav-cta-mobile { display: none; }
+
+  @media (max-width: 820px) {
+    .navlinks { display: none; }
+    .burger { display: flex; }
+    .nav-cta-desktop { display: none; }
+    .nav-cta-mobile { display: inline-flex; }
+    .nav { gap: 12px; }
+  }
+  @media (min-width: 821px) {
+    .nav-cta-mobile { display: none; }
+  }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero {
+    padding: 160px 0 80px;
     position: relative;
-    flex-shrink: 0;
-    transition: background 0.2s ease;
-  }
-  .nav-toggle:hover { background: rgba(0,0,0,0.08); }
-  .nav-toggle span {
-    display: block;
-    position: absolute;
-    width: 18px;
-    height: 2px;
-    background: var(--color-text);
-    border-radius: 2px;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-  .nav-toggle span:nth-child(1) { transform: translateY(-5px); }
-  .nav-toggle span:nth-child(2) { transform: translateY(0); }
-  .nav-toggle span:nth-child(3) { transform: translateY(5px); }
-  .nav-toggle.active span:nth-child(1) { transform: translateY(0) rotate(45deg); }
-  .nav-toggle.active span:nth-child(2) { opacity: 0; }
-  .nav-toggle.active span:nth-child(3) { transform: translateY(0) rotate(-45deg); }
-  @media (min-width: 1024px) {
-    .nav-toggle { display: none !important; }
   }
 
-  .nav-mobile-panel {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100dvh;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  .eyebrow {
+    display: inline-flex;
     align-items: center;
-    gap: var(--space-lg);
-    padding: var(--space-2xl) var(--space-lg);
-    transform: translateX(100%);
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    z-index: 100;
-    overflow-y: auto;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border: 1px solid var(--border-soft);
+    padding: 7px 16px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+    background: rgba(255,255,255,0.02);
   }
-  .nav-mobile-panel.open {
-    transform: translateX(0);
-  }
-  @media (min-width: 1024px) {
-    .nav-mobile-panel { display: none !important; }
+  .eyebrow::before {
+    content: '◆';
+    color: var(--champagne);
+    font-size: 10px;
   }
 
-  .nav-mobile-link {
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: var(--color-text);
-    text-decoration: none;
-    padding: 0.4rem 0;
-    transition: color 0.2s ease;
-    text-align: center;
-  }
-  .nav-mobile-link:hover,
-  .nav-mobile-link:active { color: var(--color-blue); }
-  .nav-mobile-link-highlight {
-    color: var(--color-blue) !important;
+  .hero-title {
+    font-family: var(--font-display);
     font-weight: 600;
+    font-size: clamp(34px, 5.6vw, 62px);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    max-width: 860px;
+    color: var(--text-muted);
   }
-
-  .nav-mobile-cta-wrap {
-    margin-top: var(--space-md);
-    width: 100%;
-    max-width: 280px;
-  }
-  .nav-mobile-cta-wrap .btn-blue {
-    width: 100%;
-    min-width: auto;
-  }
-
-  .nav-mobile-close {
-    position: absolute;
-    top: var(--space-md);
-    right: var(--space-md);
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(0,0,0,0.05);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s ease;
-    font-size: 1.5rem;
-    color: var(--color-text);
-  }
-  .nav-mobile-close:hover { background: rgba(0,0,0,0.1); }
-
-  /* ============================================================
-     REVEAL
-     ============================================================ */
-  .reveal-up { opacity: 0; transform: translateY(40px); }
-
-  /* ============================================================
-     PAIN CARDS
-     ============================================================ */
-  .pain-card {
-    background: var(--color-bg-card);
-    border-radius: 1.5rem;
-    padding: var(--space-xl) var(--space-lg);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  .hero-title .champagne {
+    color: var(--champagne);
+    display: inline-block;
     position: relative;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-    border: 1px solid rgba(0,0,0,0.04);
   }
-  .pain-card::before {
+  .hero-title .champagne::after {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--color-blue);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-  }
-  .pain-card:hover::before { opacity: 1; }
-  .pain-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 48px -16px rgba(0,0,0,0.12);
-    border-color: rgba(0, 113, 227, 0.18);
-  }
-  .pain-num {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.8rem;
-    color: var(--color-blue);
-    font-weight: 600;
-    display: inline-block;
-    background: var(--color-blue-dim);
-    padding: 0.2rem 0.7rem;
-    border-radius: 999px;
-  }
-
-  /* ============================================================
-     CONVERGÊNCIA — simplificada, sem linhas
-     ============================================================ */
-  #convergencia {
-    position: relative;
-    min-height: 100dvh;
-    overflow: hidden;
-    background: var(--color-bg-dark) !important;
-    padding: var(--space-2xl) 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .node-chip {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 0.6rem 1rem;
-    border-radius: 9999px;
-    font-size: clamp(0.65rem, 1.4vw, 0.8rem);
-    font-weight: 500;
-    color: var(--color-text-dark);
-    white-space: nowrap;
-    z-index: 3;
-    pointer-events: none;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-  .node-chip svg { width: 16px; height: 16px; color: var(--color-blue); flex-shrink: 0; }
-
-  #hub {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.5);
-    opacity: 0;
-    z-index: 4;
-    text-align: center;
-    width: min(80vw, 380px);
-    pointer-events: none;
-    transition: opacity 0.6s ease;
-  }
-  #hub p { color: var(--color-text-dark); }
-  #hub .eyebrow { color: var(--color-blue); }
-  #hub-sub { color: rgba(255,255,255,0.5); }
-
-  /* Mobile: lista em sequência com altura automática */
-  #chip-list {
-    display: none;
-    position: relative;
+    bottom: 2px;
+    left: 0;
     width: 100%;
-    max-width: 320px;
-    margin: 0 auto;
-    min-height: 260px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.85rem;
+    height: 3px;
+    background: var(--champagne);
+    opacity: 0.25;
+    border-radius: 100px;
   }
-  #chip-list .list-chip {
-    opacity: 0;
-    transform: translateY(18px) scale(0.92);
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 0.7rem 1.2rem;
-    border-radius: 9999px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--color-text-dark);
-    white-space: nowrap;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    width: auto;
-    min-width: 160px;
-    justify-content: center;
-  }
-  #chip-list .list-chip svg { width: 18px; height: 18px; color: var(--color-blue); flex-shrink: 0; }
-  #chip-list .list-chip.visible { opacity: 1; transform: translateY(0) scale(1); }
-  #chip-list .list-chip.hiding { opacity: 0; transform: translateY(-14px) scale(0.94); }
-
-  @media (max-width: 767px) {
-    #convergencia .node-chip { display: none; }
-    #chip-list { display: flex; }
-    #hub {
-      position: relative;
-      top: auto;
-      left: auto;
-      transform: none;
-      opacity: 0;
-      margin: var(--space-xl) auto 0;
-      padding-top: var(--space-xl);
-    }
-    #hub.visible { opacity: 1; }
+  .hero-title .light {
+    color: var(--text-primary);
   }
 
-  /* Fallback para "reduzir movimento" */
-  @media (prefers-reduced-motion: reduce) {
-    #convergencia .node-chip { display: flex !important; position: relative; top: auto !important; left: auto !important; transform: none !important; margin: 0.5rem auto; }
-    #convergencia { min-height: auto; padding: var(--space-xl) 0; flex-wrap: wrap; gap: var(--space-sm); }
-    #chip-list { display: none !important; }
-    #hub { opacity: 1 !important; transform: none !important; position: relative !important; top: auto !important; left: auto !important; margin-top: var(--space-lg); }
-    .node-chip { position: relative !important; top: auto !important; left: auto !important; transform: none !important; }
-  }
-
-  /* ============================================================
-     SPLIT PHOTO
-     ============================================================ */
-  .split-photo-wrap {
-    position: relative;
-    border-radius: 1.5rem;
-    overflow: hidden;
-    aspect-ratio: 3 / 4;
-    background: var(--color-bg-dark);
-    border: 1px solid rgba(255,255,255,0.06);
-  }
-  .split-photo-wrap img {
-    width: 100%; height: 100%;
-    object-fit: cover; display: block;
-  }
-  .photo-fallback {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 0.5rem;
-    color: rgba(255,255,255,0.3);
-  }
-
-  /* ============================================================
-     FUNIL
-     ============================================================ */
-  .funil-step {
-    position: relative;
-    padding: var(--space-xl) var(--space-lg);
-    border-radius: 1.25rem;
-    background: var(--color-bg-card);
-    border: 1px solid rgba(0,0,0,0.06);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Scramble letters */
+  .scramble-letter {
+    display: inline-block;
+    min-width: 0.62em;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    transition: color 0.15s ease;
   }
-  .funil-step:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 40px -12px rgba(0,0,0,0.10);
-    border-color: var(--color-blue);
+
+  .hero-sub {
+    margin-top: 22px;
+    font-size: 17.5px;
+    color: var(--text-secondary);
+    max-width: 540px;
+    line-height: 1.7;
+    font-weight: 400;
   }
-  .funil-step .step-num {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--color-blue-dim);
-    line-height: 1;
-    margin-bottom: 0.25rem;
+
+  .hero-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 36px;
   }
-  .funil-step .step-icon {
-    width: 48px; height: 48px;
-    border-radius: 9999px;
-    background: var(--color-blue-dim);
+
+  /* ============================================================
+     COMPARE
+     ============================================================ */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    margin-top: 70px;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--bg-elevated);
+  }
+  @media (max-width: 760px) {
+    .compare { grid-template-columns: 1fr; }
+  }
+  .compare-col {
+    padding: 32px 30px;
+  }
+  .compare-col.before {
+    background: var(--bg-primary);
+  }
+  .compare-col.after {
+    background: rgba(210, 182, 138, 0.03);
+    border-left: 1px solid var(--border-champagne);
+  }
+  @media (max-width: 760px) {
+    .compare-col.after { border-left: none; border-top: 1px solid var(--border-champagne); }
+  }
+  .compare-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .compare-col.after .compare-label { color: var(--champagne); }
+  .compare-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .compare-list li {
+    display: flex;
+    gap: 12px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+  .compare-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto var(--space-xs);
-    color: var(--color-blue);
+    font-size: 11px;
+    font-weight: 700;
+    margin-top: 1px;
   }
-  .funil-step .step-icon svg { width: 24px; height: 24px; }
-  .funil-connector {
-    display: none;
-    color: var(--color-text-muted);
-    font-size: 1.2rem;
-    padding: 0 0.25rem;
-    align-self: center;
+  .compare-icon.no {
+    background: rgba(255,90,90,0.10);
+    color: #ff6b6b;
   }
-  @media (min-width: 768px) {
-    .funil-connector { display: block; }
-    .funil-step { padding: var(--space-xl) var(--space-lg); }
+  .compare-icon.yes {
+    background: rgba(210, 182, 138, 0.12);
+    color: var(--champagne);
+  }
+  .compare-vs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text-muted);
+    background: var(--bg-primary);
+    padding: 10px 16px;
+    border-left: 1px solid var(--border-soft);
+    border-right: 1px solid var(--border-soft);
+    letter-spacing: 0.05em;
+  }
+  @media (max-width: 760px) {
+    .compare-vs {
+      border-left: none;
+      border-right: none;
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+      padding: 8px;
+    }
+  }
+
+  /* ============================================================
+     SECTIONS
+     ============================================================ */
+  section {
+    position: relative;
+    padding: 100px 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .section-head {
+    max-width: 640px;
+    margin-bottom: 56px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(26px, 3.4vw, 40px);
+    letter-spacing: -0.015em;
+    line-height: 1.12;
+    margin-top: 16px;
+  }
+  .section-title .champagne { color: var(--champagne); }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ============================================================
+     MÉTODO PAR
+     ============================================================ */
+  .par-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 760px) {
+    .par-grid { grid-template-columns: 1fr; }
+  }
+  .par-square {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: 20px;
+    padding: 34px 30px;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+  .par-square:hover {
+    border-color: var(--border-champagne);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .par-square::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--champagne), transparent);
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+  .par-square:hover::before { opacity: 1; }
+  .par-square-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .par-letter {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 1;
+    color: var(--champagne);
+  }
+  .par-index {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+  .par-square h3 {
+    font-size: 19px;
+    font-weight: 600;
+    margin: 16px 0 8px;
+    font-family: var(--font-display);
+  }
+  .par-square p {
+    font-size: 14.5px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ============================================================
+     RALOS
+     ============================================================ */
+  .ralos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 760px) {
+    .ralos-grid { grid-template-columns: 1fr; }
+  }
+  .ralo-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius);
+    padding: 28px 30px;
+    transition: border-color var(--transition), background var(--transition);
+  }
+  .ralo-card:hover {
+    border-color: var(--border-champagne);
+    background: var(--bg-card-hover);
+  }
+  .ralo-num {
+    font-family: var(--font-mono);
+    color: var(--champagne);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+  .ralo-card h4 {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 14px 0 10px;
+    font-family: var(--font-display);
+  }
+  .ralo-card p {
+    font-size: 14.5px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ============================================================
+     PILARES
+     ============================================================ */
+  .pilares-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 820px) {
+    .pilares-grid { grid-template-columns: 1fr; }
+  }
+  .pilar-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: border-color var(--transition);
+  }
+  .pilar-card:hover { border-color: var(--border-champagne); }
+  .pilar-idx {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    background: rgba(210, 182, 138, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--champagne);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .pilar-card h4 {
+    font-size: 19px;
+    font-weight: 600;
+    font-family: var(--font-display);
+  }
+  .pilar-card p {
+    font-size: 14.5px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .pilar-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .pilar-list li {
+    font-size: 13.5px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.85;
+  }
+  .pilar-list li::before {
+    content: '◆';
+    color: var(--champagne);
+    font-size: 8px;
+    flex-shrink: 0;
+  }
+
+  /* ============================================================
+     CRM FUNNEL
+     ============================================================ */
+  .crm-panel {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-soft);
+    border-radius: 20px;
+    padding: 38px;
+  }
+  .crm-title {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+  .crm-title .champagne { color: var(--champagne); }
+  .funnel { display: flex; flex-direction: column; gap: 10px; }
+  .funnel-stage {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 16px 22px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    transition: transform var(--transition), border-color var(--transition);
+  }
+  .funnel-stage:hover {
+    transform: translateX(6px);
+    border-color: var(--border-champagne);
+  }
+  .funnel-stage-num {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-muted);
+    width: 28px;
+  }
+  .funnel-stage-name {
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .funnel-stage-tag {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+  }
+  .funnel-stage.final {
+    border-color: var(--border-champagne);
+    background: rgba(210, 182, 138, 0.05);
+  }
+  .funnel-stage.final .funnel-stage-num { color: var(--champagne); }
+
+  /* ============================================================
+     WHATSAPP MOCK
+     ============================================================ */
+  .wa-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .wa-layout { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .wa-copy h3 {
+    font-size: 26px;
+    font-weight: 600;
+    font-family: var(--font-display);
+    margin-bottom: 14px;
+  }
+  .wa-copy p {
+    color: var(--text-secondary);
+    font-size: 15px;
+    margin-bottom: 22px;
+    line-height: 1.7;
+  }
+  .wa-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .wa-list li {
+    display: flex;
+    gap: 12px;
+    font-size: 14.5px;
+    color: var(--text-primary);
+  }
+  .wa-list li::before {
+    content: '◆';
+    color: var(--champagne);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .iphone {
+    background: #0a0a0a;
+    border-radius: 48px;
+    padding: 12px;
+    max-width: 340px;
+    margin: 0 auto;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6), inset 0 0 0 2px rgba(255,255,255,0.04);
+    position: relative;
+  }
+  .iphone-notch {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 28px;
+    background: #0a0a0a;
+    border-radius: 20px;
+    z-index: 5;
+  }
+  .iphone-screen {
+    background: #0B141A;
+    border-radius: 36px;
+    overflow: hidden;
+    min-height: 540px;
+    display: flex;
+    flex-direction: column;
+  }
+  .iphone-statusbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #E9EDEF;
+  }
+  .iphone-statusbar-icons { display: flex; gap: 4px; font-size: 10px; }
+  .wa-header-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 14px 10px;
+    background: #1F2C34;
+    border-bottom: 1px solid rgba(128,128,128,0.12);
+  }
+  .wa-back {
+    font-size: 20px;
+    color: var(--champagne);
+    margin-right: -2px;
+    font-weight: 300;
+  }
+  .wa-icon {
+    font-size: 14px;
+    opacity: 0.7;
+    color: #AEBAC1;
+  }
+  .phone-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(210, 182, 138, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--champagne);
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    border: 1px solid rgba(210, 182, 138, 0.15);
+  }
+  .phone-name {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #E9EDEF;
+  }
+  .phone-status {
+    font-size: 11px;
+    color: var(--champagne);
+  }
+  .phone-body {
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    overflow: hidden;
+    background: #0B141A;
+    min-height: 380px;
+  }
+  .bubble {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13.2px;
+    max-width: 80%;
+    line-height: 1.45;
+    opacity: 0;
+    transform: translateY(6px) scale(0.97);
+    animation: bubbleIn 0.28s ease forwards;
+    position: relative;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+  }
+  @keyframes bubbleIn {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .bubble.in {
+    background: #1F2C34;
+    color: #E9EDEF;
+    align-self: flex-start;
+    border-top-left-radius: 2px;
+  }
+  .bubble.in .bubble-meta { color: #8696A0; }
+  .bubble.out {
+    background: #2A5C4B;
+    color: #E9EDEF;
+    align-self: flex-end;
+    border-top-right-radius: 2px;
+  }
+  .bubble.out .bubble-meta { color: rgba(233, 237, 239, 0.6); }
+  .bubble .tick {
+    font-size: 9px;
+    color: #53bdeb;
+    margin-left: 4px;
+  }
+  .bubble-meta {
+    font-size: 9.5px;
+    margin-top: 2px;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3px;
+  }
+  .typing-bubble {
+    align-self: flex-start;
+    background: #1F2C34;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border-top-left-radius: 2px;
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    animation: bubbleIn 0.25s ease forwards;
+  }
+  .typing-bubble span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #8696A0;
+    animation: typingBounce 1s infinite ease-in-out;
+  }
+  .typing-bubble span:nth-child(2) { animation-delay: .15s; }
+  .typing-bubble span:nth-child(3) { animation-delay: .3s; }
+  @keyframes typingBounce {
+    0%,60%,100% { transform: translateY(0); opacity: 0.5; }
+    30% { transform: translateY(-5px); opacity: 1; }
+  }
+
+  /* ============================================================
+     PROCESSO
+     ============================================================ */
+  .processo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: var(--border-soft);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  @media (max-width: 820px) {
+    .processo-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 520px) {
+    .processo-grid { grid-template-columns: 1fr; }
+  }
+  .processo-item {
+    background: var(--bg-elevated);
+    padding: 30px 26px;
+  }
+  .processo-num {
+    font-family: var(--font-mono);
+    color: var(--champagne);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+  }
+  .processo-item h4 {
+    margin: 14px 0 8px;
+    font-size: 17px;
+    font-weight: 600;
+    font-family: var(--font-display);
+  }
+  .processo-item p {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.6;
   }
 
   /* ============================================================
      FUNDADORES
      ============================================================ */
-  .founder-card { text-align: center; }
-  .founder-photo {
-    width: 100%; aspect-ratio: 1/1;
-    border-radius: 1.5rem;
-    overflow: hidden;
-    background: var(--color-bg);
-    border: 1px solid rgba(0,0,0,0.06);
+  .founders-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 820px) {
+    .founders-grid { grid-template-columns: 1fr; }
+  }
+  .founder-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius);
+    padding: 20px;
+    transition: border-color var(--transition);
+  }
+  .founder-card:hover,
+  .founder-card:focus-within {
+    border-color: var(--border-champagne);
+  }
+  .founder-photo-wrap {
     position: relative;
-    margin-bottom: var(--space-md);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    background: var(--bg-elevated);
   }
-  .founder-photo:hover {
-    transform: scale(1.02);
-    box-shadow: 0 12px 32px -12px rgba(0,0,0,0.15);
+  .founder-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(0.3);
+    transition: filter var(--transition);
   }
-  .founder-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .founder-card:hover .founder-photo { filter: grayscale(0); }
+  .founder-story {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(34,45,82,0.1) 0%, rgba(34,45,82,0.92) 55%);
+    display: flex;
+    align-items: flex-end;
+    padding: 18px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity var(--transition), transform var(--transition);
+  }
+  .founder-card:hover .founder-story,
+  .founder-card:focus-within .founder-story {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .founder-story p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-primary);
+  }
+  .founder-card h4 {
+    font-size: 17px;
+    font-weight: 600;
+    font-family: var(--font-display);
+  }
   .founder-role {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    margin-top: 0.15rem;
+    font-size: 12px;
+    color: var(--champagne);
+    font-family: var(--font-mono);
+    margin: 4px 0 12px;
+    letter-spacing: 0.04em;
   }
-  .founder-bio {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    margin-top: var(--space-xs);
-    line-height: 1.5;
-    max-width: 240px;
-    margin-left: auto;
-    margin-right: auto;
+  .founder-card p {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.6;
   }
 
   /* ============================================================
-     CHAT — SPLIT DESKTOP
+     DEPOIMENTOS
      ============================================================ */
-  .chat-container {
-    background: var(--color-bg-card);
-    border-radius: 1.5rem;
-    padding: var(--space-md);
-    border: 1px solid rgba(0,0,0,0.06);
-    max-width: 420px;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
   }
-  .chat-header {
+  @media (max-width: 820px) {
+    .testi-grid { grid-template-columns: 1fr; }
+  }
+  .testi-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 220px;
+    transition: border-color var(--transition);
+  }
+  .testi-card:hover { border-color: var(--border-champagne); }
+  .testi-quote {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--text-primary);
+    opacity: 0.9;
+  }
+  .testi-quote::before {
+    content: '"';
+    color: var(--champagne);
+    font-size: 24px;
+    font-weight: 700;
+    margin-right: 4px;
+  }
+  .testi-foot {
+    margin-top: 22px;
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
-    padding-bottom: var(--space-sm);
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    margin-bottom: var(--space-sm);
+    gap: 10px;
   }
-  .chat-avatar {
-    width: 40px; height: 40px;
+  .testi-dot {
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
-    background: var(--color-blue);
+    background: rgba(210, 182, 138, 0.08);
+    color: var(--champagne);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    font-size: 1rem;
-    color: #fff;
-    position: relative;
-    flex-shrink: 0;
+    border: 1px solid var(--border-champagne);
   }
-  .chat-avatar .online-dot {
-    position: absolute;
-    bottom: 0; right: 0;
-    width: 11px; height: 11px;
-    border-radius: 50%;
-    background: var(--color-blue);
-    border: 2px solid var(--color-bg-card);
-    animation: pulse-dot 2s infinite;
-  }
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
-  }
-  .chat-name { font-weight: 600; color: var(--color-text); font-size: 0.9rem; }
-  .chat-status { font-size: 0.7rem; color: var(--color-text-muted); }
-  .chat-messages {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    min-height: 240px;
-    max-height: 340px;
-    overflow-y: auto;
-    padding-right: 0.25rem;
-  }
-  .chat-messages::-webkit-scrollbar { width: 4px; }
-  .chat-messages::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 999px; }
-
-  .msg {
-    max-width: 82%;
-    padding: 0.6rem 1rem;
-    border-radius: 1rem;
-    font-size: clamp(0.8rem, 1.8vw, 0.9rem);
-    line-height: 1.5;
-    opacity: 0;
-    transform: translateY(10px) scale(0.95);
-    animation: msg-appear 0.5s ease forwards;
-  }
-  .msg-user {
-    align-self: flex-end;
-    background: var(--color-blue);
-    color: #fff;
-    border-bottom-right-radius: 0.15rem;
-  }
-  .msg-bot {
-    align-self: flex-start;
-    background: #F0F0F2;
-    color: var(--color-text);
-    border-bottom-left-radius: 0.15rem;
-  }
-  @keyframes msg-appear {
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
-
-  .msg-typing {
-    align-self: flex-start;
-    background: #F0F0F2;
-    padding: 0.6rem 1.2rem;
-    border-radius: 1rem;
-    border-bottom-left-radius: 0.15rem;
-    display: flex;
-    gap: 0.25rem;
-    align-items: center;
-    font-size: 1.1rem;
-    opacity: 0;
-    animation: msg-appear 0.3s ease forwards;
-  }
-  .msg-typing span {
-    display: inline-block;
-    animation: typing-dot 1.2s infinite ease-in-out;
-  }
-  .msg-typing span:nth-child(2) { animation-delay: 0.2s; }
-  .msg-typing span:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes typing-dot {
-    0%, 80%, 100% { transform: scale(0.5); opacity: 0.3; }
-    40% { transform: scale(1); opacity: 1; }
-  }
-  .msg .check-mark {
-    display: inline-block;
-    margin-left: 0.2rem;
-    font-size: 0.65rem;
-    opacity: 0.5;
-  }
-
-  .chat-split-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xl);
-    align-items: center;
-  }
-  .chat-split-content {
-    text-align: center;
-    max-width: 480px;
-  }
-  .chat-split-content .chat-benefits {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-    margin: var(--space-lg) 0;
-    text-align: left;
-  }
-  .chat-split-content .chat-benefits li {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    font-size: clamp(0.95rem, 2vw, 1.05rem);
-    color: var(--color-text);
-    list-style: none;
-  }
-  .chat-split-content .chat-benefits li svg {
-    width: 20px;
-    height: 20px;
-    color: var(--color-blue);
-    flex-shrink: 0;
-  }
-
-  @media (min-width: 1024px) {
-    .chat-split-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-2xl);
-      align-items: center;
-    }
-    .chat-split-content {
-      text-align: left;
-      max-width: 100%;
-    }
-    .chat-split-content .chat-benefits {
-      text-align: left;
-    }
-    .chat-container {
-      margin: 0;
-      max-width: 100%;
-    }
-  }
-
-  /* ============================================================
-     DEPOIMENTOS (PROVA SOCIAL)
-     ============================================================ */
-  .testimonial-card {
-    background: var(--color-bg-card);
-    border-radius: 1.5rem;
-    padding: var(--space-xl);
-    border: 1px solid rgba(0,0,0,0.04);
-    text-align: left;
-    transition: all 0.3s ease;
-  }
-  .testimonial-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px -12px rgba(0,0,0,0.08);
-  }
-  .testimonial-card .quote {
-    font-size: clamp(1rem, 2vw, 1.15rem);
-    line-height: 1.6;
-    color: var(--color-text);
-    margin-bottom: var(--space-md);
-  }
-  .testimonial-card .quote::before {
-    content: '"';
-    color: var(--color-blue);
-    font-size: 1.8rem;
-    line-height: 1;
-    display: block;
-    margin-bottom: 0.25rem;
-  }
-  .testimonial-card .author {
+  .testi-name {
+    font-size: 13.5px;
     font-weight: 600;
-    color: var(--color-text);
   }
-  .testimonial-card .author-role {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-  }
-  .testimonial-card .author-stars {
-    color: #FFB800;
-    letter-spacing: 2px;
-    margin-bottom: var(--space-xs);
+  .testi-role {
+    font-size: 12px;
+    color: var(--text-secondary);
   }
 
   /* ============================================================
      SERVIÇOS
      ============================================================ */
+  .services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
   .service-card {
-    background: var(--color-bg-card);
-    border-radius: 1.25rem;
-    padding: var(--space-lg) var(--space-md);
-    border: 1px solid rgba(0,0,0,0.06);
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    text-align: left;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    gap: 22px;
+    align-items: flex-start;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    transition: border-color var(--transition), background var(--transition);
+  }
+  @media (max-width: 700px) {
+    .service-card {
+      grid-template-columns: 44px 1fr;
+      row-gap: 12px;
+    }
+    .service-card .service-badge-wrap {
+      grid-column: 1 / -1;
+      justify-self: start;
+    }
   }
   .service-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px -12px rgba(0,0,0,0.10);
-    border-color: var(--color-blue);
+    border-color: var(--border-champagne);
+    background: var(--bg-card-hover);
   }
-  .service-card .icon-wrap {
-    width: 44px; height: 44px;
-    border-radius: 12px;
+  .service-letter {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    background: rgba(210, 182, 138, 0.06);
+    color: var(--champagne);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: var(--space-sm);
-    background: var(--color-blue-dim);
-    color: var(--color-blue);
-  }
-  .service-card .icon-wrap svg { width: 22px; height: 22px; }
-  .service-card .service-badge {
-    display: inline-block;
-    font-size: 0.55rem;
+    font-family: var(--font-display);
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 0.15rem 0.6rem;
-    border-radius: 999px;
-    margin-top: var(--space-xs);
+    font-size: 16px;
+    border: 1px solid var(--border-champagne);
   }
-  .badge-incluso { background: var(--color-blue-dim); color: var(--color-blue); }
-  .badge-consulta { background: rgba(0,0,0,0.06); color: var(--color-text-muted); }
-
-  .service-category-title {
-    font-family: "Space Grotesk", sans-serif;
-    font-size: 1.1rem;
+  .service-body h5 {
+    font-size: 17px;
     font-weight: 600;
-    color: var(--color-text);
-    margin-bottom: var(--space-md);
+    margin-bottom: 4px;
+    font-family: var(--font-display);
+  }
+  .service-body .service-tag {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+  }
+  .service-body p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 560px;
+  }
+  .service-badge-wrap {
     display: flex;
-    align-items: center;
-    gap: var(--space-sm);
+    align-items: flex-start;
   }
-  .service-category-title .line {
-    flex: 1;
-    height: 1px;
-    background: var(--color-border);
+  .service-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 5px 14px;
+    border-radius: 100px;
+    white-space: nowrap;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
-
-  /* Grid responsivo - 2 colunas já no mobile */
-  .grid-2col-mobile {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-md);
+  .service-badge.incl {
+    color: var(--champagne);
+    background: rgba(210, 182, 138, 0.08);
+    border: 1px solid var(--border-champagne);
   }
-  @media (max-width: 480px) {
-    .grid-2col-mobile {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-sm);
-    }
-  }
-  .grid-2col-mobile .service-card {
-    padding: var(--space-md) var(--space-sm);
-  }
-  .grid-2col-mobile .service-card .icon-wrap {
-    width: 36px;
-    height: 36px;
-  }
-  .grid-2col-mobile .service-card .icon-wrap svg {
-    width: 18px;
-    height: 18px;
-  }
-  .grid-2col-mobile .service-card h4 {
-    font-size: 0.85rem;
-  }
-  .grid-2col-mobile .service-card p {
-    font-size: 0.75rem;
-  }
-
-  /* Fundadores grid - 2 colunas no mobile */
-  .founders-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-lg);
-  }
-  @media (max-width: 480px) {
-    .founders-grid {
-      gap: var(--space-md);
-    }
-  }
-  @media (min-width: 768px) {
-    .founders-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  .service-badge.cons {
+    color: var(--text-muted);
+    background: var(--bg-primary);
+    border: 1px solid var(--border-soft);
   }
 
   /* ============================================================
      FAQ
      ============================================================ */
-  .faq-item { border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .faq-item {
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .faq-item:last-child { border-bottom: none; }
   .faq-q {
-    width: 100%;
-    text-align: left;
-    padding: var(--space-lg) 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-md);
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 600;
-    font-size: clamp(1rem, 2.2vw, 1.1rem);
+    gap: 20px;
+    padding: 24px 0;
     cursor: pointer;
-    color: var(--color-text);
-    background: transparent;
-    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: var(--font-display);
+    transition: color var(--transition);
   }
-  .faq-icon { transition: transform 0.3s ease; flex-shrink: 0; color: var(--color-blue); }
-  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-q:hover { color: var(--champagne); }
+  .faq-plus {
+    font-size: 20px;
+    color: var(--champagne);
+    transition: transform var(--transition);
+    flex-shrink: 0;
+  }
+  .faq-item.open .faq-plus { transform: rotate(45deg); }
   .faq-a {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.4s ease;
-    color: var(--color-text-muted);
-    font-size: clamp(0.9rem, 2vw, 1rem);
+    transition: max-height 0.4s ease;
+  }
+  .faq-a p {
+    padding-bottom: 22px;
+    color: var(--text-secondary);
+    font-size: 14.5px;
     line-height: 1.7;
+    max-width: 640px;
   }
-  .faq-item.open .faq-a { padding-bottom: var(--space-lg); max-height: 400px; }
+  .faq-item.open .faq-a { max-height: 240px; }
 
   /* ============================================================
-     CTA
+     CTA FINAL
      ============================================================ */
-  .cta-consultoria {
-    background: var(--color-bg-card);
-    border-radius: 2rem;
-    padding: var(--space-2xl) var(--space-xl);
+  .cta-final {
+    background: radial-gradient(ellipse 80% 70% at 50% 0%, rgba(210, 182, 138, 0.04), transparent 60%), var(--bg-elevated);
+    border: 1px solid var(--border-champagne);
+    border-radius: 24px;
+    padding: 70px 40px;
     text-align: center;
-    border: 1px solid rgba(0,0,0,0.04);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-  }
-  @media (max-width: 640px) {
-    .cta-consultoria { padding: var(--space-xl) var(--space-lg); }
-  }
-
-  /* ============================================================
-     MODAL
-     ============================================================ */
-  #modal-overlay {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-    padding: var(--space-md);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-  }
-  #modal-overlay.active { opacity: 1; pointer-events: auto; }
-  #modal-box {
-    background: var(--color-bg-card);
-    border-radius: 1.5rem;
-    width: 100%;
-    max-width: 480px;
-    max-height: 90dvh;
-    overflow-y: auto;
-    transform: translateY(24px) scale(0.96);
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    padding: var(--space-xl);
-  }
-  #modal-overlay.active #modal-box { transform: translateY(0) scale(1); }
-  .modal-scrollbar::-webkit-scrollbar { width: 4px; }
-  .modal-scrollbar::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 999px; }
-
-  .progress-track {
-    height: 4px;
-    background: rgba(0,0,0,0.06);
-    border-radius: 999px;
+    position: relative;
     overflow: hidden;
   }
-  .progress-bar { height: 100%; background: var(--color-blue); border-radius: 999px; transition: width 0.5s ease; }
-
-  .choice-btn {
-    width: 100%;
-    text-align: left;
-    padding: 0.9rem 1rem;
-    border-radius: 0.9rem;
-    border: 1.5px solid rgba(0,0,0,0.08);
-    font-size: clamp(0.85rem, 2vw, 0.95rem);
-    font-weight: 500;
-    background: transparent;
-    color: var(--color-text);
-    transition: all 0.25s ease;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-sm);
-    cursor: pointer;
+  .cta-final::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--champagne), transparent);
+    opacity: 0.3;
   }
-  .choice-btn:hover { border-color: var(--color-blue); background: var(--color-blue-dim); }
-  .choice-btn.selected { border-color: var(--color-blue); background: var(--color-blue-dim); }
-  .choice-btn.selected .check-dot { opacity: 1; transform: scale(1); }
-  .check-dot { opacity: 0; transform: scale(0.5); transition: all 0.25s ease; color: var(--color-blue); flex-shrink:0; }
-
-  .field-input {
-    width: 100%;
-    padding: 0.9rem 1rem;
-    border-radius: 0.9rem;
-    border: 1.5px solid rgba(0,0,0,0.08);
-    font-size: clamp(0.85rem, 2vw, 0.95rem);
-    transition: border-color 0.25s ease;
-    background: var(--color-bg);
-    color: var(--color-text);
+  .cta-final .section-title { margin: 16px auto 0; max-width: 640px; }
+  .cta-final p.sub {
+    max-width: 520px;
+    margin: 18px auto 0;
+    color: var(--text-secondary);
+    font-size: 15.5px;
   }
-  .field-input:focus { border-color: var(--color-blue); outline: none; }
-  .field-input::placeholder { color: var(--color-text-muted); }
-
-  .consent-check {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-sm);
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
-    margin-top: var(--space-sm);
-  }
-  .consent-check input[type="checkbox"] {
-    margin-top: 0.15rem;
-    width: 18px;
-    height: 18px;
-    accent-color: var(--color-blue);
-    flex-shrink: 0;
-    cursor: pointer;
-  }
-  .consent-check a {
-    color: var(--color-blue);
-    text-decoration: none;
-  }
-  .consent-check a:hover { text-decoration: underline; }
-
-  /* ============================================================
-     FAB — ÚNICO ELEMENTO VERDE (WHATSAPP)
-     ============================================================ */
-  #fab-whats {
-    position: fixed;
-    bottom: var(--space-lg);
-    right: var(--space-lg);
-    z-index: 60;
-    width: 56px;
-    height: 56px;
-    border-radius: 9999px;
-    background: var(--color-whats);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 28px rgba(37, 211, 102, 0.40);
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-  }
-  #fab-whats:hover {
-    background: var(--color-whats-hover);
-    transform: scale(1.08);
-    box-shadow: 0 12px 36px rgba(37, 211, 102, 0.50);
-  }
-  #fab-whats svg { width: 26px; height: 26px; }
-  @media (max-width: 640px) {
-    #fab-whats { width: 48px; height: 48px; bottom: var(--space-md); right: var(--space-md); }
-    #fab-whats svg { width: 22px; height: 22px; }
+  .cta-note {
+    margin-top: 26px;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
   }
 
   /* ============================================================
      FOOTER
      ============================================================ */
-  footer { border-top: 1px solid rgba(0,0,0,0.06); padding: var(--space-2xl) 0; }
+  footer {
+    padding: 50px 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .foot-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: center;
+  }
+  .foot-links {
+    display: flex;
+    gap: 26px;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    flex-wrap: wrap;
+  }
+  .foot-links a {
+    transition: color var(--transition);
+  }
+  .foot-links a:hover { color: var(--champagne); }
+  .foot-copy {
+    font-size: 12.5px;
+    color: var(--text-muted);
+  }
+
+  /* ============================================================
+     MODAL
+     ============================================================ */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 35, 64, 0.85);
+    backdrop-filter: blur(12px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-champagne);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 460px;
+    padding: 32px;
+    position: relative;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-muted);
+    border: 1px solid var(--border-soft);
+    background: transparent;
+    transition: border-color var(--transition), color var(--transition);
+  }
+  .modal-close:hover {
+    color: var(--text-primary);
+    border-color: var(--border-champagne);
+  }
+  .progress-bar {
+    height: 2px;
+    background: var(--border-soft);
+    border-radius: 100px;
+    overflow: hidden;
+    margin-bottom: 26px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--champagne), var(--champagne-dark));
+    width: 25%;
+    transition: width 0.4s ease;
+  }
+  .step-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--champagne);
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+  }
+  .step-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    margin: 8px 0 24px;
+  }
+  .field { margin-bottom: 16px; }
+  .field label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .field input {
+    width: 100%;
+    padding: 13px 16px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-soft);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 14.5px;
+    font-family: var(--font-body);
+    transition: border-color var(--transition);
+  }
+  .field input:focus {
+    outline: none;
+    border-color: var(--border-champagne);
+  }
+  .field input::placeholder { color: var(--text-muted); }
+  .consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 18px;
+  }
+  .consent input { margin-top: 3px; accent-color: var(--champagne); }
+  .opt-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .opt {
+    padding: 14px 18px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-soft);
+    background: var(--bg-card);
+    cursor: pointer;
+    font-size: 14.5px;
+    transition: border-color var(--transition), background var(--transition);
+    font-family: var(--font-body);
+  }
+  .opt:hover {
+    border-color: var(--border-champagne);
+    background: var(--bg-card-hover);
+  }
+  .opt.selected {
+    border-color: var(--champagne);
+    background: rgba(210, 182, 138, 0.06);
+    color: var(--text-primary);
+  }
+  .modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 26px;
+  }
+  .modal-actions .btn { flex: 1; }
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .err {
+    color: #ff6767;
+    font-size: 12.5px;
+    margin-top: 8px;
+    display: none;
+  }
+  .err.show { display: block; }
+
+  /* ============================================================
+     SCROLLBAR
+     ============================================================ */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-primary); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--text-muted);
+    border-radius: 100px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--champagne); }
 
   /* ============================================================
      RESPONSIVE
      ============================================================ */
   @media (max-width: 640px) {
-    .section-padding { padding: var(--space-2xl) 0; }
-    .pain-card { padding: var(--space-lg) var(--space-md); }
-    .btn-blue, .btn-whats, .btn-ghost, .btn-ghost-dark {
-      min-height: 48px;
-      min-width: 140px;
-      padding: 0.7rem var(--space-lg);
-      font-size: 0.85rem;
-    }
-    .btn-ghost, .btn-ghost-dark { min-width: 120px; }
-    .cta-consultoria { padding: var(--space-xl) var(--space-md); }
-    .chat-messages { min-height: 180px; max-height: 260px; }
-    .founder-photo { aspect-ratio: 1/1; }
-    #modal-box { padding: var(--space-lg); }
-    .service-card { padding: var(--space-lg) var(--space-md); }
-    #chip-list .list-chip { font-size: 0.75rem; padding: 0.6rem 1.1rem; min-width: 140px; }
-    #chip-list { min-height: 220px; gap: 0.65rem; }
-    .nav-mobile-link { font-size: 1.2rem; }
-    .testimonial-card { padding: var(--space-lg); }
-  }
-
-  @media (min-width: 641px) and (max-width: 1023px) {
-    .section-padding { padding: var(--space-2xl) 0; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .reveal-up { opacity: 1 !important; transform: none !important; }
-    .msg { animation: none !important; opacity: 1 !important; transform: none !important; }
-    #chip-list .list-chip { transition: none !important; }
-  }
-
-  /* ============================================================
-     AJUSTES ESPECÍFICOS
-     ============================================================ */
-  #hero { padding-top: 5rem; }
-  @media (max-width: 640px) {
-    #hero { padding-top: 6.5rem; padding-bottom: 3rem; }
-    #hero .hero-title { font-size: 2.2rem; }
-    #hero .hero-sub { font-size: 1rem; margin-top: 1.5rem; }
-    #hero .hero-actions { margin-top: 2rem; gap: 0.75rem; }
-    #hero .hero-actions .btn-blue { width: 100%; min-width: auto; }
-    #hero .hero-metrics { margin-top: 2.5rem; gap: 1rem; }
-  }
-  @media (min-width: 641px) and (max-width: 1023px) {
-    #hero { padding-top: 6rem; }
-  }
-
-  #atendimento .atendimento-texts { gap: var(--space-lg); }
-  #atendimento .atendimento-btn { margin-top: var(--space-xl); }
-  @media (max-width: 640px) {
-    #atendimento .atendimento-texts { gap: var(--space-lg); }
-    #atendimento .atendimento-btn { margin-top: var(--space-lg); }
-    #atendimento .atendimento-texts .flex { gap: var(--space-sm); }
-  }
-
-  @media (max-width: 640px) {
-    #atração .trafego-card { padding: var(--space-lg) var(--space-md); }
-    #atração .trafego-grid { gap: var(--space-md); }
-  }
-
-  /* Transição suave entre seções claro/escuro */
-  .sec-dark, .sec-light {
-    transition: background 0.6s ease;
+    .hero { padding: 140px 0 60px; }
+    .hero-title { font-size: 30px; }
+    .hero-sub { font-size: 15px; }
+    .compare-col { padding: 24px 20px; }
+    .cta-final { padding: 40px 20px; }
+    .crm-panel { padding: 24px; }
+    .modal { padding: 24px; }
   }
 </style>
 </head>
 <body>
 
+<!-- ===== FUNDO — NEBULOSA DE CHAMPANHE SOBRE VELVET ===== -->
+<div class="bg-nebula">
+  <div class="nebula-blob"></div>
+  <div class="nebula-blob"></div>
+  <div class="nebula-blob"></div>
+</div>
+
+<!-- ===== LINHAS DE LUZ (Canvas) ===== -->
+<canvas id="light-lines"></canvas>
+
+<!-- ===== GRID SUTIL ===== -->
+<div class="bg-grid"></div>
+
 <!-- ============================================================
-     NAVEGAÇÃO — FULL-WIDTH
+     HEADER
      ============================================================ -->
-<nav id="nav">
-  <div class="nav-inner">
-    <a href="#top" class="nav-logo">
-      <span class="nav-logo-dot"></span>
+<header>
+  <div class="nav">
+    <a href="#top" class="logo">
+      <span class="logo-mark"><span></span><span></span><span></span></span>
       PAR HUB
     </a>
 
-    <div class="nav-links-wrapper">
-      <a href="#atração" class="nav-link">Atração</a>
-      <a href="#atendimento" class="nav-link">Atendimento</a>
-      <a href="#fechamento" class="nav-link">Fechamento</a>
-      <a href="#fundadores" class="nav-link">Quem Somos</a>
-      <a href="#servicos" class="nav-link">Serviços</a>
-      <a href="#depoimentos" class="nav-link">Depoimentos</a>
-      <a href="#faq" class="nav-link">FAQ</a>
-      <a href="#cta-final" class="nav-link nav-link-highlight">Formulário</a>
-    </div>
+    <nav class="navlinks">
+      <a href="#diagnostico">Diagnóstico</a>
+      <a href="#pilares">Solução</a>
+      <a href="#depoimentos">Resultados</a>
+      <a href="#faq">FAQ</a>
+    </nav>
 
     <div class="nav-actions">
-      <button onclick="openModal()" class="nav-btn-cta">Falar com Especialista</button>
-      <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+      <a class="btn btn-champagne btn-sm nav-cta-desktop" data-open-wizard>Agendar Diagnóstico</a>
+      <div class="burger" data-open-wizard>☰</div>
     </div>
   </div>
+</header>
 
-  <!-- Painel mobile — FULL SCREEN -->
-  <div id="nav-mobile-panel" class="nav-mobile-panel">
-    <button id="nav-mobile-close" class="nav-mobile-close" aria-label="Fechar menu">✕</button>
-    <a href="#atração" class="nav-mobile-link">Atração</a>
-    <a href="#atendimento" class="nav-mobile-link">Atendimento</a>
-    <a href="#fechamento" class="nav-mobile-link">Fechamento</a>
-    <a href="#fundadores" class="nav-mobile-link">Quem Somos</a>
-    <a href="#servicos" class="nav-mobile-link">Serviços</a>
-    <a href="#depoimentos" class="nav-mobile-link">Depoimentos</a>
-    <a href="#faq" class="nav-mobile-link">FAQ</a>
-    <a href="#cta-final" class="nav-mobile-link nav-mobile-link-highlight">Formulário</a>
-    <div class="nav-mobile-cta-wrap">
-      <button onclick="openModal()" class="btn-blue">Falar com Especialista</button>
-    </div>
-  </div>
-</nav>
-
+<!-- ============================================================
+     MAIN
+     ============================================================ -->
 <main id="top">
 
-  <!-- ============================================================
-     HERO
-     ============================================================ -->
-  <section id="hero" class="sec-light relative min-h-[100dvh] flex items-center overflow-hidden">
-    <div class="glow-orb w-[500px] h-[500px] bg-[var(--color-blue)] -top-60 -left-60"></div>
+  <!-- ===== HERO ===== -->
+  <section class="hero" style="border-top:none; padding-bottom:0;">
+    <div class="wrap">
+      <div class="eyebrow">Sócio de Operação Comercial</div>
 
-    <div class="container relative">
-      <div class="max-w-4xl">
-        <p class="eyebrow reveal-up">PAR HUB — Sócio de Operação Comercial &amp; Growth</p>
-        <h1 class="hero-title font-display leading-[1.05] tracking-tight text-[clamp(2.2rem,7vw,4.8rem)] font-medium reveal-up">
-          Sua única preocupação é entregar excelência.
-          <span class="block text-[var(--color-text-muted)] font-light">A operação comercial é com a gente.</span>
-        </h1>
-        <p class="hero-sub mt-6 max-w-2xl text-[clamp(0.95rem,2.5vw,1.25rem)] text-[var(--color-text-muted)] leading-relaxed reveal-up">
-          Da captação estratégica no Tráfego Pago (Meta, Google e LinkedIn) ao fechamento no WhatsApp com SDRs e Closers — centralizamos e assumimos, total ou parcialmente, a operação comercial de mentores, infoprodutores e clínicas.
-        </p>
-        <div class="hero-actions mt-8 flex flex-col sm:flex-row items-center gap-3 reveal-up">
-          <button onclick="openModal()" class="btn-blue">
-            Quero Centralizar Minha Operação
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </button>
-          <a href="#diagnostico" class="btn-ghost">Ver o diagnóstico</a>
-        </div>
+      <h1 class="hero-title">
+        Tudo separado trava o crescimento.<br>
+        <span class="champagne">Centralizado</span> <span class="light">é o Método PAR HUB.</span>
+      </h1>
 
-        <div class="hero-metrics mt-12 flex flex-wrap gap-x-10 gap-y-4 border-t border-[rgba(0,0,0,0.06)] pt-6 reveal-up">
-          <div>
-            <p class="font-display text-2xl font-semibold"><span class="counter" data-target="5">0</span> min</p>
-            <p class="text-sm text-[var(--color-text-muted)]">tempo médio de resposta</p>
-          </div>
-          <div>
-            <p class="font-display text-2xl font-semibold"><span class="counter" data-target="480">0</span>+ leads/mês</p>
-            <p class="text-sm text-[var(--color-text-muted)]">gerados para clientes</p>
-          </div>
-          <div>
-            <p class="font-display text-2xl font-semibold"><span class="counter" data-target="3">0</span> sócios</p>
-            <p class="text-sm text-[var(--color-text-muted)]">acompanhando sua estratégia</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-     DIAGNÓSTICO
-     ============================================================ -->
-  <section id="diagnostico" class="sec-light section-padding">
-    <div class="container">
-      <div class="max-w-2xl">
-        <p class="eyebrow reveal-up">O diagnóstico</p>
-        <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.8rem)] font-medium tracking-tight leading-tight reveal-up">
-          Por que o seu negócio parou de crescer?
-        </h2>
-        <p class="mt-4 text-[var(--color-text-muted)] text-[clamp(0.95rem,2.2vw,1.15rem)] leading-relaxed reveal-up">
-          Identificamos os 4 ralos de faturamento que impedem mentores, infoprodutores e clínicas de atingirem os 6 ou 7 dígitos por mês.
-        </p>
-      </div>
-
-      <div class="mt-12 grid sm:grid-cols-2 gap-6">
-        <div class="pain-card reveal-up" data-delay="0">
-          <span class="pain-num">01</span>
-          <h3 class="font-display text-lg font-semibold mt-4 mb-2">A síndrome do especialista-gargalo</h3>
-          <p class="text-[var(--color-text-muted)] text-[clamp(0.85rem,2vw,0.95rem)] leading-relaxed">
-            Você parou de crescer porque tenta fazer tudo: atende, responde WhatsApp e Direct, gerencia anúncios e ainda entrega o serviço. Seu tempo virou o teto do faturamento.
-          </p>
-        </div>
-        <div class="pain-card reveal-up" data-delay="0.1">
-          <span class="pain-num">02</span>
-          <h3 class="font-display text-lg font-semibold mt-4 mb-2">O pesadelo da equipe descentralizada</h3>
-          <p class="text-[var(--color-text-muted)] text-[clamp(0.85rem,2vw,0.95rem)] leading-relaxed">
-            Gasta com gestor de tráfego, CRM, atendente, SDR e social seller. Ninguém se fala, as informações se perdem, a conversão despenca — e ninguém assume a culpa.
-          </p>
-        </div>
-        <div class="pain-card reveal-up" data-delay="0.2">
-          <span class="pain-num">03</span>
-          <h3 class="font-display text-lg font-semibold mt-4 mb-2">A rejeição ao atendimento robótico</h3>
-          <p class="text-[var(--color-text-muted)] text-[clamp(0.85rem,2vw,0.95rem)] leading-relaxed">
-            As pessoas não gostam de ser atendidas por I.A. fria. Por falta de atendimento rápido e humano, seu potencial cliente fecha com o concorrente.
-          </p>
-        </div>
-        <div class="pain-card reveal-up" data-delay="0.3">
-          <span class="pain-num">04</span>
-          <h3 class="font-display text-lg font-semibold mt-4 mb-2">O ralo dos leads desqualificados</h3>
-          <p class="text-[var(--color-text-muted)] text-[clamp(0.85rem,2vw,0.95rem)] leading-relaxed">
-            Você atrai muita gente, mas passa o dia respondendo curiosos. Sem centralizar atração e fechamento, escalar vira um jogo de azar.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-     CONVERGÊNCIA — simplificada, sem linhas
-     ============================================================ -->
-  <section id="convergencia" class="sec-dark">
-    <!-- Chips desktop -->
-    <div id="node-a" class="node-chip" style="top:14%; left:50%;">
-      <i data-lucide="megaphone"></i> Tráfego Pago
-    </div>
-    <div id="node-b" class="node-chip" style="top:34%; left:84%;">
-      <i data-lucide="message-circle"></i> SDR
-    </div>
-    <div id="node-c" class="node-chip" style="top:74%; left:72%;">
-      <i data-lucide="phone"></i> Closer
-    </div>
-    <div id="node-d" class="node-chip" style="top:74%; left:28%;">
-      <i data-lucide="layout-grid"></i> CRM
-    </div>
-    <div id="node-e" class="node-chip" style="top:34%; left:16%;">
-      <i data-lucide="users"></i> Social Seller
-    </div>
-
-    <!-- Lista mobile -->
-    <div id="chip-list">
-      <div class="list-chip" data-index="0"><i data-lucide="megaphone"></i> Tráfego Pago</div>
-      <div class="list-chip" data-index="1"><i data-lucide="message-circle"></i> SDR</div>
-      <div class="list-chip" data-index="2"><i data-lucide="phone"></i> Closer</div>
-      <div class="list-chip" data-index="3"><i data-lucide="layout-grid"></i> CRM</div>
-      <div class="list-chip" data-index="4"><i data-lucide="users"></i> Social Seller</div>
-    </div>
-
-    <div id="hub">
-      <p class="eyebrow">A solução</p>
-      <p class="font-display text-[clamp(1.4rem,4vw,2.4rem)] font-medium leading-tight">
-        Tudo separado é o problema.<br class="hidden sm:block"> Centralizado, é a PAR HUB.
+      <p class="hero-sub">
+        Um único ecossistema de tráfego, atendimento, CRM e fechamento — com um único responsável pelo resultado: <strong style="color:var(--text-primary);">NÓS</strong>.
       </p>
-      <p id="hub-sub" class="mt-4 text-[rgba(255,255,255,0.5)] text-[clamp(0.85rem,2vw,1rem)] leading-relaxed">
-        Um único ecossistema de tráfego, atendimento, CRM e fechamento — com um único responsável pelo resultado: nós.
-      </p>
-    </div>
-  </section>
 
-  <!-- ============================================================
-     ATRAÇÃO
-     ============================================================ -->
-  <section id="atração" class="sec-light section-padding">
-    <div class="container grid lg:grid-cols-12 gap-10 items-center">
-      <div class="lg:col-span-5">
-        <p class="eyebrow reveal-up">Pilar 01 — Atração high-ticket</p>
-        <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
-          Tráfego pago focado em compradores reais.
-        </h2>
-        <p class="mt-4 text-[var(--color-text-muted)] text-[clamp(0.95rem,2.2vw,1.1rem)] leading-relaxed reveal-up">
-          Construímos funis de captação em Meta Ads, Google Ads e LinkedIn Ads para atrair leads de alto poder aquisitivo ou pacientes prontos para agendar — não curiosos.
-        </p>
-      </div>
-      <div class="lg:col-span-7 trafego-grid grid sm:grid-cols-2 gap-5">
-        <div class="trafego-card p-6 rounded-2xl border border-[rgba(0,0,0,0.06)] bg-[var(--color-bg-card)] reveal-up" data-delay="0">
-          <i data-lucide="target" class="w-6 h-6 text-[var(--color-blue)] mb-4"></i>
-          <h3 class="font-display font-semibold text-lg mb-2">Gestão multicanal</h3>
-          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">Campanhas orquestradas em Meta, Google e LinkedIn numa única estratégia.</p>
-        </div>
-        <div class="trafego-card p-6 rounded-2xl border border-[rgba(0,0,0,0.06)] bg-[var(--color-bg-card)] reveal-up" data-delay="0.1">
-          <i data-lucide="layers" class="w-6 h-6 text-[var(--color-blue)] mb-4"></i>
-          <h3 class="font-display font-semibold text-lg mb-2">Criativos de alta conversão</h3>
-          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">Roteirização de vídeos e estáticos para gerar identificação e ação.</p>
-        </div>
-        <div class="trafego-card p-6 rounded-2xl border border-[rgba(0,0,0,0.06)] bg-[var(--color-bg-card)] sm:col-span-2 reveal-up" data-delay="0.2">
-          <i data-lucide="settings" class="w-6 h-6 text-[var(--color-blue)] mb-4"></i>
-          <h3 class="font-display font-semibold text-lg mb-2">API de Conversão &amp; Pixel</h3>
-          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">Rastreamento do início ao fim para plataformas otimizarem entrega com base em quem realmente compra.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-     ATENDIMENTO
-     ============================================================ -->
-  <section id="atendimento" class="sec-dark section-padding relative overflow-hidden">
-    <div class="glow-orb w-[400px] h-[400px] bg-[var(--color-blue)] top-1/4 -right-20"></div>
-    <div class="container grid lg:grid-cols-12 gap-10 items-center relative">
-      <div class="lg:col-span-5 order-2 lg:order-1">
-        <div class="split-photo-wrap reveal-up">
-          <img src="https://raw.githubusercontent.com/closermatheus-creator/parhubagencia/main/foto01.png"
-               alt="Ster, sócia da PAR HUB"
-               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <div class="photo-fallback" style="display:none;">
-            <i data-lucide="user-round" class="w-12 h-12"></i>
-            <span class="text-sm">foto01.png</span>
-          </div>
-        </div>
-      </div>
-      <div class="lg:col-span-7 order-1 lg:order-2">
-        <p class="eyebrow mb-4 reveal-up">Pilar 02 — Atendimento humano</p>
-        <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
-          Seu atendimento nunca mais vai esfriar.
-        </h2>
-        <p class="mt-4 text-[rgba(255,255,255,0.6)] text-[clamp(0.95rem,2.2vw,1.1rem)] leading-relaxed reveal-up">
-          As pessoas não compram de robôs — compram de gente. Nossa equipe humana de SDRs e atendentes assume seu WhatsApp e Direct, com resposta em menos de 5 minutos.
-        </p>
-        <div class="atendimento-texts mt-7 space-y-5 reveal-up">
-          <div class="flex gap-3">
-            <i data-lucide="filter" class="w-5 h-5 text-[var(--color-blue)] mt-0.5 flex-shrink-0"></i>
-            <p class="text-[rgba(255,255,255,0.6)] text-[clamp(0.85rem,2vw,0.95rem)]"><span class="text-white font-medium">Qualificação ativa:</span> triamos curiosos e focamos em quem tem poder de compra real.</p>
-          </div>
-          <div class="flex gap-3">
-            <i data-lucide="eye" class="w-5 h-5 text-[var(--color-blue)] mt-0.5 flex-shrink-0"></i>
-            <p class="text-[rgba(255,255,255,0.6)] text-[clamp(0.85rem,2vw,0.95rem)]"><span class="text-white font-medium">Monitoramento de inbox:</span> abordamos ativamente quem interage com seus stories e posts.</p>
-          </div>
-        </div>
-        <button onclick="openModal()" class="atendimento-btn btn-blue mt-6">
-          Ativar Minha Operação
-          <i data-lucide="arrow-right" class="w-4 h-4"></i>
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-     FECHAMENTO
-     ============================================================ -->
-  <section id="fechamento" class="sec-light section-padding">
-    <div class="container grid lg:grid-cols-12 gap-10 items-center">
-      <div class="lg:col-span-6">
-        <p class="eyebrow reveal-up">Pilar 03 — Tecnologia &amp; fechamento</p>
-        <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
-          A estrutura de grandes players, na sua mão.
-        </h2>
-        <p class="mt-4 text-[var(--color-text-muted)] text-[clamp(0.95rem,2.2vw,1.1rem)] leading-relaxed reveal-up">
-          Implementamos um CRM próprio e treinamos Closers na sua metodologia para fechar vendas high-ticket por call ou áudio — garantindo que nenhum lead se perca no funil.
-        </p>
-      </div>
-      <div class="lg:col-span-6">
-        <div class="rounded-2xl border border-[rgba(0,0,0,0.06)] bg-[var(--color-bg-card)] p-1 reveal-up">
-          <div class="flex items-center justify-between px-5 py-4 border-b border-[rgba(0,0,0,0.06)]">
-            <span class="font-mono text-xs text-[var(--color-text-muted)]">FUNIL — PAR HUB CRM</span>
-            <span class="flex gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-[rgba(0,0,0,0.1)]"></span>
-              <span class="w-2 h-2 rounded-full bg-[rgba(0,0,0,0.1)]"></span>
-              <span class="w-2 h-2 rounded-full bg-[rgba(0,0,0,0.1)]"></span>
-            </span>
-          </div>
-          <div class="p-5 space-y-3">
-            <div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--color-bg)]">
-              <span class="text-sm font-medium">Novo lead — Tráfego Pago</span>
-              <span class="w-2 h-2 rounded-full bg-[var(--color-blue)]"></span>
-            </div>
-            <div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--color-bg)]">
-              <span class="text-sm font-medium">Qualificado — SDR</span>
-              <span class="w-2 h-2 rounded-full bg-[var(--color-blue)]"></span>
-            </div>
-            <div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--color-bg)]">
-              <span class="text-sm font-medium">Em negociação — Closer</span>
-              <span class="w-2 h-2 rounded-full bg-[var(--color-blue)]"></span>
-            </div>
-            <div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--color-blue)] text-white">
-              <span class="text-sm font-medium">Fechado</span>
-              <i data-lucide="check-circle-2" class="w-4 h-4"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-     COMO FUNCIONA — versão resumida (não repete os pilares)
-     ============================================================ -->
-  <section id="como-funciona" class="sec-light section-padding">
-    <div class="container">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <p class="eyebrow reveal-up">Como funciona</p>
-        <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
-          Do diagnóstico à escala em 4 passos
-        </h2>
-        <p class="mt-3 text-[var(--color-text-muted)] text-[clamp(0.95rem,2.2vw,1.1rem)] leading-relaxed reveal-up">
-          Um processo claro, com um único responsável pelo resultado: nós.
-        </p>
+      <div class="hero-cta-row">
+        <a class="btn btn-champagne" data-open-wizard>✦ Agendar Diagnóstico</a>
+        <a class="btn btn-ghost" href="#diagnostico">Entender o problema</a>
       </div>
 
-      <div class="flex flex-col md:flex-row items-stretch gap-4 md:gap-0">
-        <div class="funil-step flex-1 reveal-up" data-delay="0">
-          <div class="step-num">01</div>
-          <div class="step-icon"><i data-lucide="target"></i></div>
-          <h3 class="font-display text-lg font-semibold mb-1">Diagnóstico</h3>
-          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">Mapeamos seus canais, dores e gargalos em 15min.</p>
-        </div>
-        <div class="funil-connector">→</div>
-        <div class="funil-step flex-1 reveal-up" data-delay="0.1">
-          <div class="step-num">02</div>
-          <div class="step-icon"><i data-lucide="users"></i></div>
-          <h3 class="font-display text-lg font-semibold mb-1">Ativação</h3>
-          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">Colocamos tráfego, atendimento e CRM no ar.</p>
-        </div>
-        <div class="funil-connector">→</div>
-        <div class="funil-step flex-1 reveal-up" data-delay="0.2">
-          <div class="step-num">03</div>
-          <div class="step-icon"><i data-lucide="phone"></i></div>
-          <h3 class="font-display text-lg font-semibold mb-1">Otimização</h3>
-          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">Ajustes diários de campanhas e abordagem comercial.</p>
-        </div>
-        <div class="funil-connector">→</div>
-        <div class="funil-step flex-1 reveal-up" data-delay="0.3">
-          <div class="step-num">04</div>
-          <div class="step-icon"><i data-lucide="trending-up"></i></div>
-          <h3 class="font-display text-lg font-semibold mb-1">Escala</h3>
-          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">Multiplicamos resultados com base em dados reais.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-     FUNDADORES — com bio genérica
-     ============================================================ -->
-  <section id="fundadores" class="sec-light section-padding">
-    <div class="container">
-      <div class="max-w-2xl mb-12">
-        <p class="eyebrow reveal-up">Quem assina a sua estratégia</p>
-        <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
-          Estratégia revisada por sócios, não por estagiários.
-        </h2>
-        <p class="mt-3 text-[var(--color-text-muted)] text-[clamp(0.95rem,2.2vw,1.1rem)] leading-relaxed reveal-up">
-          Na PAR HUB você não é um número. Sua estratégia é desenhada e revisada semanalmente pelos nossos sócios-fundadores — parceiros comprometidos com o seu lucro real.
-        </p>
-      </div>
-
-      <div class="founders-grid">
-        <div class="founder-card reveal-up" data-delay="0">
-          <div class="founder-photo">
-            <img src="https://raw.githubusercontent.com/closermatheus-creator/parhubagencia/main/foto2.png"
-                 alt="Matheus, sócio-fundador"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-            <div class="photo-fallback" style="display:none;">
-              <i data-lucide="user-round" class="w-10 h-10"></i>
-            </div>
-          </div>
-          <p class="font-display text-lg font-semibold">Matheus</p>
-          <p class="founder-role">Sócio-fundador</p>
-          <p class="founder-bio">+8 anos de experiência em growth e operações comerciais para infoprodutores e clínicas.</p>
-        </div>
-        <div class="founder-card reveal-up" data-delay="0.1">
-          <div class="founder-photo">
-            <img src="https://raw.githubusercontent.com/closermatheus-creator/parhubagencia/main/foto01.png"
-                 alt="Ster, sócia-fundadora"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-            <div class="photo-fallback" style="display:none;">
-              <i data-lucide="user-round" class="w-10 h-10"></i>
-            </div>
-          </div>
-          <p class="font-display text-lg font-semibold">Ster</p>
-          <p class="founder-role">Sócia-fundadora</p>
-          <p class="founder-bio">Especialista em atendimento e experiência do cliente, com mais de 5 mil leads atendidos.</p>
-        </div>
-        <div class="founder-card reveal-up" data-delay="0.2">
-          <div class="founder-photo">
-            <img src="https://raw.githubusercontent.com/closermatheus-creator/parhubagencia/main/greg.png"
-                 alt="Greg, sócio-fundador"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-            <div class="photo-fallback" style="display:none;">
-              <i data-lucide="user-round" class="w-10 h-10"></i>
-            </div>
-          </div>
-          <p class="font-display text-lg font-semibold">Greg</p>
-          <p class="founder-role">Sócio-fundador</p>
-          <p class="founder-bio">Gestor de tráfego com mais de R$ 5M investidos em Meta, Google e LinkedIn.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-     CONVERSA — SPLIT DESKTOP
-     ============================================================ -->
-  <section id="conversa" class="sec-light section-padding">
-    <div class="container">
-      <div class="chat-split-wrapper">
-        <!-- Lado esquerdo: Chat -->
-        <div class="reveal-up">
-          <div class="chat-container">
-            <div class="chat-header">
-              <div class="chat-avatar">
-                <span>S</span>
-                <span class="online-dot"></span>
-              </div>
-              <div>
-                <div class="chat-name">Ster — Atendimento PAR HUB</div>
-                <div class="chat-status">Online agora • Responde em <5 min</div>
-              </div>
-            </div>
-            <div class="chat-messages" id="chat-messages"></div>
-          </div>
-        </div>
-
-        <!-- Lado direito: Texto -->
-        <div class="chat-split-content reveal-up" data-delay="0.2">
-          <p class="eyebrow">Atendimento real</p>
-          <h2 class="font-display text-[clamp(1.6rem,4vw,2.6rem)] font-medium tracking-tight leading-tight">
-            Veja como seus leads serão atendidos
-          </h2>
-          <p class="mt-4 text-[var(--color-text-muted)] text-[clamp(0.95rem,2.2vw,1.1rem)] leading-relaxed">
-            Respostas rápidas, humanas e focadas em qualificar — nunca mais perca uma venda por demora.
-          </p>
-
-          <ul class="chat-benefits">
-            <li><i data-lucide="check-circle"></i> +5 mil leads atendidos com sucesso</li>
-            <li><i data-lucide="check-circle"></i> 98% de satisfação dos clientes</li>
-            <li><i data-lucide="check-circle"></i> Resposta em menos de 5 minutos</li>
+      <div class="compare">
+        <div class="compare-col before">
+          <div class="compare-label">Sem um sócio de operação</div>
+          <ul class="compare-list">
+            <li><span class="compare-icon no">✕</span>Lead chega e espera horas — e esfria.</li>
+            <li><span class="compare-icon no">✕</span>Tráfego, atendimento e vendas em times soltos.</li>
+            <li><span class="compare-icon no">✕</span>Ninguém assume o resultado no fim do mês.</li>
           </ul>
-
-          <button onclick="openModal()" class="btn-blue mt-4">
-            Ativar Minha Operação
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </button>
+        </div>
+        <div class="compare-vs">VS</div>
+        <div class="compare-col after">
+          <div class="compare-label">Com o Método PAR</div>
+          <ul class="compare-list">
+            <li><span class="compare-icon yes">✦</span>Resposta humana em até 5 minutos.</li>
+            <li><span class="compare-icon yes">✦</span>Prospecção, Atendimento e Resultado num funil único.</li>
+            <li><span class="compare-icon yes">✦</span>Um time assume o número no fim do mês.</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-     SERVIÇOS — 2 colunas no mobile
-     ============================================================ -->
-  <section id="servicos" class="sec-light section-padding">
-    <div class="container">
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <p class="eyebrow reveal-up">Nossos serviços</p>
-        <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
-          Soluções completas para sua operação comercial
-        </h2>
-        <p class="mt-3 text-[var(--color-text-muted)] text-[clamp(0.95rem,2.2vw,1.1rem)] leading-relaxed reveal-up">
-          Da tecnologia ao atendimento humano — tudo o que você precisa para escalar seu negócio.
-        </p>
+  <!-- ===== MÉTODO PAR ===== -->
+  <section>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">O método</div>
+        <h2 class="section-title">Método PAR: três letras, uma única operação.</h2>
       </div>
-
-      <!-- Categoria 1: Tecnologia & Marketing -->
-      <div class="mb-14 reveal-up">
-        <div class="service-category-title">
-          <span>⚙️ Tecnologia &amp; Marketing</span>
-          <span class="line"></span>
-        </div>
-        <div class="grid-2col-mobile sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="service-card">
-            <div class="icon-wrap"><i data-lucide="target"></i></div>
-            <h4 class="font-display font-semibold text-base">Tráfego Pago</h4>
-            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mt-1">Gestão de campanhas em Meta, Google e LinkedIn focada em ROI real.</p>
-            <span class="service-badge badge-incluso">Incluso</span>
+      <div class="par-grid reveal">
+        <div class="par-square">
+          <div class="par-square-top">
+            <span class="par-letter">P</span>
+            <span class="par-index">01 / 03</span>
           </div>
-          <div class="service-card">
-            <div class="icon-wrap"><i data-lucide="file-text"></i></div>
-            <h4 class="font-display font-semibold text-base">Landing Pages</h4>
-            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mt-1">Páginas de alta conversão para capturar leads qualificados.</p>
-            <span class="service-badge badge-consulta">Sob Consulta</span>
-          </div>
-          <div class="service-card">
-            <div class="icon-wrap"><i data-lucide="layout-grid"></i></div>
-            <h4 class="font-display font-semibold text-base">CRM Personalizado</h4>
-            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mt-1">Gestão de funil e leads com IA treinada na sua metodologia.</p>
-            <span class="service-badge badge-incluso">Incluso</span>
-          </div>
-          <div class="service-card">
-            <div class="icon-wrap"><i data-lucide="map-pin"></i></div>
-            <h4 class="font-display font-semibold text-base">Google Meu Negócio</h4>
-            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mt-1">Otimização de perfil para atrair clientes locais.</p>
-            <span class="service-badge badge-consulta">Sob Consulta</span>
+          <div>
+            <h3>Prospecção</h3>
+            <p>Tráfego pago em Meta, Google e LinkedIn levando compradores reais até seu WhatsApp — não curiosos.</p>
           </div>
         </div>
-      </div>
-
-      <!-- Categoria 2: Atendimento -->
-      <div class="reveal-up">
-        <div class="service-category-title">
-          <span>💬 Atendimento</span>
-          <span class="line"></span>
+        <div class="par-square">
+          <div class="par-square-top">
+            <span class="par-letter">A</span>
+            <span class="par-index">02 / 03</span>
+          </div>
+          <div>
+            <h3>Atendimento</h3>
+            <p>SDRs humanos qualificam cada lead em até 5 minutos, sem deixar ninguém esfriar no funil.</p>
+          </div>
         </div>
-        <div class="grid-2col-mobile sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="service-card">
-            <div class="icon-wrap"><i data-lucide="message-circle"></i></div>
-            <h4 class="font-display font-semibold text-base">Atendente Virtual</h4>
-            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mt-1">Atendimento humano no WhatsApp e Direct com resposta em &lt;5 min.</p>
-            <span class="service-badge badge-incluso">Incluso</span>
+        <div class="par-square">
+          <div class="par-square-top">
+            <span class="par-letter">R</span>
+            <span class="par-index">✦</span>
           </div>
-          <div class="service-card">
-            <div class="icon-wrap"><i data-lucide="users"></i></div>
-            <h4 class="font-display font-semibold text-base">Social Seller</h4>
-            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mt-1">Abordagem ativa e qualificada de leads no Instagram.</p>
-            <span class="service-badge badge-consulta">Sob Consulta</span>
-          </div>
-          <div class="service-card">
-            <div class="icon-wrap"><i data-lucide="phone"></i></div>
-            <h4 class="font-display font-semibold text-base">SDR</h4>
-            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mt-1">Qualificação comercial de leads para aumentar sua taxa de fechamento.</p>
-            <span class="service-badge badge-incluso">Incluso</span>
-          </div>
-          <div class="service-card">
-            <div class="icon-wrap"><i data-lucide="instagram"></i></div>
-            <h4 class="font-display font-semibold text-base">Social Media</h4>
-            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mt-1">Estratégia de conteúdo para engajar e converter seguidores.</p>
-            <span class="service-badge badge-consulta">Sob Consulta</span>
+          <div>
+            <h3>Resultado</h3>
+            <p>Closers treinados na sua metodologia fecham vendas high-ticket dentro de um CRM próprio e transparente.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-     DEPOIMENTOS — PROVA SOCIAL
-     ============================================================ -->
-  <section id="depoimentos" class="sec-light section-padding">
-    <div class="container">
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <p class="eyebrow reveal-up">O que nossos clientes dizem</p>
-        <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
-          Resultados reais, pessoas reais
-        </h2>
-        <p class="mt-3 text-[var(--color-text-muted)] text-[clamp(0.95rem,2.2vw,1.1rem)] leading-relaxed reveal-up">
-          Histórias de quem transformou a operação comercial com a PAR HUB.
-        </p>
+  <!-- ===== DIAGNÓSTICO ===== -->
+  <section id="diagnostico">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">O diagnóstico</div>
+        <h2 class="section-title">Os <span class="champagne">4 ralos</span> de faturamento que impedem seu negócio de chegar aos 6 ou 7 dígitos.</h2>
       </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="testimonial-card reveal-up" data-delay="0">
-          <div class="author-stars">★★★★★</div>
-          <p class="quote">
-            Minha mentoria tinha tráfego, mas as vendas não vinham. A PAR HUB estruturou o atendimento e em 30 dias minha conversão triplicou.
-          </p>
-          <p class="author">— Juliana M.</p>
-          <p class="author-role">Mentora de Marketing Digital</p>
+      <div class="ralos-grid reveal">
+        <div class="ralo-card">
+          <div class="ralo-num">RALO 01</div>
+          <h4>O especialista que faz tudo</h4>
+          <p>Você atende, responde WhatsApp, gerencia anúncios e entrega o serviço. Seu tempo virou o teto do faturamento.</p>
         </div>
-
-        <div class="testimonial-card reveal-up" data-delay="0.1">
-          <div class="author-stars">★★★★★</div>
-          <p class="quote">
-            Eu fazia tudo sozinha e estava esgotada. A PAR HUB assumiu a operação e hoje tenho uma equipe que cuida de tudo enquanto eu foco no que importa.
-          </p>
-          <p class="author">— Dra. Fernanda R.</p>
-          <p class="author-role">Clínica de Estética</p>
+        <div class="ralo-card">
+          <div class="ralo-num">RALO 02</div>
+          <h4>A equipe que não se fala</h4>
+          <p>Gestor de tráfego, SDR, atendente, social seller — cada um em um canto. As informações se perdem.</p>
         </div>
-
-        <div class="testimonial-card reveal-up" data-delay="0.2">
-          <div class="author-stars">★★★★★</div>
-          <p class="quote">
-            Contratei gestor de tráfego, SDR e atendente separados e era um caos. Com a PAR HUB, tudo integrado e o resultado apareceu em semanas.
-          </p>
-          <p class="author">— Rafael S.</p>
-          <p class="author-role">Infoprodutor</p>
+        <div class="ralo-card">
+          <div class="ralo-num">RALO 03</div>
+          <h4>O atendimento que esfria</h4>
+          <p>Leads chegam, mas demoram pra ser respondidos. Enquanto isso, seu potencial cliente já fechou com o concorrente.</p>
+        </div>
+        <div class="ralo-card">
+          <div class="ralo-num">RALO 04</div>
+          <h4>O lead que não compra</h4>
+          <p>Você atrai muita gente, mas passa o dia respondendo curiosos. Sem funil de qualificação, escalar vira um jogo de azar.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-     FAQ — ANTES DO CTA
-     ============================================================ -->
-  <section id="faq" class="sec-light section-padding">
-    <div class="container max-w-3xl">
-      <p class="eyebrow text-center mb-4 reveal-up">Perguntas frequentes</p>
-      <h2 class="font-display text-[clamp(1.4rem,3.5vw,2.2rem)] font-medium tracking-tight leading-tight text-center mb-8 reveal-up">
-        Antes de decidir, tire suas dúvidas.
-      </h2>
-
-      <div id="faq-list">
-        <div class="faq-item reveal-up">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            Vocês atendem apenas infoprodutores?
-            <i data-lucide="plus" class="faq-icon w-5 h-5"></i>
-          </button>
-          <div class="faq-a">Não. Atendemos mentores, clínicas de saúde e estética, e profissionais liberais. Nossa solução se molda à necessidade do seu negócio.</div>
+  <!-- ===== PILARES ===== -->
+  <section id="pilares">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Como funciona</div>
+        <h2 class="section-title">Um funil único, do início ao fim.</h2>
+      </div>
+      <div class="pilares-grid reveal">
+        <div class="pilar-card">
+          <div class="pilar-idx">01</div>
+          <h4>Atração</h4>
+          <p>Tráfego pago em Meta, Google e LinkedIn focado em compradores reais — não em cliques.</p>
+          <ul class="pilar-list">
+            <li>Gestão multicanal integrada</li>
+            <li>Criativos de alta conversão</li>
+            <li>API de Conversão &amp; Pixel</li>
+          </ul>
         </div>
-        <div class="faq-item reveal-up" data-delay="0.1">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            O investimento em tráfego está incluso na mensalidade?
-            <i data-lucide="plus" class="faq-icon w-5 h-5"></i>
-          </button>
-          <div class="faq-a">Não. O investimento em anúncios é pago diretamente às plataformas (Meta, Google e LinkedIn) — é separado da nossa mensalidade de gestão.</div>
+        <div class="pilar-card">
+          <div class="pilar-idx">02</div>
+          <h4>Atendimento</h4>
+          <p>As pessoas compram de gente, não de robô. Nossa equipe assume seu WhatsApp e Direct, com resposta em até 5 minutos.</p>
+          <ul class="pilar-list">
+            <li>Qualificação ativa de leads</li>
+            <li>Monitoramento de inbox</li>
+            <li>Abordagem humanizada</li>
+          </ul>
         </div>
-        <div class="faq-item reveal-up" data-delay="0.2">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            Existe fidelidade?
-            <i data-lucide="plus" class="faq-icon w-5 h-5"></i>
-          </button>
-          <div class="faq-a">Sim. Fidelidade inicial de 3 meses, tempo necessário para maturação do funil e otimização dos resultados.</div>
-        </div>
-        <div class="faq-item reveal-up" data-delay="0.3">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            Quanto tempo leva para ver resultado?
-            <i data-lucide="plus" class="faq-icon w-5 h-5"></i>
-          </button>
-          <div class="faq-a">Os primeiros ajustes geram sinais em 2 a 3 semanas. A curva de escala consistente aparece a partir do segundo mês, dentro do ciclo de 90 dias.</div>
-        </div>
-        <div class="faq-item reveal-up" data-delay="0.4">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            Qual é o investimento mensal?
-            <i data-lucide="plus" class="faq-icon w-5 h-5"></i>
-          </button>
-          <div class="faq-a">Nossos planos são personalizados de acordo com a necessidade de cada negócio. O investimento começa a partir de R$ 989/mês para atendente virtual e pode chegar a uma operação completa com tráfego, SDR e CRM. Agende uma consultoria para receber uma proposta sob medida.</div>
+        <div class="pilar-card">
+          <div class="pilar-idx">03</div>
+          <h4>Fechamento</h4>
+          <p>Implementamos um CRM próprio e treinamos Closers na sua metodologia para fechar vendas high-ticket.</p>
+          <ul class="pilar-list">
+            <li>Gestão de funil com IA</li>
+            <li>Closer especializado</li>
+            <li>Relatórios transparentes</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-     CTA FINAL — FECHA A PÁGINA
-     ============================================================ -->
-  <section id="cta-final" class="sec-light section-padding">
-    <div class="container">
-      <div class="cta-consultoria reveal-up">
-        <p class="eyebrow">Sua operação sob medida</p>
-        <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight">
-          Não trabalhamos com planos engessados.
-        </h2>
-        <p class="mt-4 text-[clamp(0.95rem,2.2vw,1.1rem)] text-[var(--color-text-muted)] leading-relaxed max-w-2xl mx-auto">
-          Cada negócio tem um momento, um orçamento e uma dor diferente. Agende uma consultoria gratuita e desenhamos juntos a solução ideal para você.
-        </p>
-        <div class="mt-4 text-sm text-[var(--color-text-muted)]">
-          <span class="font-medium">A partir de R$ 989/mês</span> — planos personalizados para cada realidade
+  <!-- ===== CRM FUNNEL ===== -->
+  <section>
+    <div class="wrap">
+      <div class="crm-panel reveal">
+        <div class="crm-title">FUNIL — <span class="champagne">PAR HUB CRM</span></div>
+        <div class="funnel">
+          <div class="funnel-stage">
+            <span class="funnel-stage-num">01</span>
+            <div><div class="funnel-stage-name">Novo lead</div><div class="funnel-stage-tag">Tráfego Pago</div></div>
+          </div>
+          <div class="funnel-stage">
+            <span class="funnel-stage-num">02</span>
+            <div><div class="funnel-stage-name">Qualificado</div><div class="funnel-stage-tag">SDR / Secretária</div></div>
+          </div>
+          <div class="funnel-stage">
+            <span class="funnel-stage-num">03</span>
+            <div><div class="funnel-stage-name">Em negociação</div><div class="funnel-stage-tag">Closer</div></div>
+          </div>
+          <div class="funnel-stage final">
+            <span class="funnel-stage-num">04</span>
+            <div><div class="funnel-stage-name">Fechado ✦</div><div class="funnel-stage-tag">Dinheiro em caixa</div></div>
+          </div>
         </div>
-        <button onclick="openModal()" class="btn-blue mt-6">
-          Agendar Minha Consultoria Gratuita
-          <i data-lucide="arrow-right" class="w-4 h-4"></i>
-        </button>
-        <p class="mt-4 text-sm text-[var(--color-text-muted)]">Sem compromisso • Call rápida de 15 min com especialista</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHATSAPP MOCK ===== -->
+  <section>
+    <div class="wrap">
+      <div class="wa-layout reveal">
+        <div class="wa-copy">
+          <div class="eyebrow">Atendimento real</div>
+          <h3>Veja como seus leads serão atendidos.</h3>
+          <p>Respostas rápidas, humanas e focadas em qualificar — nunca mais perca uma venda por demora.</p>
+          <ul class="wa-list">
+            <li>Resposta humana em até 5 minutos, sem robô frio.</li>
+            <li>Qualificação ativa antes de qualquer venda.</li>
+            <li>Acompanhamento até a confirmação da consultoria.</li>
+          </ul>
+        </div>
+        <div class="iphone">
+          <div class="iphone-notch"></div>
+          <div class="iphone-screen">
+            <div class="iphone-statusbar">
+              <span>9:41</span>
+              <div class="iphone-statusbar-icons">
+                <span>📶</span><span>📶</span><span>🔋</span>
+              </div>
+            </div>
+            <div class="wa-header-bar">
+              <span class="wa-back">‹</span>
+              <div class="phone-avatar">PH</div>
+              <div style="flex:1;">
+                <div class="phone-name">PAR HUB</div>
+                <div class="phone-status" id="wa-status">online</div>
+              </div>
+              <span class="wa-icon">📹</span>
+              <span class="wa-icon">📞</span>
+            </div>
+            <div class="phone-body" id="wa-body"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROCESSO ===== -->
+  <section>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">O processo</div>
+        <h2 class="section-title">Um processo claro, com um único responsável pelo resultado: <span class="champagne">NÓS</span>.</h2>
+      </div>
+      <div class="processo-grid reveal">
+        <div class="processo-item">
+          <div class="processo-num">01</div>
+          <h4>Diagnóstico</h4>
+          <p>Mapeamos seus canais, dores e gargalos em uma call. Marque a sua e receba a proposta feita pra você.</p>
+        </div>
+        <div class="processo-item">
+          <div class="processo-num">02</div>
+          <h4>Ativação</h4>
+          <p>Colocamos tráfego, atendimento e CRM no ar com base na sua estratégia personalizada.</p>
+        </div>
+        <div class="processo-item">
+          <div class="processo-num">03</div>
+          <h4>Otimização</h4>
+          <p>Ajustes diários de campanhas e abordagem comercial baseados em dados reais.</p>
+        </div>
+        <div class="processo-item">
+          <div class="processo-num">04</div>
+          <h4>Escala</h4>
+          <p>Multiplicamos resultados com base no que funciona — e só paramos quando você chega nos 6 ou 7 dígitos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FUNDADORES ===== -->
+  <section>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Quem assina sua estratégia</div>
+        <h2 class="section-title">Cada sócio cuida da sua especialidade para resolver seu gargalo.</h2>
+        <p style="color:var(--text-secondary); margin-top:14px; font-size:15px;">Sua estratégia é desenhada e revisada semanalmente pelos nossos sócios-fundadores — parceiros comprometidos com o seu lucro real.</p>
+      </div>
+      <div class="founders-grid reveal">
+        <div class="founder-card" tabindex="0">
+          <div class="founder-photo-wrap">
+            <img class="founder-photo" src="https://raw.githubusercontent.com/closermatheus-creator/parhubagencia/main/foto2.png" alt="Matheus, sócio-fundador da PAR HUB">
+            <div class="founder-story">
+              <p>Depois de anos fechando venda de mentoria e vendo o mesmo problema em todo cliente — tráfego bom, atendimento lento — decidiu que a solução não era mais um curso, era assumir a operação inteira. Nasceu o Método PAR.</p>
+            </div>
+          </div>
+          <h4>Matheus</h4>
+          <div class="founder-role">Sócio-fundador</div>
+          <p>+8 anos de experiência em growth e operações comerciais para infoprodutores e clínicas.</p>
+        </div>
+        <div class="founder-card" tabindex="0">
+          <div class="founder-photo-wrap">
+            <img class="founder-photo" src="https://raw.githubusercontent.com/closermatheus-creator/parhubagencia/main/foto01.png" alt="Ster, sócia-fundadora da PAR HUB">
+            <div class="founder-story">
+              <p>Passou anos do outro lado da tela, respondendo lead por lead até entender que venda não se perde por preço — se perde por demora. Hoje treina cada atendente da PAR HUB pra tratar o primeiro "oi" como o momento mais importante da venda.</p>
+            </div>
+          </div>
+          <h4>Ster</h4>
+          <div class="founder-role">Sócia-fundadora</div>
+          <p>Especialista em atendimento e experiência do cliente, com mais de 5 mil leads atendidos.</p>
+        </div>
+        <div class="founder-card" tabindex="0">
+          <div class="founder-photo-wrap">
+            <img class="founder-photo" src="https://raw.githubusercontent.com/closermatheus-creator/parhubagencia/main/greg.png" alt="Greg, sócio-fundador da PAR HUB">
+            <div class="founder-story">
+              <p>Já queimou verba de sobra pra aprender que criativo bonito sem funil de atendimento é dinheiro jogado fora. Hoje só sobe uma campanha depois de garantir que existe alguém do outro lado pronto pra responder em minutos.</p>
+            </div>
+          </div>
+          <h4>Greg</h4>
+          <div class="founder-role">Sócio-fundador</div>
+          <p>Gestor de tráfego com mais de R$ 5M investidos em Meta, Google e LinkedIn.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DEPOIMENTOS ===== -->
+  <section id="depoimentos">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">O que nossos clientes dizem</div>
+        <h2 class="section-title">Resultados <span class="champagne">reais</span>.</h2>
+      </div>
+      <div class="testi-grid reveal">
+        <div class="testi-card">
+          <p class="testi-quote">Minha mentoria tinha tráfego, mas as vendas não vinham. A PAR HUB estruturou o atendimento e em 30 dias minha conversão triplicou.</p>
+          <div class="testi-foot"><div class="testi-dot">JM</div><div><div class="testi-name">Juliana M.</div><div class="testi-role">Mentora de Marketing Digital</div></div></div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">Eu fazia tudo sozinha e estava esgotada. A PAR HUB assumiu a operação e hoje tenho uma equipe que cuida de tudo enquanto eu foco no que importa.</p>
+          <div class="testi-foot"><div class="testi-dot">FR</div><div><div class="testi-name">Dra. Fernanda R.</div><div class="testi-role">Clínica de Estética</div></div></div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">Contratei gestor de tráfego, SDR e atendente separados — era um caos. Com a PAR HUB, tudo integrado e o resultado apareceu em semanas.</p>
+          <div class="testi-foot"><div class="testi-dot">RS</div><div><div class="testi-name">Rafael S.</div><div class="testi-role">Infoprodutor</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVIÇOS ===== -->
+  <section>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Nossos serviços</div>
+        <h2 class="section-title">Soluções completas para sua operação comercial.</h2>
+      </div>
+      <div class="services-list reveal" id="services-list"></div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Perguntas frequentes</div>
+        <h2 class="section-title">Dúvidas? <span class="champagne">A gente responde.</span></h2>
+      </div>
+      <div class="reveal" id="faq-list" style="max-width:760px;"></div>
+    </div>
+  </section>
+
+  <!-- ===== CTA FINAL ===== -->
+  <section id="cta">
+    <div class="wrap">
+      <div class="cta-final reveal">
+        <div class="eyebrow">Sua operação sob medida</div>
+        <h2 class="section-title">Não vendemos planos engessados. <span class="champagne">Desenhamos a solução com você.</span></h2>
+        <p class="sub">Agende um diagnóstico gratuito. Em 15 minutos, mapeamos seus gargalos e desenhamos a estratégia ideal para o seu negócio.</p>
+        <div class="hero-cta-row" style="justify-content:center; margin-top:30px;">
+          <a class="btn btn-champagne" data-open-wizard>✦ Agendar Diagnóstico Gratuito</a>
+        </div>
+        <div class="cta-note">SEM COMPROMISSO · CALL COM ESPECIALISTA</div>
       </div>
     </div>
   </section>
@@ -1937,545 +1926,483 @@
 <!-- ============================================================
      FOOTER
      ============================================================ -->
-<footer class="sec-light">
-  <div class="container flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-    <div>
-      <p class="font-display text-lg font-semibold flex items-center gap-2">
-        <span class="inline-block w-2.5 h-2.5 rounded-full bg-[var(--color-blue)]"></span>
-        PAR HUB
-      </p>
-      <p class="text-sm text-[var(--color-text-muted)] mt-1 max-w-xs">Sócio de Operação Comercial &amp; Growth para mentores, infoprodutores e clínicas.</p>
+<footer>
+  <div class="wrap foot-row">
+    <div class="logo">
+      <span class="logo-mark"><span></span><span></span><span></span></span>
+      PAR HUB
     </div>
-    <div class="flex flex-wrap gap-6 text-sm">
-      <a href="#atração" class="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Atração</a>
-      <a href="#atendimento" class="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Atendimento</a>
-      <a href="#fechamento" class="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Fechamento</a>
-      <a href="#fundadores" class="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Quem Somos</a>
-      <a href="#servicos" class="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Serviços</a>
-      <a href="#depoimentos" class="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Depoimentos</a>
-      <a href="#faq" class="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">FAQ</a>
+    <div class="foot-links">
+      <a href="#diagnostico">Diagnóstico</a>
+      <a href="#pilares">Solução</a>
+      <a href="#depoimentos">Resultados</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://wa.me/5531984943305" target="_blank" rel="noopener">Contato</a>
     </div>
-    <p class="text-xs text-[var(--color-text-muted)]">© 2026 PAR HUB</p>
+    <div class="foot-copy">© 2026 PAR HUB</div>
   </div>
 </footer>
 
 <!-- ============================================================
-     FAB — WHATSAPP (ÚNICO ELEMENTO VERDE)
+     MODAL
      ============================================================ -->
-<button id="fab-whats" onclick="openModal()" aria-label="Falar no WhatsApp">
-  <i data-lucide="message-circle"></i>
-</button>
-
-<!-- ============================================================
-     MODAL — com LGPD
-     ============================================================ -->
-<div id="modal-overlay" onclick="if(event.target===this) closeModal()">
-  <div id="modal-box" class="modal-scrollbar">
-    <div class="flex items-center justify-between mb-6">
-      <p class="eyebrow">Diagnóstico estratégico</p>
-      <button onclick="closeModal()" aria-label="Fechar" class="text-[var(--color-text-muted)] hover:text-[var(--color-text)]">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    <div id="wizard-content"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="btn-back">Voltar</button>
+      <button class="btn btn-champagne" id="btn-next">Continuar</button>
     </div>
-
-    <div class="progress-track mb-6">
-      <div id="progress-bar" class="progress-bar" style="width:20%"></div>
-    </div>
-
-    <form id="wizard-form" onsubmit="return false;">
-      <!-- Step 1 -->
-      <div class="wizard-step" data-step="1">
-        <h3 class="font-display text-xl font-semibold mb-1">Vamos começar</h3>
-        <p class="text-sm text-[var(--color-text-muted)] mb-6">Seus dados para o nosso time entrar em contato.</p>
-        <div class="space-y-4">
-          <div>
-            <label class="text-sm font-medium block mb-1.5">Nome</label>
-            <input type="text" id="f-nome" class="field-input" placeholder="Seu nome completo" required />
-          </div>
-          <div>
-            <label class="text-sm font-medium block mb-1.5">WhatsApp</label>
-            <input type="tel" id="f-whats" class="field-input" placeholder="(31) 98494-3305" required />
-          </div>
-          <div class="consent-check">
-            <input type="checkbox" id="f-consent" required />
-            <label for="f-consent">
-              Concordo em receber contato da PAR HUB pelo WhatsApp e estou ciente da 
-              <a href="#" onclick="event.preventDefault(); alert('Política de Privacidade: Seus dados serão usados apenas para contato comercial e não serão compartilhados com terceiros.')">Política de Privacidade</a>.
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 2 -->
-      <div class="wizard-step hidden" data-step="2">
-        <h3 class="font-display text-xl font-semibold mb-1">Qual é o perfil do seu negócio?</h3>
-        <p class="text-sm text-[var(--color-text-muted)] mb-6">Isso nos ajuda a entender seu cenário.</p>
-        <div class="space-y-3" data-group="perfil">
-          <button type="button" class="choice-btn" onclick="selectChoice(this)">Infoprodutor / Mentor <i data-lucide="check" class="check-dot w-4 h-4"></i></button>
-          <button type="button" class="choice-btn" onclick="selectChoice(this)">Clínica / Área da Saúde <i data-lucide="check" class="check-dot w-4 h-4"></i></button>
-          <button type="button" class="choice-btn" onclick="selectChoice(this)">Negócio Local / Prestador de Serviço <i data-lucide="check" class="check-dot w-4 h-4"></i></button>
-          <button type="button" class="choice-btn" onclick="selectChoice(this)">Outro <i data-lucide="check" class="check-dot w-4 h-4"></i></button>
-        </div>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="wizard-step hidden" data-step="3">
-        <h3 class="font-display text-xl font-semibold mb-1">Qual é o seu maior desafio comercial?</h3>
-        <p class="text-sm text-[var(--color-text-muted)] mb-6">Seja honesto — é isso que vamos resolver primeiro.</p>
-        <div class="space-y-3" data-group="desafio">
-          <button type="button" class="choice-btn" onclick="selectChoice(this)">Faço tudo sozinho e meu tempo esgotou <i data-lucide="check" class="check-dot w-4 h-4"></i></button>
-          <button type="button" class="choice-btn" onclick="selectChoice(this)">Equipe descentralizada, informações se perdem <i data-lucide="check" class="check-dot w-4 h-4"></i></button>
-          <button type="button" class="choice-btn" onclick="selectChoice(this)">Gero contatos, mas os leads esfriam <i data-lucide="check" class="check-dot w-4 h-4"></i></button>
-          <button type="button" class="choice-btn" onclick="selectChoice(this)">Atraio muita gente, mas a maioria é curioso <i data-lucide="check" class="check-dot w-4 h-4"></i></button>
-        </div>
-      </div>
-
-      <!-- Step 4 -->
-      <div class="wizard-step hidden" data-step="4">
-        <h3 class="font-display text-xl font-semibold mb-1">Qual o seu faturamento médio mensal?</h3>
-        <p class="text-sm text-[var(--color-text-muted)] mb-6">Assim já chegamos com a proposta certa.</p>
-        <div class="space-y-3" data-group="faturamento">
-          <button type="button" class="choice-btn" onclick="selectChoice(this)">Até R$ 10 mil <i data-lucide="check" class="check-dot w-4 h-4"></i></button>
-          <button type="button" class="choice-btn" onclick="selectChoice(this)">De R$ 10 mil a R$ 30 mil <i data-lucide="check" class="check-dot w-4 h-4"></i></button>
-          <button type="button" class="choice-btn" onclick="selectChoice(this)">De R$ 30 mil a R$ 100 mil <i data-lucide="check" class="check-dot w-4 h-4"></i></button>
-          <button type="button" class="choice-btn" onclick="selectChoice(this)">Acima de R$ 100 mil <i data-lucide="check" class="check-dot w-4 h-4"></i></button>
-        </div>
-      </div>
-
-      <div class="flex items-center justify-between mt-9 gap-3">
-        <button type="button" id="btn-back" onclick="wizardBack()" class="btn-ghost !py-2.5 !px-5 !text-sm" style="min-width:auto;min-height:44px;">
-          <i data-lucide="chevron-left" class="w-4 h-4"></i> Voltar
-        </button>
-        <button type="button" id="btn-next" onclick="wizardNext()" class="btn-blue !py-2.5 !px-6 !text-sm" style="min-width:auto;min-height:44px;">
-          Continuar <i data-lucide="chevron-right" class="w-4 h-4"></i>
-        </button>
-      </div>
-    </form>
   </div>
 </div>
 
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
 <script>
-  // =============================================================
-  // INICIALIZAR ÍCONES
-  // =============================================================
-  lucide.createIcons();
+/* ==============================================================
+   EFECTO SCRAMBLE — Letras formando "Centralizado"
+   ============================================================== */
+(function() {
+  const target = document.querySelector('.hero-title .champagne');
+  if (!target) return;
 
-  // =============================================================
-  // NAV — SCROLL E MOBILE
-  // =============================================================
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 20);
-  }, { passive: true });
+  const finalWord = "Centralizado";
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  const spans = [];
 
-  const navToggle = document.getElementById('nav-toggle');
-  const navPanel = document.getElementById('nav-mobile-panel');
-  const navClose = document.getElementById('nav-mobile-close');
-
-  function toggleMobileNav() {
-    const isOpen = navPanel.classList.toggle('open');
-    navToggle.classList.toggle('active', isOpen);
-    navToggle.setAttribute('aria-expanded', String(isOpen));
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  }
-
-  function closeMobileNav() {
-    navPanel.classList.remove('open');
-    navToggle.classList.remove('active');
-    navToggle.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-
-  navToggle.addEventListener('click', toggleMobileNav);
-  if (navClose) navClose.addEventListener('click', closeMobileNav);
-
-  // Fecha ao clicar em um link (inclusive o botão do formulário)
-  navPanel.querySelectorAll('a, button').forEach((el) => {
-    el.addEventListener('click', closeMobileNav);
+  target.textContent = '';
+  finalWord.split('').forEach((ch) => {
+    const span = document.createElement('span');
+    span.className = 'scramble-letter';
+    span.textContent = ch;
+    target.appendChild(span);
+    spans.push(span);
   });
 
-  // Fecha ao redimensionar para desktop
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 1024) closeMobileNav();
-  });
+  function randChar() {
+    return chars[Math.floor(Math.random() * chars.length)];
+  }
 
-  // =============================================================
-  // GSAP REVEALS
-  // =============================================================
-  gsap.registerPlugin(ScrollTrigger);
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (!reduceMotion) {
-    document.querySelectorAll('.reveal-up').forEach((el) => {
-      const delay = parseFloat(el.dataset.delay) || 0;
-      gsap.to(el, {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        delay: delay,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 88%' }
-      });
-    });
-
-    // =============================================================
-    // CONVERGÊNCIA — DESKTOP (sem linhas)
-    // =============================================================
-    const mm = gsap.matchMedia();
-    mm.add('(min-width: 768px)', () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '#convergencia',
-          start: 'top top',
-          end: '+=140%',
-          scrub: 1.2,
-          pin: true,
+  function runScramble() {
+    spans.forEach((span, i) => {
+      const finalChar = finalWord[i];
+      let ticks = 0;
+      const maxTicks = 6 + i * 2;
+      const interval = setInterval(() => {
+        ticks++;
+        if (ticks >= maxTicks) {
+          clearInterval(interval);
+          span.textContent = finalChar;
+          span.style.color = '#D2B68A';
+        } else {
+          span.textContent = finalChar === finalChar.toUpperCase() && finalChar !== finalChar.toLowerCase()
+            ? randChar().toUpperCase()
+            : randChar().toLowerCase();
+          span.style.color = '#A8A09A';
         }
-      });
-      tl.to(['#node-a', '#node-b', '#node-c', '#node-d', '#node-e'], {
-        top: '50%',
-        left: '50%',
-        scale: 0.3,
-        opacity: 0,
-        stagger: 0.12,
-        ease: 'power2.inOut'
-      }, 0)
-      .to('#hub', { opacity: 1, scale: 1, duration: 0.6, ease: 'power2.out' }, 0.35);
+      }, 45);
     });
+  }
 
-    // =============================================================
-    // CHIP LIST — MOBILE (sequência com fade in/out)
-    // =============================================================
-    if (window.innerWidth < 768) {
-      const chips = Array.from(document.querySelectorAll('#chip-list .list-chip'));
-      const hub = document.getElementById('hub');
-      const listContainer = document.getElementById('chip-list');
+  runScramble();
+  setInterval(runScramble, 5000);
+})();
 
-      const STEP_DELAY = 400;
-      const HOLD_DELAY = 2200;
-      const RESET_DELAY = 600;
+/* ==============================================================
+   LINHAS DE LUZ — Canvas
+   ============================================================== */
+(function() {
+  const canvas = document.getElementById('light-lines');
+  const ctx = canvas.getContext('2d');
+  let w, h;
+  const lines = [];
+  const LINE_COUNT = 14;
 
-      let isPaused = false;
-      let timers = [];
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
 
-      function clearTimers() {
-        timers.forEach(t => clearTimeout(t));
-        timers = [];
-      }
-
-      function resetAll() {
-        chips.forEach(c => c.classList.remove('visible', 'hiding'));
-        if (hub) hub.classList.remove('visible');
-      }
-
-      function runCycle() {
-        clearTimers();
-        if (isPaused) {
-          timers.push(setTimeout(runCycle, 400));
-          return;
-        }
-        resetAll();
-
-        chips.forEach((chip, i) => {
-          timers.push(setTimeout(() => {
-            if (!isPaused) chip.classList.add('visible');
-          }, i * STEP_DELAY));
-        });
-
-        const afterAllChips = chips.length * STEP_DELAY + 300;
-
-        timers.push(setTimeout(() => {
-          if (hub && !isPaused) hub.classList.add('visible');
-        }, afterAllChips));
-
-        const hideAt = afterAllChips + HOLD_DELAY;
-        timers.push(setTimeout(() => {
-          chips.forEach(c => { c.classList.remove('visible'); c.classList.add('hiding'); });
-          if (hub) hub.classList.remove('visible');
-        }, hideAt));
-
-        const restartAt = hideAt + RESET_DELAY;
-        timers.push(setTimeout(runCycle, restartAt));
-      }
-
-      if (listContainer) {
-        listContainer.addEventListener('mouseenter', () => { isPaused = true; });
-        listContainer.addEventListener('mouseleave', () => { isPaused = false; });
-        listContainer.addEventListener('touchstart', () => { isPaused = true; }, { passive: true });
-        listContainer.addEventListener('touchend', () => {
-          setTimeout(() => { isPaused = false; }, 1000);
-        });
-      }
-
-      runCycle();
+  class LightLine {
+    constructor() {
+      this.reset();
     }
+    reset() {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h;
+      this.length = 60 + Math.random() * 200;
+      this.angle = Math.random() * Math.PI * 2;
+      this.speed = 0.2 + Math.random() * 0.6;
+      this.opacity = 0.04 + Math.random() * 0.08;
+      this.width = 0.5 + Math.random() * 1.2;
+      this.pulse = Math.random() * Math.PI * 2;
+      this.pulseSpeed = 0.01 + Math.random() * 0.02;
+      this.driftX = (Math.random() - 0.5) * 0.15;
+      this.driftY = (Math.random() - 0.5) * 0.15;
+    }
+    update() {
+      this.angle += this.speed * 0.008;
+      this.x += Math.cos(this.angle) * this.speed * 0.3 + this.driftX;
+      this.y += Math.sin(this.angle) * this.speed * 0.3 + this.driftY;
+      this.pulse += this.pulseSpeed;
 
-    // =============================================================
-    // CONTADORES
-    // =============================================================
-    document.querySelectorAll('.counter').forEach(counter => {
-      const target = parseInt(counter.dataset.target);
-      ScrollTrigger.create({
-        trigger: counter,
-        start: 'top 80%',
-        onEnter: () => {
-          gsap.to(counter, {
-            textContent: target,
-            duration: 2.2,
-            ease: 'power2.out',
-            snap: { textContent: 1 },
-            onUpdate: () => {
-              if (target > 0 && counter.textContent.length > 0) {
-                counter.textContent = Math.min(parseInt(counter.textContent), target);
-              }
-            }
-          });
-        },
-        once: true
-      });
-    });
+      if (this.x < -100 || this.x > w + 100 || this.y < -100 || this.y > h + 100) {
+        this.reset();
+        this.x = Math.random() * w;
+        this.y = Math.random() * h;
+      }
 
-  } else {
-    // Fallback para quem prefere reduzir movimento
-    document.querySelectorAll('.reveal-up').forEach(el => {
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-    });
-    document.getElementById('hub').style.opacity = '1';
-    document.getElementById('hub').style.transform = 'translate(-50%, -50%) scale(1)';
-    document.querySelectorAll('.counter').forEach(el => {
-      el.textContent = el.dataset.target;
-    });
+      const pulseVar = 0.03 * Math.sin(this.pulse);
+      this.currentOpacity = Math.min(0.12, Math.max(0.02, this.opacity + pulseVar));
+    }
+    draw() {
+      const endX = this.x + Math.cos(this.angle) * this.length;
+      const endY = this.y + Math.sin(this.angle) * this.length;
+
+      const grad = ctx.createLinearGradient(this.x, this.y, endX, endY);
+      grad.addColorStop(0, `rgba(210, 182, 138, ${this.currentOpacity * 0.3})`);
+      grad.addColorStop(0.3, `rgba(210, 182, 138, ${this.currentOpacity})`);
+      grad.addColorStop(0.7, `rgba(210, 182, 138, ${this.currentOpacity})`);
+      grad.addColorStop(1, `rgba(210, 182, 138, ${this.currentOpacity * 0.2})`);
+
+      ctx.beginPath();
+      ctx.moveTo(this.x, this.y);
+      ctx.lineTo(endX, endY);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = this.width;
+      ctx.shadowColor = `rgba(210, 182, 138, ${this.currentOpacity * 0.3})`;
+      ctx.shadowBlur = 8;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    }
   }
 
-  // =============================================================
-  // CHAT — CORRIGIDO (digitando substitui a mensagem)
-  // =============================================================
-  const chatMessages = document.getElementById('chat-messages');
-  const chatSequence = [
-    { type: 'user', text: 'Olá! Quero saber mais sobre a mentoria de marketing digital. Vocês ainda têm vagas?' },
-    { type: 'typing', delay: 1600 },
-    { type: 'bot', text: 'Oi! Que bom que você entrou em contato! Sim, ainda temos algumas vagas para este mês. Posso te ajudar com isso!' },
-    { type: 'typing', delay: 1400 },
-    { type: 'user', text: 'Quais são os dias disponíveis para uma consultoria inicial?' },
-    { type: 'typing', delay: 1500 },
-    { type: 'bot', text: 'Temos horários na quarta-feira às 14h e na quinta-feira às 10h. Qual desses se encaixa melhor na sua agenda?' },
-    { type: 'typing', delay: 1400 },
-    { type: 'user', text: 'Quarta-feira às 14h é perfeito. Pode confirmar?' },
-    { type: 'typing', delay: 1700 },
-    { type: 'bot', text: 'Confirmado! 🎉 Acabei de enviar os detalhes da consultoria no seu WhatsApp. Já vou te passar o link para a reunião. Estamos ansiosos para te atender!' },
+  for (let i = 0; i < LINE_COUNT; i++) {
+    lines.push(new LightLine());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    lines.forEach(line => {
+      line.update();
+      line.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      resize();
+      lines.forEach(line => line.reset());
+    }, 150);
+  });
+})();
+
+/* ==============================================================
+   WHATSAPP CONVERSATION
+   ============================================================== */
+(function() {
+  const body = document.getElementById('wa-body');
+  const statusEl = document.getElementById('wa-status');
+  if (!body) return;
+
+  const messages = [
+    { dir: 'in', text: 'Oi! Vi o anúncio de vocês, queria entender mais 👋', time: '14:02' },
+    { dir: 'out', text: 'Fala! Que bom que chegou até a gente 🙌 Posso te fazer 2 perguntas rápidas pra te indicar o melhor caminho?', time: '14:02' },
+    { dir: 'in', text: 'Pode sim', time: '14:03' },
+    { dir: 'out', text: 'Você já atende hoje ou tá começando agora?', time: '14:03' },
+    { dir: 'in', text: 'Já atendo, mas os leads demoram muito pra ter resposta 😕', time: '14:04' },
+    { dir: 'out', text: 'Entendi — esse é exatamente o ralo que a gente resolve. Já te encaixo com um especialista, pode ser?', time: '14:04' },
   ];
 
-  let chatIndex = 0;
-  let isChatRunning = false;
-  let typingTimeout = null;
+  let running = false;
 
-  function removeTypingIndicator() {
-    const typing = chatMessages.querySelector('.msg-typing');
-    if (typing) typing.remove();
+  function addBubble(msg) {
+    const b = document.createElement('div');
+    b.className = 'bubble ' + msg.dir;
+    b.innerHTML = msg.text + `<div class="bubble-meta">${msg.time}${msg.dir === 'out' ? ' <span class="tick">✓✓</span>' : ''}</div>`;
+    body.appendChild(b);
+    body.scrollTop = body.scrollHeight;
   }
 
-  function addMessage(type, text) {
-    removeTypingIndicator();
-
-    const div = document.createElement('div');
-    if (type === 'typing') {
-      div.className = 'msg-typing';
-      div.innerHTML = '<span>●</span><span>●</span><span>●</span>';
-    } else {
-      div.className = `msg msg-${type}`;
-      div.textContent = text;
-      if (type === 'bot') {
-        const check = document.createElement('span');
-        check.className = 'check-mark';
-        check.textContent = '✓✓';
-        div.appendChild(check);
-      }
-    }
-    chatMessages.appendChild(div);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-    return div;
+  function addTyping() {
+    const t = document.createElement('div');
+    t.className = 'typing-bubble';
+    t.id = 'typing-now';
+    t.innerHTML = '<span></span><span></span><span></span>';
+    body.appendChild(t);
+    body.scrollTop = body.scrollHeight;
+  }
+  function removeTyping() {
+    const t = document.getElementById('typing-now');
+    if (t) t.remove();
   }
 
-  function runChatSequence() {
-    if (isChatRunning || chatIndex >= chatSequence.length) {
-      setTimeout(() => {
-        chatMessages.innerHTML = '';
-        chatIndex = 0;
-        isChatRunning = false;
-        runChatSequence();
-      }, 5000);
-      return;
-    }
+  function runChat() {
+    if (running) return;
+    running = true;
+    body.innerHTML = '';
+    statusEl.textContent = 'online';
+    let delay = 400;
 
-    isChatRunning = true;
-    const step = chatSequence[chatIndex];
-
-    if (step.type === 'typing') {
-      removeTypingIndicator();
-      addMessage('typing');
-      typingTimeout = setTimeout(() => {
-        chatIndex++;
-        isChatRunning = false;
-        runChatSequence();
-      }, step.delay);
-    } else {
-      removeTypingIndicator();
-      addMessage(step.type, step.text);
-      chatIndex++;
-      isChatRunning = false;
-
-      const nextDelay = chatIndex < chatSequence.length ?
-        (chatSequence[chatIndex].type === 'typing' ? 400 : 1600) : 3000;
-      setTimeout(runChatSequence, nextDelay);
-    }
-  }
-
-  const chatObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && chatIndex === 0 && !isChatRunning) {
-        runChatSequence();
+    messages.forEach((msg) => {
+      if (msg.dir === 'out') {
+        setTimeout(() => { statusEl.textContent = 'digitando…'; addTyping(); }, delay);
+        delay += 800;
+        setTimeout(() => { removeTyping(); statusEl.textContent = 'online'; addBubble(msg); }, delay);
+        delay += 500;
+      } else {
+        setTimeout(() => { addBubble(msg); }, delay);
+        delay += 1000;
       }
     });
-  }, { threshold: 0.15 });
 
-  const chatSection = document.getElementById('conversa');
-  if (chatSection) chatObserver.observe(chatSection);
+    setTimeout(() => { running = false; runChat(); }, delay + 4000);
+  }
 
-  // =============================================================
-  // FAQ
-  // =============================================================
-  function toggleFaq(btn) {
-    const item = btn.closest('.faq-item');
-    const answer = item.querySelector('.faq-a');
-    const isOpen = item.classList.contains('open');
-
-    document.querySelectorAll('.faq-item.open').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.faq-a').style.maxHeight = null;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { runChat(); obs.disconnect(); }
     });
+  }, { threshold: 0.30 });
+  obs.observe(document.querySelector('.iphone'));
+})();
 
-    if (!isOpen) {
-      item.classList.add('open');
-      answer.style.maxHeight = answer.scrollHeight + 'px';
+/* ==============================================================
+   SCROLL REVEAL
+   ============================================================== */
+(function() {
+  const els = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  els.forEach(el => obs.observe(el));
+})();
+
+/* ==============================================================
+   SERVIÇOS
+   ============================================================== */
+(function() {
+  const services = [
+    { letter: "P", name: "Tráfego Pago", tag: "Meta, Google e LinkedIn", badge: "incl", label: "Incluso",
+      desc: "Campanhas desenhadas pra atrair quem já tem intenção de compra, não curiosos. É o motor que alimenta a Prospecção do Método PAR." },
+    { letter: "P", name: "Landing Pages", tag: "Alta conversão", badge: "cons", label: "Sob Consulta",
+      desc: "Páginas construídas pra transformar clique em contato qualificado. Cada elemento é testado pra reduzir o custo por lead." },
+    { letter: "A", name: "Atendente Virtual", tag: "Humano, resposta em <5min", badge: "incl", label: "Incluso",
+      desc: "Um humano de verdade assume seu WhatsApp e Direct. É a porta de entrada do pilar de Atendimento." },
+    { letter: "A", name: "Social Seller", tag: "Abordagem no Instagram", badge: "cons", label: "Sob Consulta",
+      desc: "Abordagem ativa com quem interage mas não chama no direto. Trabalha lado a lado com o SDR." },
+    { letter: "A", name: "SDR", tag: "Qualificação comercial", badge: "incl", label: "Incluso",
+      desc: "Separa quem está pronto pra comprar de quem só está curioso. Só chega ao Closer quem realmente tem perfil." },
+    { letter: "R", name: "CRM Personalizado", tag: "Gestão de funil com IA", badge: "incl", label: "Incluso",
+      desc: "Organiza cada lead da entrada até o fechamento. É onde o pilar de Resultado ganha forma." },
+    { letter: "P", name: "Google Meu Negócio", tag: "Otimização local", badge: "cons", label: "Sob Consulta",
+      desc: "Otimiza seu perfil pra captar quem já está buscando um negócio como o seu na região." },
+    { letter: "P", name: "Social Media", tag: "Conteúdo estratégico", badge: "cons", label: "Sob Consulta",
+      desc: "Conteúdo que constrói autoridade enquanto o tráfego pago trabalha, aquecendo o público." },
+  ];
+  const list = document.getElementById('services-list');
+  services.forEach(s => {
+    const card = document.createElement('div');
+    card.className = 'service-card';
+    card.innerHTML = `
+      <div class="service-letter">${s.letter}</div>
+      <div class="service-body">
+        <h5>${s.name}</h5>
+        <div class="service-tag">${s.tag}</div>
+        <p>${s.desc}</p>
+      </div>
+      <div class="service-badge-wrap"><span class="service-badge ${s.badge}">${s.label}</span></div>
+    `;
+    list.appendChild(card);
+  });
+})();
+
+/* ==============================================================
+   FAQ
+   ============================================================== */
+(function() {
+  const faqs = [
+    { q: "Vocês atendem apenas infoprodutores?", a: "Não. Atendemos mentores, clínicas de saúde, estética, e profissionais liberais. Nossa solução se molda à necessidade do seu negócio." },
+    { q: "O investimento em anúncios está incluso?", a: "Não. O investimento em anúncios é pago diretamente às plataformas (Meta, Google, LinkedIn) — é separado da nossa gestão." },
+    { q: "Existe fidelidade?", a: "Sim. Fidelidade inicial de 3 meses, tempo necessário para maturação do funil e otimização consistente dos resultados." },
+    { q: "Quanto tempo leva para ver resultado?", a: "Os primeiros sinais aparecem em 2 a 3 semanas. A curva de escala consistente vem a partir do segundo mês." },
+    { q: "Como funciona o diagnóstico gratuito?", a: "Agendamos uma call de 15 minutos onde mapeamos seus canais, dores e gargalos. No final, você recebe uma proposta personalizada." },
+  ];
+  const list = document.getElementById('faq-list');
+  faqs.forEach(f => {
+    const item = document.createElement('div');
+    item.className = 'faq-item';
+    item.innerHTML = `<div class="faq-q"><span>${f.q}</span><span class="faq-plus">✦</span></div><div class="faq-a"><p>${f.a}</p></div>`;
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      item.classList.toggle('open');
+    });
+    list.appendChild(item);
+  });
+})();
+
+/* ==============================================================
+   WIZARD MODAL
+   ============================================================== */
+(function() {
+  const overlay = document.getElementById('modal-overlay');
+  const content = document.getElementById('wizard-content');
+  const progressFill = document.getElementById('progress-fill');
+  const btnBack = document.getElementById('btn-back');
+  const btnNext = document.getElementById('btn-next');
+  const WA_NUMBER = "5531984943305";
+
+  let step = 1;
+  const data = { nome: "", whats: "", consent: false, perfil: "", desafio: "", faturamento: "" };
+
+  const perfis = ["Infoprodutor / Mentor", "Clínica / Saúde", "Negócio Local", "Outro"];
+  const desafios = ["Faço tudo sozinho", "Equipe descentralizada", "Leads esfriam", "Leads desqualificados"];
+  const faturamentos = ["Até R$ 10 mil", "R$ 10k - R$ 30k", "R$ 30k - R$ 100 mil", "Acima de R$ 100 mil"];
+
+  function render() {
+    progressFill.style.width = (step * 25) + "%";
+    btnBack.disabled = step === 1;
+    btnNext.textContent = step === 4 ? "Enviar" : "Continuar";
+
+    if (step === 1) {
+      content.innerHTML = `
+        <div class="step-eyebrow">PASSO 1 / 4</div>
+        <div class="step-title">Vamos começar</div>
+        <div class="field">
+          <label>Nome</label>
+          <input type="text" id="f-nome" placeholder="Seu nome completo" value="${data.nome}">
+        </div>
+        <div class="field">
+          <label>WhatsApp</label>
+          <input type="tel" id="f-whats" placeholder="(31) 90000-0000" value="${data.whats}">
+        </div>
+        <label class="consent">
+          <input type="checkbox" id="f-consent" ${data.consent ? "checked" : ""}>
+          <span>Concordo em ser contatado pela PAR HUB via WhatsApp para receber meu diagnóstico.</span>
+        </label>
+        <div class="err" id="err-1">Preencha nome, WhatsApp e aceite o consentimento para continuar.</div>
+      `;
+    }
+    if (step === 2) {
+      content.innerHTML = `
+        <div class="step-eyebrow">PASSO 2 / 4</div>
+        <div class="step-title">Qual é o seu negócio?</div>
+        <div class="opt-grid" id="opt-perfil">
+          ${perfis.map(p => `<div class="opt ${data.perfil === p ? 'selected' : ''}" data-val="${p}">${p}</div>`).join('')}
+        </div>
+        <div class="err" id="err-2">Selecione uma opção para continuar.</div>
+      `;
+      bindOptions('opt-perfil', 'perfil');
+    }
+    if (step === 3) {
+      content.innerHTML = `
+        <div class="step-eyebrow">PASSO 3 / 4</div>
+        <div class="step-title">Qual o seu maior desafio?</div>
+        <div class="opt-grid" id="opt-desafio">
+          ${desafios.map(p => `<div class="opt ${data.desafio === p ? 'selected' : ''}" data-val="${p}">${p}</div>`).join('')}
+        </div>
+        <div class="err" id="err-3">Selecione uma opção para continuar.</div>
+      `;
+      bindOptions('opt-desafio', 'desafio');
+    }
+    if (step === 4) {
+      content.innerHTML = `
+        <div class="step-eyebrow">PASSO 4 / 4</div>
+        <div class="step-title">Qual o seu faturamento mensal?</div>
+        <div class="opt-grid" id="opt-fat">
+          ${faturamentos.map(p => `<div class="opt ${data.faturamento === p ? 'selected' : ''}" data-val="${p}">${p}</div>`).join('')}
+        </div>
+        <div class="err" id="err-4">Selecione uma opção para enviar.</div>
+      `;
+      bindOptions('opt-fat', 'faturamento');
     }
   }
 
-  // =============================================================
-  // MODAL WIZARD
-  // =============================================================
-  const WHATS_NUMBER = '5531984943305';
-  let currentStep = 1;
-  const totalSteps = 4;
-  const answers = { perfil: '', desafio: '', faturamento: '' };
-
-  function openModal() {
-    document.getElementById('modal-overlay').classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    document.getElementById('modal-overlay').classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  function selectChoice(btn) {
-    const group = btn.closest('[data-group]');
-    group.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    const groupName = group.getAttribute('data-group');
-    answers[groupName] = btn.childNodes[0].textContent.trim();
-  }
-
-  function showStep(step) {
-    document.querySelectorAll('.wizard-step').forEach(s => {
-      s.classList.toggle('hidden', parseInt(s.dataset.step) !== step);
+  function bindOptions(containerId, field) {
+    const container = document.getElementById(containerId);
+    container.querySelectorAll('.opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        container.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        data[field] = opt.dataset.val;
+        hideError();
+      });
     });
-    document.getElementById('progress-bar').style.width = (step / totalSteps * 100) + '%';
-    document.getElementById('btn-back').classList.toggle('invisible', step === 1);
-    const nextBtn = document.getElementById('btn-next');
-    nextBtn.innerHTML = step === totalSteps
-      ? 'Enviar <i data-lucide="send" class="w-4 h-4"></i>'
-      : 'Continuar <i data-lucide="chevron-right" class="w-4 h-4"></i>';
-    lucide.createIcons();
   }
 
-  function validateStep(step) {
+  function showError() {
+    const err = content.querySelector('.err');
+    if (err) err.classList.add('show');
+  }
+  function hideError() {
+    const err = content.querySelector('.err');
+    if (err) err.classList.remove('show');
+  }
+
+  function validateStep() {
     if (step === 1) {
       const nome = document.getElementById('f-nome').value.trim();
       const whats = document.getElementById('f-whats').value.trim();
       const consent = document.getElementById('f-consent').checked;
-      if (!nome || !whats) { flashInvalid(); return false; }
-      if (!consent) { alert('Por favor, concorde com a Política de Privacidade para continuar.'); return false; }
-      return true;
+      data.nome = nome;
+      data.whats = whats;
+      data.consent = consent;
+      return nome.length > 0 && whats.length > 0 && consent;
     }
-    if (step === 2 && !answers.perfil) { flashInvalid(); return false; }
-    if (step === 3 && !answers.desafio) { flashInvalid(); return false; }
-    if (step === 4 && !answers.faturamento) { flashInvalid(); return false; }
+    if (step === 2) return !!data.perfil;
+    if (step === 3) return !!data.desafio;
+    if (step === 4) return !!data.faturamento;
     return true;
   }
 
-  function flashInvalid() {
-    const activeStep = document.querySelector(`.wizard-step[data-step="${currentStep}"]`);
-    activeStep.animate([
-      { transform: 'translateX(0)' },
-      { transform: 'translateX(-5px)' },
-      { transform: 'translateX(5px)' },
-      { transform: 'translateX(0)' }
-    ], { duration: 200 });
-  }
-
-  function wizardNext() {
-    if (!validateStep(currentStep)) return;
-    if (currentStep === totalSteps) {
-      sendToWhatsapp();
-      return;
-    }
-    currentStep++;
-    showStep(currentStep);
-  }
-
-  function wizardBack() {
-    if (currentStep === 1) return;
-    currentStep--;
-    showStep(currentStep);
-  }
-
   function sendToWhatsapp() {
-    const nome = document.getElementById('f-nome').value.trim();
-    const whats = document.getElementById('f-whats').value.trim();
-    const msg = `Olá PAR HUB! Acabei de preencher o diagnóstico estratégico:
-👤 Nome: ${nome}
-📱 WhatsApp: ${whats}
-🎯 Perfil: ${answers.perfil}
-⚠️ Desafio: ${answers.desafio}
-💰 Faturamento: ${answers.faturamento}
-Quero agendar minha consultoria!`;
-    window.open(`https://wa.me/${WHATS_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+    const msg = `Olá PAR HUB! Diagnóstico preenchido:%0A👤 Nome: ${data.nome}%0A📱 WhatsApp: ${data.whats}%0A🎯 Perfil: ${data.perfil}%0A⚠️ Desafio: ${data.desafio}%0A💰 Faturamento: ${data.faturamento}%0A%0AQuero agendar minha consultoria!`;
+    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
     closeModal();
   }
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
+  btnNext.addEventListener('click', () => {
+    if (!validateStep()) { showError(); return; }
+    if (step < 4) { step++; render(); } else { sendToWhatsapp(); }
+  });
+  btnBack.addEventListener('click', () => {
+    if (step > 1) { step--; render(); }
   });
 
-  // =============================================================
-  // URL TRIGGER — abre o modal via link
-  // =============================================================
-  window.addEventListener('DOMContentLoaded', () => {
+  function openModal() {
+    step = 1;
+    Object.assign(data, { nome: "", whats: "", consent: false, perfil: "", desafio: "", faturamento: "" });
+    render();
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-open-wizard]').forEach(btn => {
+    btn.addEventListener('click', openModal);
+  });
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
+
+  window.addEventListener('load', () => {
     const params = new URLSearchParams(window.location.search);
     if (params.get('abrir') === 'formulario' || window.location.hash === '#abrir-formulario') {
-      setTimeout(openModal, 600);
+      openModal();
     }
   });
-
-  // =============================================================
-  // RECARREGAR ÍCONES
-  // =============================================================
-  document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => lucide.createIcons(), 200);
-  });
+})();
 </script>
-
 </body>
 </html>
