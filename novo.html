@@ -22,7 +22,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <style>
-  /* ===== VARIÁVEIS (identidade Apple: fundo branco, texto preto, dobras escuras mantidas) ===== */
+  /* ============================================================
+     VARIÁVEIS — IDENTIDADE VISUAL
+     ============================================================ */
   :root {
     --color-bg: #FFFFFF;
     --color-bg-dark: #000000;
@@ -32,17 +34,27 @@
     --color-text-dark: #F5F5F7;
     --color-border: #D2D2D7;
     --color-border-dark: #424245;
-    /* Verde: reservado exclusivamente para o botão do WhatsApp */
-    --color-whats: #25D366;
-    --color-whats-hover: #1DA851;
-    --color-whats-dim: rgba(37, 211, 102, 0.12);
-    /* Azul: cor de destaque principal em toda a marca (estilo Apple) */
+    /* AZUL: cor principal da marca */
     --color-blue: #0071E3;
     --color-blue-hover: #0058B9;
     --color-blue-dim: rgba(0, 113, 227, 0.10);
+    /* VERDE: reservado exclusivamente para o WhatsApp */
+    --color-whats: #25D366;
+    --color-whats-hover: #1DA851;
+    --color-whats-dim: rgba(37, 211, 102, 0.12);
+    /* Espaçamentos sistemáticos - escala única */
+    --space-xs: 0.5rem;
+    --space-sm: 0.75rem;
+    --space-md: 1.25rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-2xl: 5rem;
+    --space-3xl: 7rem;
   }
 
-  /* ===== RESET ===== */
+  /* ============================================================
+     RESET E BASE
+     ============================================================ */
   * { -webkit-font-smoothing: antialiased; margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
@@ -56,19 +68,31 @@
 
   ::selection { background: var(--color-blue); color: #fff; }
 
-  /* ===== SCROLLBAR ===== */
+  /* ============================================================
+     SCROLLBAR
+     ============================================================ */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--color-bg); }
   ::-webkit-scrollbar-thumb { background: var(--color-blue); border-radius: 999px; }
 
-  /* ===== UTILIDADES ===== */
-  .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.75rem; }
-  @media (max-width: 640px) { .container { padding: 0 1.5rem; } }
-  @media (min-width: 1024px) { .container { padding: 0 3rem; } }
+  /* ============================================================
+     UTILIDADES
+     ============================================================ */
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+  }
+  @media (max-width: 640px) { .container { padding: 0 var(--space-md); } }
+  @media (min-width: 1024px) { .container { padding: 0 var(--space-xl); } }
 
-  .section-padding { padding: 5.5rem 0; }
-  @media (min-width: 768px) { .section-padding { padding: 7.5rem 0; } }
-  @media (min-width: 1024px) { .section-padding { padding: 9.5rem 0; } }
+  .section-padding {
+    padding: var(--space-2xl) 0;
+  }
+  @media (min-width: 768px) {
+    .section-padding { padding: var(--space-3xl) 0; }
+  }
 
   .eyebrow {
     font-family: "JetBrains Mono", ui-monospace, monospace;
@@ -77,10 +101,9 @@
     text-transform: uppercase;
     font-weight: 500;
     color: var(--color-blue);
-    margin-bottom: 0.75rem;
+    margin-bottom: var(--space-sm);
     display: inline-block;
   }
-  .eyebrow-blue { color: var(--color-blue); }
 
   .sec-dark { background: var(--color-bg-dark) !important; color: var(--color-text-dark) !important; }
   .sec-light { background: var(--color-bg) !important; color: var(--color-text) !important; }
@@ -90,49 +113,54 @@
     border-radius: 9999px;
     filter: blur(120px);
     pointer-events: none;
-    opacity: 0.10;
+    opacity: 0.08;
   }
 
-  /* ===== BOTÕES ===== */
+  /* ============================================================
+     BOTÕES
+     ============================================================ */
   .btn-blue {
-    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
     background: var(--color-blue) !important;
     color: #fff !important;
     font-weight: 600;
-    padding: 0.9rem 2.2rem;
+    padding: 0.85rem var(--space-xl);
     border-radius: 9999px;
     border: none;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     font-size: clamp(0.9rem, 2vw, 1.05rem);
     cursor: pointer;
-    min-height: 54px;
-    min-width: 200px;
+    min-height: 52px;
+    min-width: 180px;
     text-align: center;
-    box-shadow: 0 8px 28px rgba(0, 113, 227, 0.28);
-    position: relative;
-    overflow: hidden;
+    box-shadow: 0 8px 28px rgba(0, 113, 227, 0.25);
   }
   .btn-blue:hover {
     background: var(--color-blue-hover) !important;
     transform: translateY(-3px);
-    box-shadow: 0 14px 40px rgba(0, 113, 227, 0.38);
+    box-shadow: 0 14px 40px rgba(0, 113, 227, 0.35);
   }
   .btn-blue:active { transform: translateY(0); }
 
-  /* Botão de WhatsApp explícito — único CTA verde da marca */
   .btn-whats {
-    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
     background: var(--color-whats) !important;
     color: #fff !important;
     font-weight: 600;
-    padding: 0.9rem 2.2rem;
+    padding: 0.85rem var(--space-xl);
     border-radius: 9999px;
     border: none;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     font-size: clamp(0.9rem, 2vw, 1.05rem);
     cursor: pointer;
-    min-height: 54px;
-    min-width: 200px;
+    min-height: 52px;
+    min-width: 180px;
     text-align: center;
     box-shadow: 0 8px 28px rgba(37, 211, 102, 0.30);
   }
@@ -144,42 +172,54 @@
   .btn-whats:active { transform: translateY(0); }
 
   .btn-ghost {
-    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
     color: var(--color-text) !important;
     border: 1.5px solid var(--color-border);
-    padding: 0.9rem 2rem;
+    padding: 0.85rem var(--space-lg);
     border-radius: 9999px;
     font-weight: 500;
     font-size: clamp(0.9rem, 2vw, 1rem);
     background: transparent;
     cursor: pointer;
     transition: all 0.3s ease;
-    min-height: 54px;
-    min-width: 180px;
+    min-height: 52px;
+    min-width: 160px;
     text-align: center;
   }
   .btn-ghost:hover { border-color: var(--color-blue); background: var(--color-blue-dim); }
 
   .btn-ghost-dark {
-    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
     color: var(--color-text-dark) !important;
     border: 1.5px solid rgba(255,255,255,0.2);
-    padding: 0.9rem 2rem;
+    padding: 0.85rem var(--space-lg);
     border-radius: 9999px;
     font-weight: 500;
     font-size: clamp(0.9rem, 2vw, 1rem);
     background: transparent;
     cursor: pointer;
     transition: all 0.3s ease;
-    min-height: 54px;
-    min-width: 180px;
+    min-height: 52px;
+    min-width: 160px;
     text-align: center;
   }
   .btn-ghost-dark:hover { border-color: var(--color-blue); background: var(--color-blue-dim); }
 
-  /* ===== NAV ===== */
+  /* ============================================================
+     NAVEGAÇÃO — FULL-WIDTH
+     ============================================================ */
   #nav {
-    position: fixed; top: 0; inset-x: 0; z-index: 50;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -191,14 +231,20 @@
   #nav.scrolled { background: rgba(255, 255, 255, 0.96); }
 
   .nav-inner {
-    height: 64px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-    padding: 0 1.5rem;
+    width: 100%;
+    height: 64px;
+    padding: 0 var(--space-lg);
+    gap: var(--space-sm);
   }
-  @media (min-width: 768px) { .nav-inner { height: 72px; padding: 0 2.5rem; } }
+  @media (min-width: 768px) {
+    .nav-inner { height: 72px; padding: 0 var(--space-xl); }
+  }
+  @media (min-width: 1024px) {
+    .nav-inner { padding: 0 var(--space-2xl); }
+  }
 
   .nav-logo {
     color: var(--color-text);
@@ -213,36 +259,63 @@
   }
   .nav-logo-dot {
     display: inline-block;
-    width: 9px; height: 9px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
     background: var(--color-blue);
   }
 
-  /* Links horizontais — somente desktop (>=1024px), sem scroll */
   .nav-links-wrapper {
     display: none;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.25rem;
+    flex: 1;
+    justify-content: center;
+    padding: 0 var(--space-md);
   }
+  @media (min-width: 1024px) {
+    .nav-links-wrapper { display: flex; }
+  }
+
   .nav-link {
     color: var(--color-text-muted);
     text-decoration: none;
     font-size: 0.85rem;
     font-weight: 500;
-    white-space: nowrap;
-    padding: 0.5rem 0.85rem;
+    padding: 0.45rem 0.9rem;
     border-radius: 999px;
     transition: all 0.2s ease;
+    white-space: nowrap;
+    position: relative;
   }
-  .nav-link:hover { color: var(--color-text); background: rgba(0,0,0,0.04); }
-  .nav-link.active { color: var(--color-text); background: rgba(0,0,0,0.06); }
-  .nav-link-highlight { color: var(--color-blue) !important; font-weight: 600; }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0.2rem;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 70%;
+    height: 2px;
+    background: var(--color-blue);
+    transition: transform 0.3s ease;
+  }
+  .nav-link:hover { color: var(--color-text); }
+  .nav-link:hover::after { transform: translateX(-50%) scaleX(1); }
+  .nav-link-highlight {
+    color: var(--color-blue) !important;
+    font-weight: 600;
+  }
+  .nav-link-highlight::after { background: var(--color-blue); }
 
-  .nav-actions { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
-
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-shrink: 0;
+  }
   .nav-btn-cta {
     display: none;
-    padding: 0.6rem 1.3rem;
+    padding: 0.5rem 1.2rem;
     border-radius: 999px;
     background: var(--color-blue);
     color: #fff;
@@ -254,13 +327,16 @@
     transition: all 0.2s ease;
   }
   .nav-btn-cta:hover { background: var(--color-blue-hover); transform: translateY(-1px); }
+  @media (min-width: 1024px) {
+    .nav-btn-cta { display: inline-flex; align-items: center; justify-content: center; }
+  }
 
-  /* Botão hamburguer — clica e expande (mobile/tablet) */
   .nav-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 42px; height: 42px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     border: none;
     background: rgba(0,0,0,0.045);
@@ -273,7 +349,8 @@
   .nav-toggle span {
     display: block;
     position: absolute;
-    width: 18px; height: 2px;
+    width: 18px;
+    height: 2px;
     background: var(--color-text);
     border-radius: 2px;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -284,48 +361,94 @@
   .nav-toggle.active span:nth-child(1) { transform: translateY(0) rotate(45deg); }
   .nav-toggle.active span:nth-child(2) { opacity: 0; }
   .nav-toggle.active span:nth-child(3) { transform: translateY(0) rotate(-45deg); }
+  @media (min-width: 1024px) {
+    .nav-toggle { display: none !important; }
+  }
 
-  /* Painel do menu mobile — expande abaixo do nav ao clicar */
   .nav-mobile-panel {
-    position: absolute; top: 100%; left: 0; right: 0;
-    background: rgba(255,255,255,0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    max-height: 0;
-    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100dvh;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     display: flex;
     flex-direction: column;
-    transition: max-height 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-lg);
+    padding: var(--space-2xl) var(--space-lg);
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 100;
+    overflow-y: auto;
   }
-  .nav-mobile-panel.open { max-height: 32rem; }
+  .nav-mobile-panel.open {
+    transform: translateX(0);
+  }
+  @media (min-width: 1024px) {
+    .nav-mobile-panel { display: none !important; }
+  }
+
   .nav-mobile-link {
-    padding: 1rem 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 500;
     color: var(--color-text);
     text-decoration: none;
-    font-size: 0.98rem;
-    font-weight: 500;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 0.4rem 0;
+    transition: color 0.2s ease;
+    text-align: center;
+  }
+  .nav-mobile-link:hover,
+  .nav-mobile-link:active { color: var(--color-blue); }
+  .nav-mobile-link-highlight {
+    color: var(--color-blue) !important;
+    font-weight: 600;
+  }
+
+  .nav-mobile-cta-wrap {
+    margin-top: var(--space-md);
+    width: 100%;
+    max-width: 280px;
+  }
+  .nav-mobile-cta-wrap .btn-blue {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .nav-mobile-close {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0,0,0,0.05);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: background 0.2s ease;
+    font-size: 1.5rem;
+    color: var(--color-text);
   }
-  .nav-mobile-link:active, .nav-mobile-link:hover { background: rgba(0,0,0,0.03); }
-  .nav-mobile-cta-wrap { padding: 1.25rem 1.5rem 1.75rem; }
+  .nav-mobile-close:hover { background: rgba(0,0,0,0.1); }
 
-  @media (min-width: 1024px) {
-    .nav-links-wrapper { display: flex; }
-    .nav-btn-cta { display: inline-flex; align-items: center; justify-content: center; }
-    .nav-toggle, .nav-mobile-panel { display: none !important; }
-  }
-
-  /* ===== REVEAL ===== */
+  /* ============================================================
+     REVEAL
+     ============================================================ */
   .reveal-up { opacity: 0; transform: translateY(40px); }
-  .reveal-scale { opacity: 0; transform: scale(0.92); }
 
-  /* ===== PAIN CARDS ===== */
+  /* ============================================================
+     PAIN CARDS
+     ============================================================ */
   .pain-card {
     background: var(--color-bg-card);
     border-radius: 1.5rem;
-    padding: 2rem 1.75rem;
+    padding: var(--space-xl) var(--space-lg);
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     overflow: hidden;
@@ -337,7 +460,7 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--color-blue), #5AC8FA);
+    background: var(--color-blue);
     opacity: 0;
     transition: opacity 0.5s ease;
   }
@@ -358,23 +481,30 @@
     border-radius: 999px;
   }
 
-  /* ===== CONVERGÊNCIA ===== */
+  /* ============================================================
+     CONVERGÊNCIA — simplificada, sem linhas
+     ============================================================ */
   #convergencia {
     position: relative;
-    min-height: 100vh;
+    min-height: 100dvh;
     overflow: hidden;
     background: var(--color-bg-dark) !important;
-    padding: 4rem 0;
+    padding: var(--space-2xl) 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .node-chip {
     position: absolute;
     transform: translate(-50%, -50%);
-    display: flex; align-items: center; gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.08);
     padding: 0.6rem 1rem;
     border-radius: 9999px;
-    font-size: clamp(0.65rem, 1.6vw, 0.8rem);
+    font-size: clamp(0.65rem, 1.4vw, 0.8rem);
     font-weight: 500;
     color: var(--color-text-dark);
     white-space: nowrap;
@@ -384,8 +514,11 @@
     -webkit-backdrop-filter: blur(8px);
   }
   .node-chip svg { width: 16px; height: 16px; color: var(--color-blue); flex-shrink: 0; }
+
   #hub {
-    position: absolute; top: 50%; left: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%) scale(0.5);
     opacity: 0;
     z-index: 4;
@@ -398,22 +531,14 @@
   #hub .eyebrow { color: var(--color-blue); }
   #hub-sub { color: rgba(255,255,255,0.5); }
 
-  #convergencia svg.lines-svg {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    z-index: 2;
-    pointer-events: none;
-  }
-  .node-line { stroke: rgba(255,255,255,0.06); stroke-width: 1.5; }
-
-  /* Mobile: todos os chips surgem em sequência, ficam juntos, somem juntos, e o ciclo se repete */
+  /* Mobile: lista em sequência com altura automática */
   #chip-list {
     display: none;
     position: relative;
     width: 100%;
     max-width: 320px;
     margin: 0 auto;
-    min-height: 300px;
+    min-height: 260px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -422,7 +547,9 @@
   #chip-list .list-chip {
     opacity: 0;
     transform: translateY(18px) scale(0.92);
-    display: flex; align-items: center; gap: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.08);
     padding: 0.7rem 1.2rem;
@@ -433,30 +560,43 @@
     white-space: nowrap;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     width: auto;
     min-width: 160px;
     justify-content: center;
   }
   #chip-list .list-chip svg { width: 18px; height: 18px; color: var(--color-blue); flex-shrink: 0; }
-  #chip-list .list-chip.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-  #chip-list .list-chip.hiding {
-    opacity: 0;
-    transform: translateY(-14px) scale(0.94);
-  }
+  #chip-list .list-chip.visible { opacity: 1; transform: translateY(0) scale(1); }
+  #chip-list .list-chip.hiding { opacity: 0; transform: translateY(-14px) scale(0.94); }
 
   @media (max-width: 767px) {
     #convergencia .node-chip { display: none; }
-    #convergencia svg.lines-svg { display: none; }
     #chip-list { display: flex; }
-    #hub { position: relative; top: auto; left: auto; transform: none; opacity: 0; margin: 2rem auto 0; padding-top: 2rem; }
+    #hub {
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      opacity: 0;
+      margin: var(--space-xl) auto 0;
+      padding-top: var(--space-xl);
+    }
     #hub.visible { opacity: 1; }
   }
 
-  /* ===== SPLIT PHOTO ===== */
+  /* Fallback para "reduzir movimento" */
+  @media (prefers-reduced-motion: reduce) {
+    #convergencia .node-chip { display: flex !important; position: relative; top: auto !important; left: auto !important; transform: none !important; margin: 0.5rem auto; }
+    #convergencia { min-height: auto; padding: var(--space-xl) 0; flex-wrap: wrap; gap: var(--space-sm); }
+    #chip-list { display: none !important; }
+    #hub { opacity: 1 !important; transform: none !important; position: relative !important; top: auto !important; left: auto !important; margin-top: var(--space-lg); }
+    .node-chip { position: relative !important; top: auto !important; left: auto !important; transform: none !important; }
+  }
+
+  /* ============================================================
+     SPLIT PHOTO
+     ============================================================ */
   .split-photo-wrap {
     position: relative;
     border-radius: 1.5rem;
@@ -476,10 +616,12 @@
     color: rgba(255,255,255,0.3);
   }
 
-  /* ===== FUNIL ===== */
+  /* ============================================================
+     FUNIL
+     ============================================================ */
   .funil-step {
     position: relative;
-    padding: 1.75rem 1.25rem;
+    padding: var(--space-xl) var(--space-lg);
     border-radius: 1.25rem;
     background: var(--color-bg-card);
     border: 1px solid rgba(0,0,0,0.06);
@@ -504,8 +646,10 @@
     width: 48px; height: 48px;
     border-radius: 9999px;
     background: var(--color-blue-dim);
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-xs);
     color: var(--color-blue);
   }
   .funil-step .step-icon svg { width: 24px; height: 24px; }
@@ -518,16 +662,21 @@
   }
   @media (min-width: 768px) {
     .funil-connector { display: block; }
-    .funil-step { padding: 2rem 1.5rem; }
+    .funil-step { padding: var(--space-xl) var(--space-lg); }
   }
 
-  /* ===== FUNDADORES ===== */
+  /* ============================================================
+     FUNDADORES
+     ============================================================ */
   .founder-card { text-align: center; }
   .founder-photo {
-    width: 100%; aspect-ratio: 1/1; border-radius: 1.5rem; overflow: hidden;
+    width: 100%; aspect-ratio: 1/1;
+    border-radius: 1.5rem;
+    overflow: hidden;
     background: var(--color-bg);
     border: 1px solid rgba(0,0,0,0.06);
-    position: relative; margin-bottom: 1rem;
+    position: relative;
+    margin-bottom: var(--space-md);
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   .founder-photo:hover {
@@ -535,12 +684,28 @@
     box-shadow: 0 12px 32px -12px rgba(0,0,0,0.15);
   }
   .founder-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .founder-role {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: 0.15rem;
+  }
+  .founder-bio {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-xs);
+    line-height: 1.5;
+    max-width: 240px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-  /* ===== CHAT ===== */
+  /* ============================================================
+     CHAT — SPLIT DESKTOP
+     ============================================================ */
   .chat-container {
     background: var(--color-bg-card);
     border-radius: 1.5rem;
-    padding: 1.25rem;
+    padding: var(--space-md);
     border: 1px solid rgba(0,0,0,0.06);
     max-width: 420px;
     margin: 0 auto;
@@ -549,22 +714,31 @@
     box-shadow: 0 4px 16px rgba(0,0,0,0.04);
   }
   .chat-header {
-    display: flex; align-items: center; gap: 0.75rem;
-    padding-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding-bottom: var(--space-sm);
     border-bottom: 1px solid rgba(0,0,0,0.06);
-    margin-bottom: 0.75rem;
+    margin-bottom: var(--space-sm);
   }
   .chat-avatar {
-    width: 40px; height: 40px; border-radius: 50%;
+    width: 40px; height: 40px;
+    border-radius: 50%;
     background: var(--color-blue);
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 1rem; color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
     position: relative;
     flex-shrink: 0;
   }
   .chat-avatar .online-dot {
-    position: absolute; bottom: 0; right: 0;
-    width: 11px; height: 11px; border-radius: 50%;
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 11px; height: 11px;
+    border-radius: 50%;
     background: var(--color-blue);
     border: 2px solid var(--color-bg-card);
     animation: pulse-dot 2s infinite;
@@ -576,8 +750,12 @@
   .chat-name { font-weight: 600; color: var(--color-text); font-size: 0.9rem; }
   .chat-status { font-size: 0.7rem; color: var(--color-text-muted); }
   .chat-messages {
-    display: flex; flex-direction: column; gap: 0.5rem;
-    min-height: 240px; max-height: 340px; overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-height: 240px;
+    max-height: 340px;
+    overflow-y: auto;
     padding-right: 0.25rem;
   }
   .chat-messages::-webkit-scrollbar { width: 4px; }
@@ -615,7 +793,8 @@
     padding: 0.6rem 1.2rem;
     border-radius: 1rem;
     border-bottom-left-radius: 0.15rem;
-    display: flex; gap: 0.25rem;
+    display: flex;
+    gap: 0.25rem;
     align-items: center;
     font-size: 1.1rem;
     opacity: 0;
@@ -638,11 +817,108 @@
     opacity: 0.5;
   }
 
-  /* ===== SERVIÇOS ===== */
+  .chat-split-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+  .chat-split-content {
+    text-align: center;
+    max-width: 480px;
+  }
+  .chat-split-content .chat-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin: var(--space-lg) 0;
+    text-align: left;
+  }
+  .chat-split-content .chat-benefits li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    color: var(--color-text);
+    list-style: none;
+  }
+  .chat-split-content .chat-benefits li svg {
+    width: 20px;
+    height: 20px;
+    color: var(--color-blue);
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .chat-split-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+    .chat-split-content {
+      text-align: left;
+      max-width: 100%;
+    }
+    .chat-split-content .chat-benefits {
+      text-align: left;
+    }
+    .chat-container {
+      margin: 0;
+      max-width: 100%;
+    }
+  }
+
+  /* ============================================================
+     DEPOIMENTOS (PROVA SOCIAL)
+     ============================================================ */
+  .testimonial-card {
+    background: var(--color-bg-card);
+    border-radius: 1.5rem;
+    padding: var(--space-xl);
+    border: 1px solid rgba(0,0,0,0.04);
+    text-align: left;
+    transition: all 0.3s ease;
+  }
+  .testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px -12px rgba(0,0,0,0.08);
+  }
+  .testimonial-card .quote {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    line-height: 1.6;
+    color: var(--color-text);
+    margin-bottom: var(--space-md);
+  }
+  .testimonial-card .quote::before {
+    content: '"';
+    color: var(--color-blue);
+    font-size: 1.8rem;
+    line-height: 1;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  .testimonial-card .author {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  .testimonial-card .author-role {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+  .testimonial-card .author-stars {
+    color: #FFB800;
+    letter-spacing: 2px;
+    margin-bottom: var(--space-xs);
+  }
+
+  /* ============================================================
+     SERVIÇOS
+     ============================================================ */
   .service-card {
     background: var(--color-bg-card);
     border-radius: 1.25rem;
-    padding: 1.5rem 1.25rem;
+    padding: var(--space-lg) var(--space-md);
     border: 1px solid rgba(0,0,0,0.06);
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     text-align: left;
@@ -656,8 +932,10 @@
   .service-card .icon-wrap {
     width: 44px; height: 44px;
     border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-sm);
     background: var(--color-blue-dim);
     color: var(--color-blue);
   }
@@ -670,7 +948,7 @@
     letter-spacing: 0.05em;
     padding: 0.15rem 0.6rem;
     border-radius: 999px;
-    margin-top: 0.5rem;
+    margin-top: var(--space-xs);
   }
   .badge-incluso { background: var(--color-blue-dim); color: var(--color-blue); }
   .badge-consulta { background: rgba(0,0,0,0.06); color: var(--color-text-muted); }
@@ -680,10 +958,10 @@
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--color-text);
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-sm);
   }
   .service-category-title .line {
     flex: 1;
@@ -691,68 +969,156 @@
     background: var(--color-border);
   }
 
-  /* ===== FAQ ===== */
+  /* Grid responsivo - 2 colunas já no mobile */
+  .grid-2col-mobile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+  @media (max-width: 480px) {
+    .grid-2col-mobile {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-sm);
+    }
+  }
+  .grid-2col-mobile .service-card {
+    padding: var(--space-md) var(--space-sm);
+  }
+  .grid-2col-mobile .service-card .icon-wrap {
+    width: 36px;
+    height: 36px;
+  }
+  .grid-2col-mobile .service-card .icon-wrap svg {
+    width: 18px;
+    height: 18px;
+  }
+  .grid-2col-mobile .service-card h4 {
+    font-size: 0.85rem;
+  }
+  .grid-2col-mobile .service-card p {
+    font-size: 0.75rem;
+  }
+
+  /* Fundadores grid - 2 colunas no mobile */
+  .founders-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+  @media (max-width: 480px) {
+    .founders-grid {
+      gap: var(--space-md);
+    }
+  }
+  @media (min-width: 768px) {
+    .founders-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* ============================================================
+     FAQ
+     ============================================================ */
   .faq-item { border-bottom: 1px solid rgba(0,0,0,0.06); }
   .faq-q {
-    width: 100%; text-align: left; padding: 1.5rem 0;
-    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-    font-family: "Space Grotesk", sans-serif; font-weight: 600; font-size: clamp(1rem, 2.2vw, 1.1rem);
-    cursor: pointer; color: var(--color-text);
-    background: transparent; border: none;
+    width: 100%;
+    text-align: left;
+    padding: var(--space-lg) 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: clamp(1rem, 2.2vw, 1.1rem);
+    cursor: pointer;
+    color: var(--color-text);
+    background: transparent;
+    border: none;
   }
   .faq-icon { transition: transform 0.3s ease; flex-shrink: 0; color: var(--color-blue); }
   .faq-item.open .faq-icon { transform: rotate(45deg); }
   .faq-a {
-    max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease;
-    color: var(--color-text-muted); font-size: clamp(0.9rem, 2vw, 1rem); line-height: 1.7;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    color: var(--color-text-muted);
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    line-height: 1.7;
   }
-  .faq-item.open .faq-a { padding-bottom: 1.5rem; max-height: 400px; }
+  .faq-item.open .faq-a { padding-bottom: var(--space-lg); max-height: 400px; }
 
-  /* ===== CTA ===== */
+  /* ============================================================
+     CTA
+     ============================================================ */
   .cta-consultoria {
     background: var(--color-bg-card);
     border-radius: 2rem;
-    padding: 3rem 2rem;
+    padding: var(--space-2xl) var(--space-xl);
     text-align: center;
     border: 1px solid rgba(0,0,0,0.04);
     box-shadow: 0 4px 20px rgba(0,0,0,0.04);
   }
-  @media (min-width: 768px) { .cta-consultoria { padding: 4rem 3rem; } }
+  @media (max-width: 640px) {
+    .cta-consultoria { padding: var(--space-xl) var(--space-lg); }
+  }
 
-  /* ===== MODAL ===== */
+  /* ============================================================
+     MODAL
+     ============================================================ */
   #modal-overlay {
     position: fixed; inset: 0;
     background: rgba(0,0,0,0.6);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 100; padding: 1.25rem;
-    opacity: 0; pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: var(--space-md);
+    opacity: 0;
+    pointer-events: none;
     transition: opacity 0.4s ease;
   }
   #modal-overlay.active { opacity: 1; pointer-events: auto; }
   #modal-box {
     background: var(--color-bg-card);
     border-radius: 1.5rem;
-    width: 100%; max-width: 480px;
-    max-height: 90vh; overflow-y: auto;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90dvh;
+    overflow-y: auto;
     transform: translateY(24px) scale(0.96);
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    padding: 2rem;
+    padding: var(--space-xl);
   }
   #modal-overlay.active #modal-box { transform: translateY(0) scale(1); }
   .modal-scrollbar::-webkit-scrollbar { width: 4px; }
   .modal-scrollbar::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 999px; }
 
-  .progress-track { height: 4px; background: rgba(0,0,0,0.06); border-radius: 999px; overflow: hidden; }
+  .progress-track {
+    height: 4px;
+    background: rgba(0,0,0,0.06);
+    border-radius: 999px;
+    overflow: hidden;
+  }
   .progress-bar { height: 100%; background: var(--color-blue); border-radius: 999px; transition: width 0.5s ease; }
 
   .choice-btn {
-    width: 100%; text-align: left; padding: 0.9rem 1rem; border-radius: 0.9rem;
-    border: 1.5px solid rgba(0,0,0,0.08); font-size: clamp(0.85rem, 2vw, 0.95rem); font-weight: 500;
-    background: transparent; color: var(--color-text);
+    width: 100%;
+    text-align: left;
+    padding: 0.9rem 1rem;
+    border-radius: 0.9rem;
+    border: 1.5px solid rgba(0,0,0,0.08);
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+    font-weight: 500;
+    background: transparent;
+    color: var(--color-text);
     transition: all 0.25s ease;
-    display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
     cursor: pointer;
   }
   .choice-btn:hover { border-color: var(--color-blue); background: var(--color-blue-dim); }
@@ -761,92 +1127,151 @@
   .check-dot { opacity: 0; transform: scale(0.5); transition: all 0.25s ease; color: var(--color-blue); flex-shrink:0; }
 
   .field-input {
-    width: 100%; padding: 0.9rem 1rem; border-radius: 0.9rem;
-    border: 1.5px solid rgba(0,0,0,0.08); font-size: clamp(0.85rem, 2vw, 0.95rem);
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: 0.9rem;
+    border: 1.5px solid rgba(0,0,0,0.08);
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
     transition: border-color 0.25s ease;
-    background: var(--color-bg); color: var(--color-text);
+    background: var(--color-bg);
+    color: var(--color-text);
   }
   .field-input:focus { border-color: var(--color-blue); outline: none; }
   .field-input::placeholder { color: var(--color-text-muted); }
 
-  /* ===== FAB (único elemento verde da marca — botão de WhatsApp) ===== */
+  .consent-check {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-sm);
+  }
+  .consent-check input[type="checkbox"] {
+    margin-top: 0.15rem;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-blue);
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .consent-check a {
+    color: var(--color-blue);
+    text-decoration: none;
+  }
+  .consent-check a:hover { text-decoration: underline; }
+
+  /* ============================================================
+     FAB — ÚNICO ELEMENTO VERDE (WHATSAPP)
+     ============================================================ */
   #fab-whats {
-    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 60;
-    width: 56px; height: 56px; border-radius: 9999px;
-    background: var(--color-whats); color: #fff;
-    display: flex; align-items: center; justify-content: center;
+    position: fixed;
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+    z-index: 60;
+    width: 56px;
+    height: 56px;
+    border-radius: 9999px;
+    background: var(--color-whats);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-shadow: 0 8px 28px rgba(37, 211, 102, 0.40);
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
   }
-  #fab-whats:hover { background: var(--color-whats-hover); transform: scale(1.08); box-shadow: 0 12px 36px rgba(37, 211, 102, 0.50); }
+  #fab-whats:hover {
+    background: var(--color-whats-hover);
+    transform: scale(1.08);
+    box-shadow: 0 12px 36px rgba(37, 211, 102, 0.50);
+  }
   #fab-whats svg { width: 26px; height: 26px; }
-
-  /* ===== FOOTER ===== */
-  footer { border-top: 1px solid rgba(0,0,0,0.06); padding: 3rem 0; }
-
-  /* ===== RESPONSIVE ===== */
   @media (max-width: 640px) {
-    .section-padding { padding: 4.5rem 0; }
-    .pain-card { padding: 1.75rem 1.5rem; }
+    #fab-whats { width: 48px; height: 48px; bottom: var(--space-md); right: var(--space-md); }
+    #fab-whats svg { width: 22px; height: 22px; }
+  }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer { border-top: 1px solid rgba(0,0,0,0.06); padding: var(--space-2xl) 0; }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width: 640px) {
+    .section-padding { padding: var(--space-2xl) 0; }
+    .pain-card { padding: var(--space-lg) var(--space-md); }
     .btn-blue, .btn-whats, .btn-ghost, .btn-ghost-dark {
-      min-height: 48px; min-width: 160px; padding: 0.75rem 1.6rem; font-size: 0.85rem;
+      min-height: 48px;
+      min-width: 140px;
+      padding: 0.7rem var(--space-lg);
+      font-size: 0.85rem;
     }
-    .btn-ghost, .btn-ghost-dark { min-width: 140px; }
-    .cta-consultoria { padding: 2.5rem 1.75rem; }
+    .btn-ghost, .btn-ghost-dark { min-width: 120px; }
+    .cta-consultoria { padding: var(--space-xl) var(--space-md); }
     .chat-messages { min-height: 180px; max-height: 260px; }
     .founder-photo { aspect-ratio: 1/1; }
-    #fab-whats { width: 48px; height: 48px; bottom: 1rem; right: 1rem; }
-    #fab-whats svg { width: 22px; height: 22px; }
-    #modal-box { padding: 1.75rem; }
-    .service-card { padding: 1.5rem 1.25rem; }
+    #modal-box { padding: var(--space-lg); }
+    .service-card { padding: var(--space-lg) var(--space-md); }
     #chip-list .list-chip { font-size: 0.75rem; padding: 0.6rem 1.1rem; min-width: 140px; }
-    #chip-list { min-height: 240px; gap: 0.65rem; }
+    #chip-list { min-height: 220px; gap: 0.65rem; }
+    .nav-mobile-link { font-size: 1.2rem; }
+    .testimonial-card { padding: var(--space-lg); }
   }
 
   @media (min-width: 641px) and (max-width: 1023px) {
-    .section-padding { padding: 5.5rem 0; }
+    .section-padding { padding: var(--space-2xl) 0; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .reveal-up, .reveal-scale { opacity: 1 !important; transform: none !important; }
+    .reveal-up { opacity: 1 !important; transform: none !important; }
     .msg { animation: none !important; opacity: 1 !important; transform: none !important; }
     #chip-list .list-chip { transition: none !important; }
   }
 
-  /* ===== HERO MOBILE FIX ===== */
+  /* ============================================================
+     AJUSTES ESPECÍFICOS
+     ============================================================ */
   #hero { padding-top: 5rem; }
   @media (max-width: 640px) {
     #hero { padding-top: 6.5rem; padding-bottom: 3rem; }
     #hero .hero-title { font-size: 2.2rem; }
     #hero .hero-sub { font-size: 1rem; margin-top: 1.5rem; }
     #hero .hero-actions { margin-top: 2rem; gap: 0.75rem; }
+    #hero .hero-actions .btn-blue { width: 100%; min-width: auto; }
     #hero .hero-metrics { margin-top: 2.5rem; gap: 1rem; }
   }
   @media (min-width: 641px) and (max-width: 1023px) {
     #hero { padding-top: 6rem; }
   }
 
-  /* ===== ATENDIMENTO MOBILE FIX ===== */
-  #atendimento .atendimento-texts { gap: 1.75rem; }
-  #atendimento .atendimento-btn { margin-top: 2.25rem; }
+  #atendimento .atendimento-texts { gap: var(--space-lg); }
+  #atendimento .atendimento-btn { margin-top: var(--space-xl); }
   @media (max-width: 640px) {
-    #atendimento .atendimento-texts { gap: 1.5rem; }
-    #atendimento .atendimento-btn { margin-top: 2rem; }
-    #atendimento .atendimento-texts .flex { gap: 0.9rem; }
+    #atendimento .atendimento-texts { gap: var(--space-lg); }
+    #atendimento .atendimento-btn { margin-top: var(--space-lg); }
+    #atendimento .atendimento-texts .flex { gap: var(--space-sm); }
   }
 
-  /* ===== TRÁFEGO CARDS MOBILE FIX ===== */
   @media (max-width: 640px) {
-    #atração .trafego-card { padding: 1.75rem 1.5rem; }
-    #atração .trafego-grid { gap: 1.25rem; }
+    #atração .trafego-card { padding: var(--space-lg) var(--space-md); }
+    #atração .trafego-grid { gap: var(--space-md); }
+  }
+
+  /* Transição suave entre seções claro/escuro */
+  .sec-dark, .sec-light {
+    transition: background 0.6s ease;
   }
 </style>
 </head>
 <body>
 
-<!-- ===== NAV ===== -->
+<!-- ============================================================
+     NAVEGAÇÃO — FULL-WIDTH
+     ============================================================ -->
 <nav id="nav">
   <div class="nav-inner">
     <a href="#top" class="nav-logo">
@@ -860,40 +1285,43 @@
       <a href="#fechamento" class="nav-link">Fechamento</a>
       <a href="#fundadores" class="nav-link">Quem Somos</a>
       <a href="#servicos" class="nav-link">Serviços</a>
+      <a href="#depoimentos" class="nav-link">Depoimentos</a>
       <a href="#faq" class="nav-link">FAQ</a>
       <a href="#cta-final" class="nav-link nav-link-highlight">Formulário</a>
     </div>
 
     <div class="nav-actions">
       <button onclick="openModal()" class="nav-btn-cta">Falar com Especialista</button>
-      <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" onclick="toggleMobileNav()">
+      <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 
-  <!-- Painel do menu mobile: clica no botão acima e expande -->
+  <!-- Painel mobile — FULL SCREEN -->
   <div id="nav-mobile-panel" class="nav-mobile-panel">
+    <button id="nav-mobile-close" class="nav-mobile-close" aria-label="Fechar menu">✕</button>
     <a href="#atração" class="nav-mobile-link">Atração</a>
     <a href="#atendimento" class="nav-mobile-link">Atendimento</a>
     <a href="#fechamento" class="nav-mobile-link">Fechamento</a>
     <a href="#fundadores" class="nav-mobile-link">Quem Somos</a>
     <a href="#servicos" class="nav-mobile-link">Serviços</a>
+    <a href="#depoimentos" class="nav-mobile-link">Depoimentos</a>
     <a href="#faq" class="nav-mobile-link">FAQ</a>
-    <a href="#cta-final" class="nav-mobile-link nav-link-highlight">Formulário</a>
+    <a href="#cta-final" class="nav-mobile-link nav-mobile-link-highlight">Formulário</a>
     <div class="nav-mobile-cta-wrap">
-      <button onclick="openModal()" class="btn-blue" style="width:100%; min-width:auto;">
-        Falar com Especialista
-      </button>
+      <button onclick="openModal()" class="btn-blue">Falar com Especialista</button>
     </div>
   </div>
 </nav>
 
 <main id="top">
 
-  <!-- ===== HERO ===== -->
-  <section id="hero" class="sec-light relative min-h-screen flex items-center overflow-hidden">
-    <div class="glow-orb w-[500px] h-[500px] bg-[var(--color-blue)] -top-60 -left-60 opacity-10"></div>
+  <!-- ============================================================
+     HERO
+     ============================================================ -->
+  <section id="hero" class="sec-light relative min-h-[100dvh] flex items-center overflow-hidden">
+    <div class="glow-orb w-[500px] h-[500px] bg-[var(--color-blue)] -top-60 -left-60"></div>
 
     <div class="container relative">
       <div class="max-w-4xl">
@@ -919,8 +1347,8 @@
             <p class="text-sm text-[var(--color-text-muted)]">tempo médio de resposta</p>
           </div>
           <div>
-            <p class="font-display text-2xl font-semibold"><span class="counter" data-target="1">0</span> ecossistema</p>
-            <p class="text-sm text-[var(--color-text-muted)]">tráfego, atendimento e CRM</p>
+            <p class="font-display text-2xl font-semibold"><span class="counter" data-target="480">0</span>+ leads/mês</p>
+            <p class="text-sm text-[var(--color-text-muted)]">gerados para clientes</p>
           </div>
           <div>
             <p class="font-display text-2xl font-semibold"><span class="counter" data-target="3">0</span> sócios</p>
@@ -931,7 +1359,9 @@
     </div>
   </section>
 
-  <!-- ===== DIAGNÓSTICO ===== -->
+  <!-- ============================================================
+     DIAGNÓSTICO
+     ============================================================ -->
   <section id="diagnostico" class="sec-light section-padding">
     <div class="container">
       <div class="max-w-2xl">
@@ -977,16 +1407,10 @@
     </div>
   </section>
 
-  <!-- ===== CONVERGÊNCIA ===== -->
-  <section id="convergencia" class="sec-dark flex items-center justify-center">
-    <svg class="lines-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-      <line class="node-line" x1="50" y1="12" x2="50" y2="50" />
-      <line class="node-line" x1="84" y1="32" x2="50" y2="50" />
-      <line class="node-line" x1="72" y1="76" x2="50" y2="50" />
-      <line class="node-line" x1="28" y1="76" x2="50" y2="50" />
-      <line class="node-line" x1="16" y1="32" x2="50" y2="50" />
-    </svg>
-
+  <!-- ============================================================
+     CONVERGÊNCIA — simplificada, sem linhas
+     ============================================================ -->
+  <section id="convergencia" class="sec-dark">
     <!-- Chips desktop -->
     <div id="node-a" class="node-chip" style="top:14%; left:50%;">
       <i data-lucide="megaphone"></i> Tráfego Pago
@@ -1004,7 +1428,7 @@
       <i data-lucide="users"></i> Social Seller
     </div>
 
-    <!-- Lista mobile (fade in/out loop) -->
+    <!-- Lista mobile -->
     <div id="chip-list">
       <div class="list-chip" data-index="0"><i data-lucide="megaphone"></i> Tráfego Pago</div>
       <div class="list-chip" data-index="1"><i data-lucide="message-circle"></i> SDR</div>
@@ -1024,11 +1448,13 @@
     </div>
   </section>
 
-  <!-- ===== ATRAÇÃO ===== -->
+  <!-- ============================================================
+     ATRAÇÃO
+     ============================================================ -->
   <section id="atração" class="sec-light section-padding">
     <div class="container grid lg:grid-cols-12 gap-10 items-center">
       <div class="lg:col-span-5">
-        <p class="eyebrow eyebrow-blue reveal-up">Pilar 01 — Atração high-ticket</p>
+        <p class="eyebrow reveal-up">Pilar 01 — Atração high-ticket</p>
         <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
           Tráfego pago focado em compradores reais.
         </h2>
@@ -1056,9 +1482,11 @@
     </div>
   </section>
 
-  <!-- ===== ATENDIMENTO ===== -->
+  <!-- ============================================================
+     ATENDIMENTO
+     ============================================================ -->
   <section id="atendimento" class="sec-dark section-padding relative overflow-hidden">
-    <div class="glow-orb w-[400px] h-[400px] bg-[var(--color-blue)] top-1/4 -right-20 opacity-8"></div>
+    <div class="glow-orb w-[400px] h-[400px] bg-[var(--color-blue)] top-1/4 -right-20"></div>
     <div class="container grid lg:grid-cols-12 gap-10 items-center relative">
       <div class="lg:col-span-5 order-2 lg:order-1">
         <div class="split-photo-wrap reveal-up">
@@ -1090,18 +1518,20 @@
           </div>
         </div>
         <button onclick="openModal()" class="atendimento-btn btn-blue mt-6">
-          Ativar Minha Operação Comercial
+          Ativar Minha Operação
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </button>
       </div>
     </div>
   </section>
 
-  <!-- ===== FECHAMENTO ===== -->
+  <!-- ============================================================
+     FECHAMENTO
+     ============================================================ -->
   <section id="fechamento" class="sec-light section-padding">
     <div class="container grid lg:grid-cols-12 gap-10 items-center">
       <div class="lg:col-span-6">
-        <p class="eyebrow eyebrow-blue reveal-up">Pilar 03 — Tecnologia &amp; fechamento</p>
+        <p class="eyebrow reveal-up">Pilar 03 — Tecnologia &amp; fechamento</p>
         <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
           A estrutura de grandes players, na sua mão.
         </h2>
@@ -1142,16 +1572,18 @@
     </div>
   </section>
 
-  <!-- ===== COMO FUNCIONA ===== -->
+  <!-- ============================================================
+     COMO FUNCIONA — versão resumida (não repete os pilares)
+     ============================================================ -->
   <section id="como-funciona" class="sec-light section-padding">
     <div class="container">
       <div class="text-center max-w-3xl mx-auto mb-12">
-        <p class="eyebrow eyebrow-blue reveal-up">Como funciona</p>
+        <p class="eyebrow reveal-up">Como funciona</p>
         <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
-          Seu funil de vendas do zero ao resultado
+          Do diagnóstico à escala em 4 passos
         </h2>
         <p class="mt-3 text-[var(--color-text-muted)] text-[clamp(0.95rem,2.2vw,1.1rem)] leading-relaxed reveal-up">
-          Um processo claro e transparente, desenhado para escalar seu faturamento sem complicação.
+          Um processo claro, com um único responsável pelo resultado: nós.
         </p>
       </div>
 
@@ -1159,39 +1591,41 @@
         <div class="funil-step flex-1 reveal-up" data-delay="0">
           <div class="step-num">01</div>
           <div class="step-icon"><i data-lucide="target"></i></div>
-          <h3 class="font-display text-lg font-semibold mb-1">Atrair</h3>
-          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">Tráfego pago multicanal com criativos persuasivos.</p>
+          <h3 class="font-display text-lg font-semibold mb-1">Diagnóstico</h3>
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">Mapeamos seus canais, dores e gargalos em 15min.</p>
         </div>
         <div class="funil-connector">→</div>
         <div class="funil-step flex-1 reveal-up" data-delay="0.1">
           <div class="step-num">02</div>
           <div class="step-icon"><i data-lucide="users"></i></div>
-          <h3 class="font-display text-lg font-semibold mb-1">Qualificar</h3>
-          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">SDR humana filtra curiosos e foca em compradores.</p>
+          <h3 class="font-display text-lg font-semibold mb-1">Ativação</h3>
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">Colocamos tráfego, atendimento e CRM no ar.</p>
         </div>
         <div class="funil-connector">→</div>
         <div class="funil-step flex-1 reveal-up" data-delay="0.2">
           <div class="step-num">03</div>
           <div class="step-icon"><i data-lucide="phone"></i></div>
-          <h3 class="font-display text-lg font-semibold mb-1">Fechar</h3>
-          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">Closer especializado conduz a negociação e fecha.</p>
+          <h3 class="font-display text-lg font-semibold mb-1">Otimização</h3>
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">Ajustes diários de campanhas e abordagem comercial.</p>
         </div>
         <div class="funil-connector">→</div>
         <div class="funil-step flex-1 reveal-up" data-delay="0.3">
           <div class="step-num">04</div>
           <div class="step-icon"><i data-lucide="trending-up"></i></div>
-          <h3 class="font-display text-lg font-semibold mb-1">Escalar</h3>
-          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">CRM próprio com IA otimiza e multiplica resultados.</p>
+          <h3 class="font-display text-lg font-semibold mb-1">Escala</h3>
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">Multiplicamos resultados com base em dados reais.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== FUNDADORES ===== -->
+  <!-- ============================================================
+     FUNDADORES — com bio genérica
+     ============================================================ -->
   <section id="fundadores" class="sec-light section-padding">
     <div class="container">
       <div class="max-w-2xl mb-12">
-        <p class="eyebrow eyebrow-blue reveal-up">Quem assina a sua estratégia</p>
+        <p class="eyebrow reveal-up">Quem assina a sua estratégia</p>
         <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
           Estratégia revisada por sócios, não por estagiários.
         </h2>
@@ -1200,7 +1634,7 @@
         </p>
       </div>
 
-      <div class="grid sm:grid-cols-3 gap-8">
+      <div class="founders-grid">
         <div class="founder-card reveal-up" data-delay="0">
           <div class="founder-photo">
             <img src="https://raw.githubusercontent.com/closermatheus-creator/parhubagencia/main/foto2.png"
@@ -1211,7 +1645,8 @@
             </div>
           </div>
           <p class="font-display text-lg font-semibold">Matheus</p>
-          <p class="text-sm text-[var(--color-text-muted)]">Sócio-fundador</p>
+          <p class="founder-role">Sócio-fundador</p>
+          <p class="founder-bio">+8 anos de experiência em growth e operações comerciais para infoprodutores e clínicas.</p>
         </div>
         <div class="founder-card reveal-up" data-delay="0.1">
           <div class="founder-photo">
@@ -1223,7 +1658,8 @@
             </div>
           </div>
           <p class="font-display text-lg font-semibold">Ster</p>
-          <p class="text-sm text-[var(--color-text-muted)]">Sócia-fundadora</p>
+          <p class="founder-role">Sócia-fundadora</p>
+          <p class="founder-bio">Especialista em atendimento e experiência do cliente, com mais de 5 mil leads atendidos.</p>
         </div>
         <div class="founder-card reveal-up" data-delay="0.2">
           <div class="founder-photo">
@@ -1235,49 +1671,68 @@
             </div>
           </div>
           <p class="font-display text-lg font-semibold">Greg</p>
-          <p class="text-sm text-[var(--color-text-muted)]">Sócio-fundador</p>
+          <p class="founder-role">Sócio-fundador</p>
+          <p class="founder-bio">Gestor de tráfego com mais de R$ 5M investidos em Meta, Google e LinkedIn.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== CONVERSA ===== -->
+  <!-- ============================================================
+     CONVERSA — SPLIT DESKTOP
+     ============================================================ -->
   <section id="conversa" class="sec-light section-padding">
     <div class="container">
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <p class="eyebrow eyebrow-blue reveal-up">Atendimento real</p>
-        <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
-          Veja como seus leads serão atendidos
-        </h2>
-        <p class="mt-3 text-[var(--color-text-muted)] text-[clamp(0.95rem,2.2vw,1.1rem)] leading-relaxed reveal-up">
-          Respostas rápidas, humanas e focadas em qualificar — nunca mais perca uma venda por demora.
-        </p>
-      </div>
+      <div class="chat-split-wrapper">
+        <!-- Lado esquerdo: Chat -->
+        <div class="reveal-up">
+          <div class="chat-container">
+            <div class="chat-header">
+              <div class="chat-avatar">
+                <span>S</span>
+                <span class="online-dot"></span>
+              </div>
+              <div>
+                <div class="chat-name">Ster — Atendimento PAR HUB</div>
+                <div class="chat-status">Online agora • Responde em <5 min</div>
+              </div>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+          </div>
+        </div>
 
-      <div class="flex justify-center reveal-up">
-        <div class="chat-container w-full max-w-sm">
-          <div class="chat-header">
-            <div class="chat-avatar">
-              <span>S</span>
-              <span class="online-dot"></span>
-            </div>
-            <div>
-              <div class="chat-name">Ster — Atendimento PAR HUB</div>
-              <div class="chat-status">Online agora • Responde em <5 min</div>
-            </div>
-          </div>
-          <div class="chat-messages" id="chat-messages">
-          </div>
+        <!-- Lado direito: Texto -->
+        <div class="chat-split-content reveal-up" data-delay="0.2">
+          <p class="eyebrow">Atendimento real</p>
+          <h2 class="font-display text-[clamp(1.6rem,4vw,2.6rem)] font-medium tracking-tight leading-tight">
+            Veja como seus leads serão atendidos
+          </h2>
+          <p class="mt-4 text-[var(--color-text-muted)] text-[clamp(0.95rem,2.2vw,1.1rem)] leading-relaxed">
+            Respostas rápidas, humanas e focadas em qualificar — nunca mais perca uma venda por demora.
+          </p>
+
+          <ul class="chat-benefits">
+            <li><i data-lucide="check-circle"></i> +5 mil leads atendidos com sucesso</li>
+            <li><i data-lucide="check-circle"></i> 98% de satisfação dos clientes</li>
+            <li><i data-lucide="check-circle"></i> Resposta em menos de 5 minutos</li>
+          </ul>
+
+          <button onclick="openModal()" class="btn-blue mt-4">
+            Ativar Minha Operação
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== SERVIÇOS (NOVO) ===== -->
+  <!-- ============================================================
+     SERVIÇOS — 2 colunas no mobile
+     ============================================================ -->
   <section id="servicos" class="sec-light section-padding">
     <div class="container">
       <div class="text-center max-w-3xl mx-auto mb-14">
-        <p class="eyebrow eyebrow-blue reveal-up">Nossos serviços</p>
+        <p class="eyebrow reveal-up">Nossos serviços</p>
         <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
           Soluções completas para sua operação comercial
         </h2>
@@ -1292,7 +1747,7 @@
           <span>⚙️ Tecnologia &amp; Marketing</span>
           <span class="line"></span>
         </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="grid-2col-mobile sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="service-card">
             <div class="icon-wrap"><i data-lucide="target"></i></div>
             <h4 class="font-display font-semibold text-base">Tráfego Pago</h4>
@@ -1326,7 +1781,7 @@
           <span>💬 Atendimento</span>
           <span class="line"></span>
         </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="grid-2col-mobile sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="service-card">
             <div class="icon-wrap"><i data-lucide="message-circle"></i></div>
             <h4 class="font-display font-semibold text-base">Atendente Virtual</h4>
@@ -1356,30 +1811,58 @@
     </div>
   </section>
 
-  <!-- ===== CTA ===== -->
-  <section id="cta-final" class="sec-light section-padding">
+  <!-- ============================================================
+     DEPOIMENTOS — PROVA SOCIAL
+     ============================================================ -->
+  <section id="depoimentos" class="sec-light section-padding">
     <div class="container">
-      <div class="cta-consultoria reveal-up">
-        <p class="eyebrow eyebrow-blue">Sua operação sob medida</p>
-        <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight">
-          Não trabalhamos com planos engessados.
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <p class="eyebrow reveal-up">O que nossos clientes dizem</p>
+        <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight reveal-up">
+          Resultados reais, pessoas reais
         </h2>
-        <p class="mt-4 text-[clamp(0.95rem,2.2vw,1.1rem)] text-[var(--color-text-muted)] leading-relaxed max-w-2xl mx-auto">
-          Cada negócio tem um momento, um orçamento e uma dor diferente. Agende uma consultoria gratuita e desenhamos juntos a solução ideal para você.
+        <p class="mt-3 text-[var(--color-text-muted)] text-[clamp(0.95rem,2.2vw,1.1rem)] leading-relaxed reveal-up">
+          Histórias de quem transformou a operação comercial com a PAR HUB.
         </p>
-        <button onclick="openModal()" class="btn-blue mt-6">
-          Agendar Minha Consultoria Gratuita
-          <i data-lucide="arrow-right" class="w-4 h-4"></i>
-        </button>
-        <p class="mt-4 text-sm text-[var(--color-text-muted)]">Sem compromisso • Call rápida de 15 min com especialista</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="testimonial-card reveal-up" data-delay="0">
+          <div class="author-stars">★★★★★</div>
+          <p class="quote">
+            Minha mentoria tinha tráfego, mas as vendas não vinham. A PAR HUB estruturou o atendimento e em 30 dias minha conversão triplicou.
+          </p>
+          <p class="author">— Juliana M.</p>
+          <p class="author-role">Mentora de Marketing Digital</p>
+        </div>
+
+        <div class="testimonial-card reveal-up" data-delay="0.1">
+          <div class="author-stars">★★★★★</div>
+          <p class="quote">
+            Eu fazia tudo sozinha e estava esgotada. A PAR HUB assumiu a operação e hoje tenho uma equipe que cuida de tudo enquanto eu foco no que importa.
+          </p>
+          <p class="author">— Dra. Fernanda R.</p>
+          <p class="author-role">Clínica de Estética</p>
+        </div>
+
+        <div class="testimonial-card reveal-up" data-delay="0.2">
+          <div class="author-stars">★★★★★</div>
+          <p class="quote">
+            Contratei gestor de tráfego, SDR e atendente separados e era um caos. Com a PAR HUB, tudo integrado e o resultado apareceu em semanas.
+          </p>
+          <p class="author">— Rafael S.</p>
+          <p class="author-role">Infoprodutor</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== FAQ ===== -->
-  <section id="faq" class="sec-light section-padding" style="padding-top:0;">
+  <!-- ============================================================
+     FAQ — ANTES DO CTA
+     ============================================================ -->
+  <section id="faq" class="sec-light section-padding">
     <div class="container max-w-3xl">
-      <p class="eyebrow eyebrow-blue text-center mb-4 reveal-up">Perguntas frequentes</p>
+      <p class="eyebrow text-center mb-4 reveal-up">Perguntas frequentes</p>
       <h2 class="font-display text-[clamp(1.4rem,3.5vw,2.2rem)] font-medium tracking-tight leading-tight text-center mb-8 reveal-up">
         Antes de decidir, tire suas dúvidas.
       </h2>
@@ -1413,13 +1896,47 @@
           </button>
           <div class="faq-a">Os primeiros ajustes geram sinais em 2 a 3 semanas. A curva de escala consistente aparece a partir do segundo mês, dentro do ciclo de 90 dias.</div>
         </div>
+        <div class="faq-item reveal-up" data-delay="0.4">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Qual é o investimento mensal?
+            <i data-lucide="plus" class="faq-icon w-5 h-5"></i>
+          </button>
+          <div class="faq-a">Nossos planos são personalizados de acordo com a necessidade de cada negócio. O investimento começa a partir de R$ 989/mês para atendente virtual e pode chegar a uma operação completa com tráfego, SDR e CRM. Agende uma consultoria para receber uma proposta sob medida.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     CTA FINAL — FECHA A PÁGINA
+     ============================================================ -->
+  <section id="cta-final" class="sec-light section-padding">
+    <div class="container">
+      <div class="cta-consultoria reveal-up">
+        <p class="eyebrow">Sua operação sob medida</p>
+        <h2 class="font-display text-[clamp(1.6rem,4.5vw,2.6rem)] font-medium tracking-tight leading-tight">
+          Não trabalhamos com planos engessados.
+        </h2>
+        <p class="mt-4 text-[clamp(0.95rem,2.2vw,1.1rem)] text-[var(--color-text-muted)] leading-relaxed max-w-2xl mx-auto">
+          Cada negócio tem um momento, um orçamento e uma dor diferente. Agende uma consultoria gratuita e desenhamos juntos a solução ideal para você.
+        </p>
+        <div class="mt-4 text-sm text-[var(--color-text-muted)]">
+          <span class="font-medium">A partir de R$ 989/mês</span> — planos personalizados para cada realidade
+        </div>
+        <button onclick="openModal()" class="btn-blue mt-6">
+          Agendar Minha Consultoria Gratuita
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+        <p class="mt-4 text-sm text-[var(--color-text-muted)]">Sem compromisso • Call rápida de 15 min com especialista</p>
       </div>
     </div>
   </section>
 
 </main>
 
-<!-- ===== FOOTER ===== -->
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
 <footer class="sec-light">
   <div class="container flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
     <div>
@@ -1435,22 +1952,27 @@
       <a href="#fechamento" class="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Fechamento</a>
       <a href="#fundadores" class="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Quem Somos</a>
       <a href="#servicos" class="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Serviços</a>
+      <a href="#depoimentos" class="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Depoimentos</a>
       <a href="#faq" class="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">FAQ</a>
     </div>
     <p class="text-xs text-[var(--color-text-muted)]">© 2026 PAR HUB</p>
   </div>
 </footer>
 
-<!-- ===== FAB ===== -->
+<!-- ============================================================
+     FAB — WHATSAPP (ÚNICO ELEMENTO VERDE)
+     ============================================================ -->
 <button id="fab-whats" onclick="openModal()" aria-label="Falar no WhatsApp">
   <i data-lucide="message-circle"></i>
 </button>
 
-<!-- ===== MODAL ===== -->
+<!-- ============================================================
+     MODAL — com LGPD
+     ============================================================ -->
 <div id="modal-overlay" onclick="if(event.target===this) closeModal()">
   <div id="modal-box" class="modal-scrollbar">
     <div class="flex items-center justify-between mb-6">
-      <p class="eyebrow eyebrow-blue">Diagnóstico estratégico</p>
+      <p class="eyebrow">Diagnóstico estratégico</p>
       <button onclick="closeModal()" aria-label="Fechar" class="text-[var(--color-text-muted)] hover:text-[var(--color-text)]">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
@@ -1460,7 +1982,7 @@
       <div id="progress-bar" class="progress-bar" style="width:20%"></div>
     </div>
 
-    <form id="wizard-form">
+    <form id="wizard-form" onsubmit="return false;">
       <!-- Step 1 -->
       <div class="wizard-step" data-step="1">
         <h3 class="font-display text-xl font-semibold mb-1">Vamos começar</h3>
@@ -1473,6 +1995,13 @@
           <div>
             <label class="text-sm font-medium block mb-1.5">WhatsApp</label>
             <input type="tel" id="f-whats" class="field-input" placeholder="(31) 98494-3305" required />
+          </div>
+          <div class="consent-check">
+            <input type="checkbox" id="f-consent" required />
+            <label for="f-consent">
+              Concordo em receber contato da PAR HUB pelo WhatsApp e estou ciente da 
+              <a href="#" onclick="event.preventDefault(); alert('Política de Privacidade: Seus dados serão usados apenas para contato comercial e não serão compartilhados com terceiros.')">Política de Privacidade</a>.
+            </label>
           </div>
         </div>
       </div>
@@ -1526,37 +2055,53 @@
 </div>
 
 <script>
-  // ===== INICIALIZAR ÍCONES =====
+  // =============================================================
+  // INICIALIZAR ÍCONES
+  // =============================================================
   lucide.createIcons();
 
-  // ===== NAV SCROLL =====
+  // =============================================================
+  // NAV — SCROLL E MOBILE
+  // =============================================================
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 20);
   }, { passive: true });
 
-  // ===== NAV MOBILE (botão que clica e expande) =====
   const navToggle = document.getElementById('nav-toggle');
   const navPanel = document.getElementById('nav-mobile-panel');
+  const navClose = document.getElementById('nav-mobile-close');
 
   function toggleMobileNav() {
     const isOpen = navPanel.classList.toggle('open');
     navToggle.classList.toggle('active', isOpen);
     navToggle.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
   }
+
   function closeMobileNav() {
     navPanel.classList.remove('open');
     navToggle.classList.remove('active');
     navToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
   }
-  navPanel.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', closeMobileNav);
+
+  navToggle.addEventListener('click', toggleMobileNav);
+  if (navClose) navClose.addEventListener('click', closeMobileNav);
+
+  // Fecha ao clicar em um link (inclusive o botão do formulário)
+  navPanel.querySelectorAll('a, button').forEach((el) => {
+    el.addEventListener('click', closeMobileNav);
   });
+
+  // Fecha ao redimensionar para desktop
   window.addEventListener('resize', () => {
     if (window.innerWidth >= 1024) closeMobileNav();
   });
 
-  // ===== GSAP REVEALS =====
+  // =============================================================
+  // GSAP REVEALS
+  // =============================================================
   gsap.registerPlugin(ScrollTrigger);
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1573,19 +2118,9 @@
       });
     });
 
-    document.querySelectorAll('.reveal-scale').forEach((el) => {
-      const delay = parseFloat(el.dataset.delay) || 0;
-      gsap.to(el, {
-        opacity: 1,
-        scale: 1,
-        duration: 0.9,
-        delay: delay,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 88%' }
-      });
-    });
-
-    // ===== CONVERGÊNCIA (Desktop) =====
+    // =============================================================
+    // CONVERGÊNCIA — DESKTOP (sem linhas)
+    // =============================================================
     const mm = gsap.matchMedia();
     mm.add('(min-width: 768px)', () => {
       const tl = gsap.timeline({
@@ -1598,22 +2133,27 @@
         }
       });
       tl.to(['#node-a', '#node-b', '#node-c', '#node-d', '#node-e'], {
-        top: '50%', left: '50%', scale: 0.3, opacity: 0, stagger: 0.12, ease: 'power2.inOut'
+        top: '50%',
+        left: '50%',
+        scale: 0.3,
+        opacity: 0,
+        stagger: 0.12,
+        ease: 'power2.inOut'
       }, 0)
-      .to('.node-line', { opacity: 0, stagger: 0.08 }, 0.05)
       .to('#hub', { opacity: 1, scale: 1, duration: 0.6, ease: 'power2.out' }, 0.35);
     });
 
-    // ===== CHIP LIST (Mobile) =====
-    // Todos os itens surgem em sequência, ficam visíveis juntos, somem juntos, e repete.
+    // =============================================================
+    // CHIP LIST — MOBILE (sequência com fade in/out)
+    // =============================================================
     if (window.innerWidth < 768) {
       const chips = Array.from(document.querySelectorAll('#chip-list .list-chip'));
       const hub = document.getElementById('hub');
       const listContainer = document.getElementById('chip-list');
 
-      const STEP_DELAY = 450;   // intervalo entre cada chip surgindo
-      const HOLD_DELAY = 2200;  // tempo com todos visíveis antes de sumirem
-      const RESET_DELAY = 650;  // tempo com tudo escondido antes de recomeçar
+      const STEP_DELAY = 400;
+      const HOLD_DELAY = 2200;
+      const RESET_DELAY = 600;
 
       let isPaused = false;
       let timers = [];
@@ -1630,36 +2170,30 @@
 
       function runCycle() {
         clearTimers();
-
         if (isPaused) {
           timers.push(setTimeout(runCycle, 400));
           return;
         }
-
         resetAll();
 
-        // Revela cada chip, um de cada vez, mantendo os anteriores visíveis
         chips.forEach((chip, i) => {
           timers.push(setTimeout(() => {
             if (!isPaused) chip.classList.add('visible');
           }, i * STEP_DELAY));
         });
 
-        const afterAllChips = chips.length * STEP_DELAY + 350;
+        const afterAllChips = chips.length * STEP_DELAY + 300;
 
-        // Revela a mensagem central logo após o último chip
         timers.push(setTimeout(() => {
           if (hub && !isPaused) hub.classList.add('visible');
         }, afterAllChips));
 
-        // Depois de um tempo com tudo junto na tela, some tudo ao mesmo tempo
         const hideAt = afterAllChips + HOLD_DELAY;
         timers.push(setTimeout(() => {
           chips.forEach(c => { c.classList.remove('visible'); c.classList.add('hiding'); });
           if (hub) hub.classList.remove('visible');
         }, hideAt));
 
-        // Reinicia o loop
         const restartAt = hideAt + RESET_DELAY;
         timers.push(setTimeout(runCycle, restartAt));
       }
@@ -1676,7 +2210,9 @@
       runCycle();
     }
 
-    // ===== CONTADORES =====
+    // =============================================================
+    // CONTADORES
+    // =============================================================
     document.querySelectorAll('.counter').forEach(counter => {
       const target = parseInt(counter.dataset.target);
       ScrollTrigger.create({
@@ -1700,8 +2236,8 @@
     });
 
   } else {
-    // Fallback
-    document.querySelectorAll('.reveal-up, .reveal-scale').forEach(el => {
+    // Fallback para quem prefere reduzir movimento
+    document.querySelectorAll('.reveal-up').forEach(el => {
       el.style.opacity = '1';
       el.style.transform = 'none';
     });
@@ -1712,26 +2248,36 @@
     });
   }
 
-  // ===== CHAT (mais lento) =====
+  // =============================================================
+  // CHAT — CORRIGIDO (digitando substitui a mensagem)
+  // =============================================================
   const chatMessages = document.getElementById('chat-messages');
   const chatSequence = [
-    { type: 'user', text: 'Olá! Vi seu anúncio e quero saber mais sobre a mentoria. Vocês têm disponibilidade esta semana?' },
-    { type: 'typing', delay: 1800 },
-    { type: 'bot', text: 'Olá! Que bom que entrou em contato! Sim, temos horários disponíveis. Posso te ajudar com isso!' },
-    { type: 'typing', delay: 1500 },
-    { type: 'user', text: 'Quais dias e horários vocês têm?' },
+    { type: 'user', text: 'Olá! Quero saber mais sobre a mentoria de marketing digital. Vocês ainda têm vagas?' },
     { type: 'typing', delay: 1600 },
-    { type: 'bot', text: 'Temos quarta-feira às 14h e quinta-feira às 10h. Qual desses fica melhor para você?' },
+    { type: 'bot', text: 'Oi! Que bom que você entrou em contato! Sim, ainda temos algumas vagas para este mês. Posso te ajudar com isso!' },
+    { type: 'typing', delay: 1400 },
+    { type: 'user', text: 'Quais são os dias disponíveis para uma consultoria inicial?' },
     { type: 'typing', delay: 1500 },
-    { type: 'user', text: 'Quarta-feira às 14h é perfeito. Pode confirmar!' },
-    { type: 'typing', delay: 1800 },
-    { type: 'bot', text: 'Confirmado! Enviei os detalhes no seu WhatsApp. Estamos ansiosos para te atender! 🚀' },
+    { type: 'bot', text: 'Temos horários na quarta-feira às 14h e na quinta-feira às 10h. Qual desses se encaixa melhor na sua agenda?' },
+    { type: 'typing', delay: 1400 },
+    { type: 'user', text: 'Quarta-feira às 14h é perfeito. Pode confirmar?' },
+    { type: 'typing', delay: 1700 },
+    { type: 'bot', text: 'Confirmado! 🎉 Acabei de enviar os detalhes da consultoria no seu WhatsApp. Já vou te passar o link para a reunião. Estamos ansiosos para te atender!' },
   ];
 
   let chatIndex = 0;
   let isChatRunning = false;
+  let typingTimeout = null;
+
+  function removeTypingIndicator() {
+    const typing = chatMessages.querySelector('.msg-typing');
+    if (typing) typing.remove();
+  }
 
   function addMessage(type, text) {
+    removeTypingIndicator();
+
     const div = document.createElement('div');
     if (type === 'typing') {
       div.className = 'msg-typing';
@@ -1748,6 +2294,7 @@
     }
     chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
+    return div;
   }
 
   function runChatSequence() {
@@ -1760,21 +2307,26 @@
       }, 5000);
       return;
     }
+
     isChatRunning = true;
     const step = chatSequence[chatIndex];
+
     if (step.type === 'typing') {
+      removeTypingIndicator();
       addMessage('typing');
-      setTimeout(() => {
+      typingTimeout = setTimeout(() => {
         chatIndex++;
         isChatRunning = false;
         runChatSequence();
       }, step.delay);
     } else {
+      removeTypingIndicator();
       addMessage(step.type, step.text);
       chatIndex++;
       isChatRunning = false;
+
       const nextDelay = chatIndex < chatSequence.length ?
-        (chatSequence[chatIndex].type === 'typing' ? 400 : 1800) : 3500;
+        (chatSequence[chatIndex].type === 'typing' ? 400 : 1600) : 3000;
       setTimeout(runChatSequence, nextDelay);
     }
   }
@@ -1785,26 +2337,33 @@
         runChatSequence();
       }
     });
-  }, { threshold: 0.2 });
+  }, { threshold: 0.15 });
+
   const chatSection = document.getElementById('conversa');
   if (chatSection) chatObserver.observe(chatSection);
 
-  // ===== FAQ =====
+  // =============================================================
+  // FAQ
+  // =============================================================
   function toggleFaq(btn) {
     const item = btn.closest('.faq-item');
     const answer = item.querySelector('.faq-a');
     const isOpen = item.classList.contains('open');
+
     document.querySelectorAll('.faq-item.open').forEach(i => {
       i.classList.remove('open');
       i.querySelector('.faq-a').style.maxHeight = null;
     });
+
     if (!isOpen) {
       item.classList.add('open');
       answer.style.maxHeight = answer.scrollHeight + 'px';
     }
   }
 
-  // ===== MODAL WIZARD =====
+  // =============================================================
+  // MODAL WIZARD
+  // =============================================================
   const WHATS_NUMBER = '5531984943305';
   let currentStep = 1;
   const totalSteps = 4;
@@ -1814,6 +2373,7 @@
     document.getElementById('modal-overlay').classList.add('active');
     document.body.style.overflow = 'hidden';
   }
+
   function closeModal() {
     document.getElementById('modal-overlay').classList.remove('active');
     document.body.style.overflow = '';
@@ -1844,7 +2404,9 @@
     if (step === 1) {
       const nome = document.getElementById('f-nome').value.trim();
       const whats = document.getElementById('f-whats').value.trim();
+      const consent = document.getElementById('f-consent').checked;
       if (!nome || !whats) { flashInvalid(); return false; }
+      if (!consent) { alert('Por favor, concorde com a Política de Privacidade para continuar.'); return false; }
       return true;
     }
     if (step === 2 && !answers.perfil) { flashInvalid(); return false; }
@@ -1872,6 +2434,7 @@
     currentStep++;
     showStep(currentStep);
   }
+
   function wizardBack() {
     if (currentStep === 1) return;
     currentStep--;
@@ -1896,7 +2459,9 @@ Quero agendar minha consultoria!`;
     if (e.key === 'Escape') closeModal();
   });
 
-  // ===== URL TRIGGER =====
+  // =============================================================
+  // URL TRIGGER — abre o modal via link
+  // =============================================================
   window.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     if (params.get('abrir') === 'formulario' || window.location.hash === '#abrir-formulario') {
@@ -1904,7 +2469,9 @@ Quero agendar minha consultoria!`;
     }
   });
 
-  // ===== RECARREGAR ÍCONES =====
+  // =============================================================
+  // RECARREGAR ÍCONES
+  // =============================================================
   document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => lucide.createIcons(), 200);
   });
