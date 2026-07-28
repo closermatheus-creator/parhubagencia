@@ -1060,7 +1060,7 @@
   }
 
   /* ============================================================
-     FUNDADORES — Com texto sempre visível no mobile
+     FUNDADORES — Com modal ao clicar na foto
      ============================================================ */
   .founders-grid {
     display: grid;
@@ -1089,6 +1089,7 @@
     overflow: hidden;
     margin-bottom: 14px;
     background: var(--bg-elevated);
+    cursor: pointer;
   }
   .founder-photo {
     width: 100%;
@@ -1100,7 +1101,41 @@
   }
   .founder-card:hover .founder-photo { filter: grayscale(0); }
 
-  /* ===== HISTÓRIA (overlay no desktop, visível no mobile) ===== */
+  /* Ícone de clique na foto */
+  .founder-photo-wrap::after {
+    content: '👤';
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 14px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--transition);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .founder-photo-wrap:hover::after {
+    opacity: 1;
+  }
+  @media (max-width: 820px) {
+    .founder-photo-wrap::after {
+      opacity: 1;
+      background: rgba(0,0,0,0.3);
+      font-size: 12px;
+      width: 26px;
+      height: 26px;
+      bottom: 6px;
+      right: 6px;
+    }
+  }
+
+  /* Story que aparece no hover (desktop) */
   .founder-story {
     position: absolute;
     inset: 0;
@@ -1111,6 +1146,7 @@
     opacity: 0;
     transform: translateY(6px);
     transition: opacity var(--transition), transform var(--transition);
+    pointer-events: none;
   }
   .founder-card:hover .founder-story,
   .founder-card:focus-within .founder-story {
@@ -1123,7 +1159,7 @@
     color: var(--text-primary);
   }
 
-  /* ===== MOBILE: história sempre visível ===== */
+  /* Mobile: story sempre visível */
   @media (max-width: 820px) {
     .founder-story {
       position: relative;
@@ -1170,6 +1206,75 @@
     .founder-card h4 { font-size: 15px; }
     .founder-card p { font-size: 12.5px; }
     .founder-story p { font-size: 12px; }
+  }
+
+  /* ============================================================
+     MODAL DO FUNDADOR
+     ============================================================ */
+  .modal-founder {
+    max-width: 560px;
+    padding: 32px;
+  }
+  .modal-founder .founder-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+  .modal-founder .founder-modal-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-champagne);
+    flex-shrink: 0;
+    background: var(--bg-primary);
+  }
+  .modal-founder .founder-modal-name {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .modal-founder .founder-modal-role {
+    font-size: 13px;
+    color: var(--champagne);
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+  }
+  .modal-founder .founder-modal-bio {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+  .modal-founder .founder-modal-bio::-webkit-scrollbar {
+    width: 3px;
+  }
+  .modal-founder .founder-modal-bio::-webkit-scrollbar-thumb {
+    background: var(--border-champagne);
+    border-radius: 100px;
+  }
+  .modal-founder .founder-modal-bio strong {
+    color: var(--text-primary);
+  }
+  .modal-founder .founder-modal-bio .highlight {
+    color: var(--champagne);
+  }
+  .modal-founder .founder-modal-bio p {
+    margin-bottom: 12px;
+  }
+  .modal-founder .founder-modal-bio p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 640px) {
+    .modal-founder { padding: 22px; }
+    .modal-founder .founder-modal-header { gap: 14px; }
+    .modal-founder .founder-modal-avatar { width: 52px; height: 52px; }
+    .modal-founder .founder-modal-name { font-size: 17px; }
+    .modal-founder .founder-modal-bio { font-size: 13px; max-height: 50vh; }
   }
 
   /* ============================================================
@@ -1461,7 +1566,7 @@
   }
 
   /* ============================================================
-     MODAL
+     MODAL BASE
      ============================================================ */
   .modal-overlay {
     position: fixed;
@@ -1509,6 +1614,7 @@
     color: var(--text-primary);
     border-color: var(--border-champagne);
   }
+
   .progress-bar {
     height: 2px;
     background: var(--border-soft);
@@ -1912,45 +2018,55 @@
     </div>
   </section>
 
-  <!-- ===== FUNDADORES — COM TEXTO VISÍVEL NO MOBILE ===== -->
+  <!-- ===== FUNDADORES — COM MODAL AO CLICAR NA FOTO ===== -->
   <section>
     <div class="wrap">
       <div class="section-head reveal">
         <div class="eyebrow">Quem assina sua estratégia</div>
         <h2 class="section-title">Cada sócio cuida da sua especialidade para resolver seu gargalo.</h2>
-        <p style="color:var(--text-secondary); margin-top:12px; font-size:14.5px;">Sua estratégia é desenhada e revisada semanalmente pelos nossos sócios-fundadores.</p>
+        <p style="color:var(--text-secondary); margin-top:12px; font-size:14.5px;">Clique na foto de cada sócio para conhecer sua história completa.</p>
       </div>
       <div class="founders-grid reveal">
         <div class="founder-card" tabindex="0">
-          <div class="founder-photo-wrap">
+          <div class="founder-photo-wrap" data-founder="matheus">
             <img class="founder-photo" src="https://raw.githubusercontent.com/closermatheus-creator/parhubagencia/main/foto2.png" alt="Matheus" loading="lazy" decoding="async">
-            <div class="founder-story"><p>Depois de anos fechando venda de mentoria, decidiu que a solução era assumir a operação inteira. Nasceu o Método PAR.</p></div>
+            <div class="founder-story"><p>Fundador e criador do Método PAR. Especialista em tráfego pago, fechamento e estruturação de operações digitais.</p></div>
           </div>
-          <h4>Matheus</h4>
+          <h4>Matheus Santos</h4>
           <div class="founder-role">Sócio-fundador</div>
           <p>+8 anos em growth e operações comerciais para infoprodutores e clínicas.</p>
         </div>
+
         <div class="founder-card" tabindex="0">
-          <div class="founder-photo-wrap">
+          <div class="founder-photo-wrap" data-founder="ster">
             <img class="founder-photo" src="https://raw.githubusercontent.com/closermatheus-creator/parhubagencia/main/foto01.png" alt="Ster" loading="lazy" decoding="async">
-            <div class="founder-story"><p>Entendeu que venda não se perde por preço — se perde por demora. Treina cada atendente pra tratar o "oi" como o momento mais importante.</p></div>
+            <div class="founder-story"><p>Especialista em atendimento, prospecção estratégica e desenvolvimento de automações comerciais.</p></div>
           </div>
-          <h4>Ster</h4>
+          <h4>Sther Peixoto</h4>
           <div class="founder-role">Sócia-fundadora</div>
           <p>Especialista em atendimento, com mais de 5 mil leads atendidos.</p>
         </div>
+
         <div class="founder-card" tabindex="0">
-          <div class="founder-photo-wrap">
-            <img class="founder-photo" src="https://raw.githubusercontent.com/closermatheus-creator/parhubagencia/main/greg.png" alt="Greg" loading="lazy" decoding="async">
-            <div class="founder-story"><p>Aprendeu que criativo bonito sem funil de atendimento é dinheiro jogado fora. Só sobe campanha depois de garantir resposta em minutos.</p></div>
+          <div class="founder-photo-wrap" data-founder="greg">
+            <img class="founder-photo" src="https://raw.githubusercontent.com/closermatheus-creator/parhubagencia/main/Greg.png" alt="Greg" loading="lazy" decoding="async">
+            <div class="founder-story"><p>Especialista em gestão, implantação e otimização de operações empresariais.</p></div>
           </div>
-          <h4>Greg</h4>
+          <h4>Gregue</h4>
           <div class="founder-role">Sócio-fundador</div>
-          <p>Gestor de tráfego com mais de R$ 5M investidos em Meta, Google e LinkedIn.</p>
+          <p>Gestor de operações com mais de 50 empresas implantadas no setor industrial.</p>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- ===== MODAL DO FUNDADOR ===== -->
+  <div class="modal-overlay" id="founder-modal">
+    <div class="modal modal-founder">
+      <button class="modal-close" id="founder-modal-close">✕</button>
+      <div id="founder-modal-content"></div>
+    </div>
+  </div>
 
   <!-- ===== DEPOIMENTOS ===== -->
   <section id="depoimentos">
@@ -2036,7 +2152,7 @@
 </footer>
 
 <!-- ============================================================
-     MODAL
+     MODAL DO WIZARD
      ============================================================ -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal">
@@ -2356,6 +2472,111 @@
       item.classList.toggle('open');
     });
     list.appendChild(item);
+  });
+})();
+
+/* ==============================================================
+   MODAL DO FUNDADOR — Histórias completas
+   ============================================================== */
+(function() {
+  const modal = document.getElementById('founder-modal');
+  const content = document.getElementById('founder-modal-content');
+  const closeBtn = document.getElementById('founder-modal-close');
+
+  const foundersData = {
+    matheus: {
+      name: 'Matheus Santos',
+      role: 'Sócio-fundador',
+      avatar: 'https://raw.githubusercontent.com/closermatheus-creator/parhubagencia/main/foto2.png',
+      bio: `<p><strong>Matheus Santos</strong>, de Belo Horizonte, é o fundador e criador do Método PAR.</p>
+
+<p>Desenvolvedor de Sistemas, Gestor de Tráfego Pago, Closer Sênior e Fundador da ParHub Agência. Com 28 anos, construiu sua trajetória unindo tecnologia, marketing e vendas para desenvolver estratégias que geram crescimento previsível para empresas e especialistas.</p>
+
+<p>Sua atuação começou no <strong>marketing político</strong> e na gestão de campanhas para negócios locais, onde adquiriu uma visão aprofundada sobre posicionamento, aquisição de clientes e geração de resultados.</p>
+
+<p>Hoje, concentra sua atuação na estruturação e escalabilidade de operações digitais para <strong>mentores, consultores e especialistas</strong> que comercializam mentorias high ticket. Desenvolve estratégias de tráfego pago orientadas por dados, constrói funis de aquisição de clientes e otimiza processos comerciais para aumentar a previsibilidade das vendas.</p>
+
+<p>Além da expertise em marketing, atua como <strong>Closer Sênior</strong>, participando de operações de alta performance em agências de marketing, mentorias high ticket e empresas de soluções empresariais.</p>
+
+<p>Acredita que a combinação entre <strong>tecnologia, estratégia e desenvolvimento humano</strong> é o caminho para construir empresas mais eficientes e escaláveis. Atualmente em formação em Programação Neurolinguística (PNL) pelo Instituto Lucas Naves e na formação Closer Águia, da FullSales.</p>
+
+<p><span class="highlight">Seu propósito</span> é ajudar empresas e especialistas a estruturarem operações capazes de crescer com previsibilidade, eficiência e resultados consistentes.</p>`
+    },
+    ster: {
+      name: 'Sther Peixoto',
+      role: 'Sócia-fundadora',
+      avatar: 'https://raw.githubusercontent.com/closermatheus-creator/parhubagencia/main/foto01.png',
+      bio: `<p><strong>Sther Peixoto</strong>, aos 25 anos, vem construindo uma trajetória focada em atendimento comercial, prospecção estratégica e desenvolvimento de soluções para empresas que desejam crescer de forma estruturada.</p>
+
+<p>Especializada pela <strong>Full Sales</strong> nas áreas de <strong>SDR</strong> e <strong>Social Seller</strong>, desenvolveu expertise em processos de captação de clientes, qualificação de leads e relacionamento comercial, atuando tanto em operações outbound quanto inbound.</p>
+
+<p>Sua atuação é orientada por <strong>processos, comunicação estratégica e foco na geração de oportunidades qualificadas</strong> para as equipes de vendas.</p>
+
+<p>Atualmente, amplia sua formação nas áreas de <strong>desenvolvimento de automações</strong> e <strong>desenvolvimento Front-end</strong>, integrando conhecimentos de tecnologia e comercial para criar processos mais inteligentes, escaláveis e eficientes.</p>
+
+<p>Natural do Rio de Janeiro, Sther acredita que a combinação entre <strong>tecnologia, atendimento humanizado e estratégia comercial</strong> é um dos principais diferenciais para empresas que desejam aumentar sua produtividade e entregar uma experiência de excelência aos seus clientes.</p>
+
+<p><span class="highlight">Seu compromisso</span> é desenvolver soluções que conectem pessoas, processos e tecnologia, contribuindo para operações comerciais mais organizadas, previsíveis e orientadas por resultados.</p>`
+    },
+    greg: {
+      name: 'Gregue',
+      role: 'Sócio-fundador',
+      avatar: 'https://raw.githubusercontent.com/closermatheus-creator/parhubagencia/main/Greg.png',
+      bio: `<p><strong>Gregue</strong>, natural de Betim, é cofundador da ParHub Agência, administrador formado pela PUC Minas e especialista em gestão, implantação e otimização de operações empresariais.</p>
+
+<p>Atuou principalmente no setor industrial, com destaque para a <strong>indústria vidreira</strong>, na implantação do sistema WGGlass em mais de <strong>50 empresas brasileiras</strong>, acompanhando todas as etapas do processo, desde o planejamento até a consolidação da operação.</p>
+
+<p>Essa experiência proporcionou uma visão ampla sobre <strong>gestão, produtividade, controle de processos e tomada de decisão baseada em dados</strong>.</p>
+
+<p>Como gestor industrial, liderou equipes em operações de grande porte, alcançando resultados como <strong>redução de retrabalho em até 60%</strong>, aumento da produtividade, melhoria dos fluxos operacionais e fortalecimento da cultura de gestão por indicadores.</p>
+
+<p>Na ParHub, aplica essa experiência para desenvolver soluções que ajudam empresas a crescer com <strong>organização, inovação e eficiência</strong>.</p>
+
+<p>Acredita que resultados sustentáveis são construídos por meio de <strong>planejamento, processos bem definidos, tecnologia e execução disciplinada</strong>.</p>
+
+<p><span class="highlight">Seu propósito</span> é transformar desafios em oportunidades de crescimento.</p>`
+    }
+  };
+
+  function openFounderModal(id) {
+    const data = foundersData[id];
+    if (!data) return;
+
+    content.innerHTML = `
+      <div class="founder-modal-header">
+        <img class="founder-modal-avatar" src="${data.avatar}" alt="${data.name}" loading="lazy">
+        <div>
+          <div class="founder-modal-name">${data.name}</div>
+          <div class="founder-modal-role">${data.role}</div>
+        </div>
+      </div>
+      <div class="founder-modal-bio">${data.bio}</div>
+    `;
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeFounderModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Clique nas fotos
+  document.querySelectorAll('[data-founder]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      const id = el.dataset.founder;
+      openFounderModal(id);
+    });
+  });
+
+  // Fechar modal
+  closeBtn.addEventListener('click', closeFounderModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeFounderModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeFounderModal();
   });
 })();
 
