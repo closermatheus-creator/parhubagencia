@@ -1,0 +1,2537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>PAR HUB × Dra. Maria Clara Reis — Proposta Comercial</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ============================================================
+                   1. RESET E BASE
+                   ============================================================ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #f7f4f0;
+            --bg-card: #ffffff;
+            --text: #1c1c1c;
+            --text-secondary: #5a554a;
+            --text-muted: #8c8275;
+            --gold: #c69c6d;
+            --gold-light: #dab488;
+            --gold-pale: rgba(198, 156, 109, 0.10);
+            --wine: #7a2e3b;
+            --border: rgba(26, 26, 26, 0.06);
+            --border-strong: rgba(26, 26, 26, 0.10);
+            --radius: 12px;
+            --maxw: 1100px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 500;
+            letter-spacing: -0.025em;
+            margin: 0;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            height: auto;
+        }
+
+        .wrap {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        @media (min-width: 768px) {
+            .wrap {
+                padding: 0 40px;
+            }
+        }
+
+        /* ============================================================
+                   2. UTILITÁRIOS
+                   ============================================================ */
+        .section {
+            padding: 60px 0;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .section {
+                padding: 100px 0;
+            }
+        }
+
+        .eyebrow {
+            font-size: 9px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .eyebrow {
+                font-size: 10px;
+                gap: 12px;
+            }
+        }
+
+        .eyebrow::before,
+        .eyebrow::after {
+            content: "";
+            width: 18px;
+            height: 1px;
+            background: var(--gold);
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 768px) {
+            .eyebrow::before,
+            .eyebrow::after {
+                width: 24px;
+            }
+        }
+
+        .eyebrow.center {
+            justify-content: center;
+        }
+        .eyebrow.center::before,
+        .eyebrow.center::after {
+            width: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .eyebrow.center::before,
+            .eyebrow.center::after {
+                width: 20px;
+            }
+        }
+
+        .tag {
+            font-size: 8.5px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            border: 1px solid var(--gold-pale);
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-weight: 500;
+            background: var(--gold-pale);
+            display: inline-block;
+        }
+
+        @media (min-width: 768px) {
+            .tag {
+                font-size: 9.5px;
+                padding: 2px 14px;
+            }
+        }
+
+        .tag.wine {
+            color: var(--wine);
+            border-color: rgba(122, 46, 59, 0.12);
+            background: rgba(122, 46, 59, 0.04);
+        }
+
+        /* ============================================================
+                   3. REVELAÇÃO (SCROLL)
+                   ============================================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
+                transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .reveal.in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================================
+                   4. NAVEGAÇÃO (COM HAMBÚRGUER)
+                   ============================================================ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(247, 244, 240, 0.92);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+            height: 56px;
+            display: flex;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            nav {
+                height: 60px;
+            }
+        }
+
+        nav.scrolled {
+            background: rgba(247, 244, 240, 0.97);
+            box-shadow: 0 1px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .nav-inner {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 0 16px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        @media (min-width: 768px) {
+            .nav-inner {
+                padding: 0 32px;
+            }
+        }
+
+        .brand {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        @media (min-width: 768px) {
+            .brand {
+                font-size: 17px;
+            }
+        }
+
+        .brand span {
+            color: var(--gold);
+        }
+
+        /* Menu Desktop */
+        .nav-links {
+            display: none;
+            gap: 24px;
+            font-size: 12.5px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        @media (min-width: 820px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-links a {
+            opacity: 0.5;
+            transition: opacity 0.25s ease;
+        }
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .nav-cta {
+            display: none;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 5px 18px;
+            border-radius: 6px;
+            font-size: 12.5px;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            letter-spacing: 0.02em;
+        }
+
+        @media (min-width: 820px) {
+            .nav-cta {
+                display: inline-block;
+            }
+        }
+
+        .nav-cta:hover {
+            background: var(--gold);
+            color: #fff;
+        }
+
+        /* Menu Hamburguer */
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            z-index: 101;
+        }
+
+        @media (min-width: 820px) {
+            .menu-toggle {
+                display: none;
+            }
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 4px);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(4px, -4px);
+        }
+
+        /* Menu Mobile */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg);
+            z-index: 99;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            padding: 40px;
+        }
+
+        .mobile-menu.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu a {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text);
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            opacity: 1;
+        }
+
+        .mobile-menu .mobile-cta {
+            margin-top: 16px;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 10px 32px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* ============================================================
+                   5. HERO — PRIMEIRA DOBRA
+                   ============================================================ */
+        .hero {
+            padding-top: 80px;
+            padding-bottom: 40px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--bg);
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                padding-top: 100px;
+                padding-bottom: 60px;
+            }
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1.2fr 0.8fr;
+                gap: 48px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-grid {
+                gap: 56px;
+            }
+        }
+
+        .hero-content h1 {
+            font-size: clamp(28px, 7vw, 48px);
+            line-height: 1.04;
+            margin-top: 12px;
+            letter-spacing: -0.035em;
+            font-weight: 550;
+        }
+
+        @media (min-width: 768px) {
+            .hero-content h1 {
+                font-size: clamp(34px, 5vw, 48px);
+                margin-top: 16px;
+            }
+        }
+
+        .hero-content h1 .highlight {
+            color: var(--gold);
+        }
+
+        .hero-content p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-top: 14px;
+            max-width: 100%;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        @media (min-width: 768px) {
+            .hero-content p {
+                font-size: 17px;
+                margin-top: 18px;
+                max-width: 48ch;
+            }
+        }
+
+        .hero-photo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-photo .photo-frame {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--gold-pale);
+            box-shadow: 0 8px 32px rgba(198, 156, 109, 0.10);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        @media (min-width: 480px) {
+            .hero-photo .photo-frame {
+                width: 220px;
+                height: 220px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .hero-photo .photo-frame {
+                width: 260px;
+                height: 260px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-photo .photo-frame {
+                width: 280px;
+                height: 280px;
+            }
+        }
+
+        .hero-photo .photo-frame:hover {
+            transform: scale(1.02);
+            box-shadow: 0 16px 56px rgba(198, 156, 109, 0.18);
+        }
+
+        .hero-photo .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 24px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-strong);
+        }
+
+        @media (min-width: 768px) {
+            .hero-stats {
+                gap: 40px;
+                margin-top: 32px;
+                padding-top: 28px;
+            }
+        }
+
+        .hero-stat .num {
+            font-size: 24px;
+            font-weight: 550;
+            color: var(--gold);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        @media (min-width: 768px) {
+            .hero-stat .num {
+                font-size: 30px;
+            }
+        }
+
+        .hero-stat .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+            font-weight: 450;
+            letter-spacing: 0.02em;
+        }
+
+        @media (min-width: 768px) {
+            .hero-stat .label {
+                font-size: 12.5px;
+            }
+        }
+
+        /* ============================================================
+                   6. ECOSSISTEMA — SEGUNDA DOBRA
+                   ============================================================ */
+        .ecosystem {
+            background: var(--bg);
+            padding: 48px 0 60px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .ecosystem {
+                padding: 80px 0;
+            }
+        }
+
+        .eco-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        @media (min-width: 768px) {
+            .eco-header {
+                margin: 0 auto 48px;
+            }
+        }
+
+        .eco-header h2 {
+            font-size: clamp(24px, 5.5vw, 36px);
+            margin-top: 10px;
+            letter-spacing: -0.03em;
+            font-weight: 550;
+        }
+
+        @media (min-width: 768px) {
+            .eco-header h2 {
+                font-size: clamp(28px, 3.6vw, 40px);
+                margin-top: 14px;
+            }
+        }
+
+        .eco-header h2 span {
+            color: var(--gold);
+        }
+
+        .eco-header p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 8px;
+            line-height: 1.7;
+            font-weight: 400;
+            padding: 0 4px;
+        }
+
+        @media (min-width: 768px) {
+            .eco-header p {
+                font-size: 16px;
+                margin-top: 10px;
+            }
+        }
+
+        /* Linha do tempo - mobile */
+        .journey {
+            position: relative;
+            padding: 10px 0;
+        }
+
+        @media (min-width: 768px) {
+            .journey {
+                padding: 20px 0 10px;
+            }
+        }
+
+        .journey::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, #d4c8bd 4%, #d4c8bd 96%, transparent);
+            opacity: 0.25;
+        }
+
+        @media (min-width: 768px) {
+            .journey::before {
+                opacity: 0.3;
+            }
+        }
+
+        .journey-item {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 6px;
+            position: relative;
+            padding: 16px 0;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .journey-item {
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+                padding: 20px 0;
+                text-align: inherit;
+            }
+        }
+
+        .journey-item.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .journey-item .dot {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .journey-item .dot {
+                display: block;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: var(--gold);
+                border: 2px solid var(--bg);
+                box-shadow: 0 0 0 3px rgba(198, 156, 109, 0.12);
+                z-index: 2;
+                opacity: 0;
+                transition: opacity 0.6s ease;
+            }
+            .journey-item.revealed .dot {
+                opacity: 1;
+            }
+        }
+
+        .journey-item .left {
+            padding: 0 4px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .journey-item .left {
+                padding-right: 48px;
+                text-align: right;
+                align-items: flex-end;
+            }
+        }
+
+        .journey-item .right {
+            padding: 0 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .journey-item .right {
+                padding-left: 48px;
+                align-items: flex-start;
+                text-align: left;
+            }
+        }
+
+        .journey-item .step {
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        @media (min-width: 768px) {
+            .journey-item .step {
+                font-size: 11px;
+            }
+        }
+
+        .journey-item h3 {
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            margin-top: 2px;
+            color: var(--text);
+        }
+
+        @media (min-width: 768px) {
+            .journey-item h3 {
+                font-size: clamp(18px, 2vw, 22px);
+                margin-top: 4px;
+            }
+        }
+
+        .journey-item p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 100%;
+            font-weight: 400;
+        }
+
+        @media (min-width: 768px) {
+            .journey-item p {
+                font-size: 14px;
+                max-width: 320px;
+            }
+        }
+
+        .journey-item .right p {
+            margin: 0 auto;
+        }
+        .journey-item .left p {
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .journey-item .right p {
+                margin-left: 0;
+            }
+            .journey-item .left p {
+                margin-right: 0;
+            }
+        }
+
+        /* Itens alternados - desktop */
+        @media (min-width: 768px) {
+            .journey-item:nth-child(odd) .left {
+                grid-column: 1;
+            }
+            .journey-item:nth-child(odd) .right {
+                grid-column: 2;
+            }
+
+            .journey-item:nth-child(even) .left {
+                grid-column: 2;
+                padding-left: 48px;
+                padding-right: 0;
+                text-align: left;
+                align-items: flex-start;
+            }
+
+            .journey-item:nth-child(even) .right {
+                grid-column: 1;
+                padding-right: 48px;
+                padding-left: 0;
+                align-items: flex-end;
+                text-align: right;
+            }
+
+            .journey-item:nth-child(even) .right p {
+                margin-left: 0;
+            }
+            .journey-item:nth-child(even) .left p {
+                margin-right: 0;
+            }
+        }
+
+        /* Destaque: Alinhamento Comercial */
+        .journey-item.highlight {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: var(--radius);
+            padding: 20px 12px;
+            margin: 6px 0;
+            border: 1px solid rgba(198, 156, 109, 0.08);
+        }
+
+        @media (min-width: 768px) {
+            .journey-item.highlight {
+                padding: 28px 0;
+                margin: 8px 0;
+            }
+            .journey-item.highlight .left,
+            .journey-item.highlight .right {
+                padding-left: 56px;
+                padding-right: 56px;
+            }
+            .journey-item.highlight .left {
+                text-align: center;
+                align-items: center;
+            }
+            .journey-item.highlight .right {
+                text-align: center;
+                align-items: center;
+            }
+        }
+
+        .journey-item.highlight h3 {
+            color: var(--wine);
+        }
+        .journey-item.highlight .step {
+            color: var(--wine);
+        }
+
+        @media (min-width: 768px) {
+            .journey-item.highlight .dot {
+                background: var(--wine);
+                box-shadow: 0 0 0 3px rgba(122, 46, 59, 0.10);
+            }
+        }
+
+        /* ============================================================
+                   7. PROJEÇÃO DE CONVERSÃO (10%, 20%, 30%)
+                   ============================================================ */
+        .projection-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 28px;
+            padding: 20px 16px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius);
+            border: 1px solid rgba(198, 156, 109, 0.06);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: all 0.8s ease;
+        }
+
+        @media (min-width: 480px) {
+            .projection-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 16px;
+                padding: 24px 20px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .projection-grid {
+                gap: 20px;
+                margin-top: 40px;
+                padding: 28px 36px;
+            }
+        }
+
+        .projection-grid.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .projection-grid .p-item .num {
+            font-size: clamp(28px, 6vw, 40px);
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        @media (min-width: 768px) {
+            .projection-grid .p-item .num {
+                font-size: clamp(32px, 3.4vw, 44px);
+            }
+        }
+
+        .projection-grid .p-item .num small {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        @media (min-width: 768px) {
+            .projection-grid .p-item .num small {
+                font-size: 18px;
+            }
+        }
+
+        .projection-grid .p-item .label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            font-weight: 450;
+            letter-spacing: 0.02em;
+            line-height: 1.3;
+        }
+
+        @media (min-width: 768px) {
+            .projection-grid .p-item .label {
+                font-size: 13px;
+                margin-top: 6px;
+            }
+        }
+
+        .projection-grid .p-item .revenue {
+            font-size: 13px;
+            font-weight: 550;
+            color: var(--wine);
+            margin-top: 3px;
+            letter-spacing: -0.01em;
+        }
+
+        @media (min-width: 768px) {
+            .projection-grid .p-item .revenue {
+                font-size: 15px;
+                margin-top: 4px;
+            }
+        }
+
+        .projection-grid .p-item .revenue small {
+            font-size: 10px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        @media (min-width: 768px) {
+            .projection-grid .p-item .revenue small {
+                font-size: 12px;
+            }
+        }
+
+        .projection-grid .p-item.highlight .num {
+            color: var(--wine);
+            font-size: clamp(32px, 7vw, 44px);
+        }
+
+        @media (min-width: 768px) {
+            .projection-grid .p-item.highlight .num {
+                font-size: clamp(36px, 3.8vw, 48px);
+            }
+        }
+
+        .projection-grid .p-item.highlight .revenue {
+            color: var(--wine);
+            font-size: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .projection-grid .p-item.highlight .revenue {
+                font-size: 17px;
+            }
+        }
+
+        .projection-note {
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 10px;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            padding: 0 8px;
+        }
+
+        @media (min-width: 768px) {
+            .projection-note {
+                font-size: 12.5px;
+                margin-top: 14px;
+            }
+        }
+
+        .projection-note strong {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        /* ============================================================
+                   8. SEÇÕES DE DETALHES (COM SEPARAÇÃO MELHORADA)
+                   ============================================================ */
+        .detail-section {
+            padding: 56px 0;
+            min-height: auto;
+            display: flex;
+            align-items: center;
+            background: var(--bg);
+        }
+
+        @media (min-width: 768px) {
+            .detail-section {
+                padding: 90px 0;
+                min-height: 100vh;
+            }
+        }
+
+        .detail-section:nth-child(odd) {
+            background: #faf7f2;
+        }
+
+        .detail-content {
+            max-width: 760px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 4px;
+        }
+
+        .detail-content .eyebrow {
+            justify-content: center;
+        }
+
+        .detail-content h2 {
+            font-size: clamp(24px, 5.5vw, 36px);
+            letter-spacing: -0.03em;
+            margin-top: 10px;
+            font-weight: 550;
+            line-height: 1.1;
+        }
+
+        @media (min-width: 768px) {
+            .detail-content h2 {
+                font-size: clamp(28px, 3.4vw, 40px);
+                margin-top: 12px;
+            }
+        }
+
+        .detail-content .desc-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 12px;
+            line-height: 1.7;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+            padding: 0 4px;
+        }
+
+        @media (min-width: 768px) {
+            .detail-content .desc-text {
+                font-size: 17px;
+                margin-top: 16px;
+                max-width: 600px;
+            }
+        }
+
+        /* Separador entre texto e lista */
+        .detail-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--gold);
+            margin: 24px auto 20px;
+            opacity: 0.3;
+            border-radius: 2px;
+        }
+
+        @media (min-width: 768px) {
+            .detail-divider {
+                margin: 32px auto 28px;
+                width: 48px;
+            }
+        }
+
+        .detail-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            max-width: 100%;
+            text-align: left;
+        }
+
+        @media (min-width: 480px) {
+            .detail-content ul {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px 24px;
+                max-width: 600px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .detail-content ul {
+                gap: 14px 32px;
+            }
+        }
+
+        .detail-content li {
+            font-size: 13px;
+            color: var(--text-secondary);
+            padding-left: 18px;
+            position: relative;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        @media (min-width: 768px) {
+            .detail-content li {
+                font-size: 15px;
+                padding-left: 22px;
+                line-height: 1.6;
+            }
+        }
+
+        .detail-content li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        /* ============================================================
+                   9. ALINHAMENTO COMERCIAL
+                   ============================================================ */
+        .align-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        @media (min-width: 480px) {
+            .align-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .align-grid {
+                gap: 24px;
+                margin-top: 44px;
+            }
+        }
+
+        .align-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px 18px;
+            transition: all 0.35s ease;
+        }
+
+        @media (min-width: 768px) {
+            .align-card {
+                padding: 30px 28px;
+            }
+        }
+
+        .align-card:hover {
+            border-color: var(--gold-light);
+            box-shadow: 0 6px 28px rgba(198, 156, 109, 0.10);
+        }
+
+        .align-card h3 {
+            font-size: 16px;
+            margin-top: 6px;
+            font-weight: 550;
+            letter-spacing: -0.01em;
+        }
+
+        @media (min-width: 768px) {
+            .align-card h3 {
+                font-size: 18px;
+                margin-top: 8px;
+            }
+        }
+
+        .align-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        @media (min-width: 768px) {
+            .align-card ul {
+                margin: 14px 0 0;
+                gap: 8px;
+            }
+        }
+
+        .align-card li {
+            font-size: 13px;
+            color: var(--text-secondary);
+            padding-left: 18px;
+            position: relative;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        @media (min-width: 768px) {
+            .align-card li {
+                font-size: 14px;
+                padding-left: 20px;
+                line-height: 1.6;
+            }
+        }
+
+        .align-card li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        .align-whatsapp {
+            text-align: center;
+            margin-top: 20px;
+            padding: 16px;
+            background: rgba(198, 156, 109, 0.04);
+            border-radius: var(--radius);
+            border: 1px solid rgba(198, 156, 109, 0.08);
+        }
+
+        @media (min-width: 768px) {
+            .align-whatsapp {
+                margin-top: 32px;
+                padding: 20px;
+            }
+        }
+
+        .align-whatsapp p {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        @media (min-width: 768px) {
+            .align-whatsapp p {
+                font-size: 14px;
+            }
+        }
+
+        .align-whatsapp strong {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        /* ============================================================
+                   10. INVESTIMENTO (SOMENTE R$ 3.000/mês)
+                   ============================================================ */
+        .invest-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1px;
+            margin-top: 28px;
+            background: var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        @media (min-width: 480px) {
+            .invest-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .invest-grid {
+                margin-top: 44px;
+            }
+        }
+
+        .invest-card {
+            background: var(--bg-card);
+            padding: 24px 20px;
+        }
+
+        @media (min-width: 768px) {
+            .invest-card {
+                padding: 34px 30px;
+            }
+        }
+
+        .invest-card.highlight {
+            background: #faf7f2;
+        }
+
+        .invest-card .tag {
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .invest-card .big {
+            font-size: clamp(32px, 7vw, 44px);
+            font-weight: 550;
+            color: var(--gold);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        @media (min-width: 768px) {
+            .invest-card .big {
+                font-size: clamp(38px, 4vw, 48px);
+            }
+        }
+
+        .invest-card .big small {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        @media (min-width: 768px) {
+            .invest-card .big small {
+                font-size: 15px;
+            }
+        }
+
+        .invest-card p {
+            font-size: 12.5px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        @media (min-width: 768px) {
+            .invest-card p {
+                font-size: 13.5px;
+                margin-top: 10px;
+                line-height: 1.7;
+            }
+        }
+
+        .invest-total {
+            margin-top: 1px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .invest-total {
+                padding: 20px 30px;
+                gap: 12px;
+            }
+        }
+
+        .invest-total .label {
+            font-size: 13px;
+            font-weight: 450;
+            color: var(--text-secondary);
+        }
+
+        @media (min-width: 768px) {
+            .invest-total .label {
+                font-size: 14px;
+            }
+        }
+
+        .invest-total .value {
+            font-size: 18px;
+            font-weight: 550;
+            color: var(--gold);
+            letter-spacing: -0.02em;
+        }
+
+        @media (min-width: 768px) {
+            .invest-total .value {
+                font-size: 22px;
+            }
+        }
+
+        /* ============================================================
+                   11. RADAR INTERATIVO
+                   ============================================================ */
+        .radar-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto 0;
+            width: 120px;
+            height: 120px;
+            position: relative;
+        }
+
+        @media (min-width: 480px) {
+            .radar-container {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .radar-container {
+                width: 180px;
+                height: 180px;
+                margin: 28px auto 0;
+            }
+        }
+
+        .radar {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            border-radius: 50%;
+            border: 1.5px solid rgba(198, 156, 109, 0.15);
+            background: radial-gradient(circle at center, rgba(198, 156, 109, 0.03) 0%, transparent 70%);
+        }
+
+        .radar-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 0.5px solid rgba(198, 156, 109, 0.08);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .radar-ring:nth-child(1) {
+            width: 33%;
+            height: 33%;
+        }
+        .radar-ring:nth-child(2) {
+            width: 66%;
+            height: 66%;
+        }
+        .radar-ring:nth-child(3) {
+            width: 100%;
+            height: 100%;
+        }
+
+        .radar-sweep {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+            transform-origin: 0% 50%;
+            animation: radarSweep 3s linear infinite;
+            border-radius: 2px;
+            opacity: 0.6;
+        }
+
+        @keyframes radarSweep {
+            0% {
+                transform: translate(0, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(0, -50%) rotate(360deg);
+            }
+        }
+
+        .radar-dots {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .radar-dot {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: radarPing 3.5s ease-in-out infinite;
+            box-shadow: 0 0 8px rgba(198, 156, 109, 0.3);
+        }
+
+        @media (min-width: 768px) {
+            .radar-dot {
+                width: 6px;
+                height: 6px;
+            }
+        }
+
+        .radar-dot:nth-child(1) {
+            top: 18%;
+            left: 65%;
+            animation-delay: 0.2s;
+        }
+        .radar-dot:nth-child(2) {
+            top: 55%;
+            left: 20%;
+            animation-delay: 0.9s;
+        }
+        .radar-dot:nth-child(3) {
+            top: 75%;
+            left: 70%;
+            animation-delay: 1.6s;
+        }
+        .radar-dot:nth-child(4) {
+            top: 30%;
+            left: 30%;
+            animation-delay: 2.3s;
+        }
+        .radar-dot:nth-child(5) {
+            top: 10%;
+            left: 45%;
+            animation-delay: 3.0s;
+        }
+        .radar-dot:nth-child(6) {
+            top: 65%;
+            left: 55%;
+            animation-delay: 0.5s;
+        }
+        .radar-dot:nth-child(7) {
+            top: 45%;
+            left: 80%;
+            animation-delay: 1.2s;
+        }
+        .radar-dot:nth-child(8) {
+            top: 85%;
+            left: 40%;
+            animation-delay: 1.9s;
+        }
+
+        @keyframes radarPing {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            20% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            60% {
+                opacity: 0.8;
+                transform: scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+        }
+
+        .radar-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 16px rgba(198, 156, 109, 0.3);
+            animation: radarPulse 2s ease-in-out infinite;
+        }
+
+        @media (min-width: 768px) {
+            .radar-center {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        @keyframes radarPulse {
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.6);
+                opacity: 0.3;
+            }
+        }
+
+        .radar-label {
+            text-align: center;
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 6px;
+            letter-spacing: 0.06em;
+            font-weight: 400;
+        }
+
+        @media (min-width: 768px) {
+            .radar-label {
+                font-size: 11px;
+                margin-top: 8px;
+            }
+        }
+
+        /* ============================================================
+                   12. RESUMO
+                   ============================================================ */
+        .cmp-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1px;
+            margin-top: 28px;
+            background: var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        @media (min-width: 480px) {
+            .cmp-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .cmp-grid {
+                margin-top: 44px;
+            }
+        }
+
+        .cmp-col {
+            padding: 24px 20px;
+            background: var(--bg-card);
+        }
+
+        @media (min-width: 768px) {
+            .cmp-col {
+                padding: 34px 30px;
+            }
+        }
+
+        .cmp-col.before {
+            background: #f5f0eb;
+        }
+
+        .cmp-col.after {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .cmp-col.after h4 {
+            color: var(--gold-light);
+        }
+
+        .cmp-col h4 {
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 500;
+            color: var(--wine);
+        }
+
+        @media (min-width: 768px) {
+            .cmp-col h4 {
+                font-size: 11px;
+            }
+        }
+
+        .cmp-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .cmp-col ul {
+                margin: 16px 0 0;
+                gap: 10px;
+            }
+        }
+
+        .cmp-col li {
+            font-size: 13px;
+            padding-left: 0;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        @media (min-width: 768px) {
+            .cmp-col li {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        }
+
+        .cmp-col.before li {
+            color: var(--text-secondary);
+        }
+
+        .cmp-col.after li {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        /* ============================================================
+                   13. TIMELINE
+                   ============================================================ */
+        .timeline {
+            margin-top: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .timeline {
+                margin-top: 52px;
+            }
+        }
+
+        .tl-row {
+            display: grid;
+            grid-template-columns: 44px 1fr;
+            gap: 12px;
+            padding: 12px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (min-width: 768px) {
+            .tl-row {
+                grid-template-columns: 56px 1fr;
+                gap: 18px;
+                padding: 16px 0;
+            }
+        }
+
+        .tl-row:last-child {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tl-row .step {
+            font-size: 17px;
+            font-weight: 500;
+            color: var(--gold);
+            letter-spacing: -0.02em;
+        }
+
+        @media (min-width: 768px) {
+            .tl-row .step {
+                font-size: 20px;
+            }
+        }
+
+        .tl-row .body b {
+            display: block;
+            font-size: 13px;
+            font-weight: 550;
+            margin-bottom: 1px;
+        }
+
+        @media (min-width: 768px) {
+            .tl-row .body b {
+                font-size: 14.5px;
+            }
+        }
+
+        .tl-row .body span {
+            font-size: 12.5px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        @media (min-width: 768px) {
+            .tl-row .body span {
+                font-size: 13.5px;
+            }
+        }
+
+        /* ============================================================
+                   14. CTA
+                   ============================================================ */
+        .cta {
+            background: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            padding: 60px 0 40px;
+            min-height: auto;
+        }
+
+        @media (min-width: 768px) {
+            .cta {
+                padding: 96px 0 64px;
+            }
+        }
+
+        .cta h2 {
+            font-size: clamp(24px, 5.5vw, 36px);
+            max-width: 16ch;
+            margin: 10px auto 0;
+            letter-spacing: -0.03em;
+            font-weight: 550;
+            line-height: 1.1;
+        }
+
+        @media (min-width: 768px) {
+            .cta h2 {
+                font-size: clamp(28px, 3.6vw, 42px);
+                margin: 14px auto 0;
+            }
+        }
+
+        .cta p {
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        @media (min-width: 768px) {
+            .cta p {
+                margin-top: 14px;
+                font-size: 16px;
+            }
+        }
+
+        .cta-btn {
+            display: inline-block;
+            margin-top: 20px;
+            background: var(--gold);
+            color: #fff;
+            padding: 11px 28px;
+            font-weight: 500;
+            font-size: 13px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.02em;
+        }
+
+        @media (min-width: 768px) {
+            .cta-btn {
+                margin-top: 30px;
+                padding: 13px 38px;
+                font-size: 14.5px;
+            }
+        }
+
+        .cta-btn:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(198, 156, 109, 0.25);
+        }
+
+        .cta-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 24px;
+            align-items: center;
+        }
+
+        @media (min-width: 480px) {
+            .cta-contacts {
+                flex-direction: row;
+                justify-content: center;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .cta-contacts {
+                gap: 40px;
+                margin-top: 32px;
+            }
+        }
+
+        .cta-contacts a {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        @media (min-width: 768px) {
+            .cta-contacts a {
+                font-size: 14px;
+                gap: 8px;
+            }
+        }
+
+        .cta-contacts a:hover {
+            color: var(--gold-light);
+        }
+
+        .cta-contacts .icon {
+            font-size: 16px;
+            color: var(--gold);
+        }
+
+        @media (min-width: 768px) {
+            .cta-contacts .icon {
+                font-size: 18px;
+            }
+        }
+
+        footer {
+            background: #1a1a1a;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            padding: 16px 0;
+            text-align: center;
+            font-size: 10.5px;
+            letter-spacing: 0.06em;
+            font-weight: 400;
+        }
+
+        @media (min-width: 768px) {
+            footer {
+                padding: 22px 0;
+                font-size: 11.5px;
+            }
+        }
+
+        /* ============================================================
+                   15. EFEITO DE FADE ENTRE DOBRAS
+                   ============================================================ */
+        .section-fade {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
+                transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .section-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0.06;
+            margin: 0 auto;
+            max-width: 60%;
+        }
+
+        @media (min-width: 768px) {
+            .section-divider {
+                opacity: 0.08;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+    NAVEGAÇÃO
+    ============================================================ -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <div class="brand">PAR<span>HUB</span></div>
+
+            <div class="nav-links">
+                <a href="#hero">Início</a>
+                <a href="#ecossistema">Ecossistema</a>
+                <a href="#prospeccao">Prospecção</a>
+                <a href="#atendimento">Atendimento</a>
+                <a href="#resultado">Resultado</a>
+                <a href="#investimento">Investimento</a>
+            </div>
+
+            <a href="#cta" class="nav-cta">Falar com a PAR HUB</a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#hero" class="mobile-link">Início</a>
+        <a href="#ecossistema" class="mobile-link">Ecossistema</a>
+        <a href="#prospeccao" class="mobile-link">Prospecção</a>
+        <a href="#atendimento" class="mobile-link">Atendimento</a>
+        <a href="#resultado" class="mobile-link">Resultado</a>
+        <a href="#investimento" class="mobile-link">Investimento</a>
+        <a href="#cta" class="mobile-cta">Falar com a PAR HUB</a>
+    </div>
+
+    <!-- ============================================================
+    HERO
+    ============================================================ -->
+    <section class="hero section-fade" id="hero">
+        <div class="wrap">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="eyebrow">Proposta Comercial · Dra. Maria Clara Reis</div>
+                    <h1>O tráfego não é o problema.<br><span class="highlight">O funil, sim.</span></h1>
+                    <p>Sua clínica já atrai o volume certo de leads. O que falta é a estrutura para transformar interesse em agenda cheia — com dados, automação e um processo comercial à altura do seu ticket.</p>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <div class="num">155</div>
+                            <div class="label">Leads gerados por mês, hoje</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="num">&lt;5%</div>
+                            <div class="label">Taxa de conversão atual</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="num">30%</div>
+                            <div class="label">Meta com estrutura completa</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-photo">
+                    <div class="photo-frame">
+                        <img src="https://github.com/closermatheus-creator/parhubagencia/raw/bdea21b1e357147274cc72c2b6524fbb4e7e06ed/foto%20marica%20clara.jpeg" alt="Dra. Maria Clara Reis" loading="lazy" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============================================================
+    ECOSSISTEMA
+    ============================================================ -->
+    <section class="ecosystem section-fade" id="ecossistema">
+        <div class="wrap">
+            <div class="eco-header">
+                <div class="eyebrow center">Ecossistema PAR HUB</div>
+                <h2>Do clique ao paciente<br><span>um sistema contínuo</span></h2>
+                <p>Cada etapa conectada à seguinte — com dados, automação e alinhamento comercial para transformar interesse em resultado.</p>
+            </div>
+
+            <div class="journey">
+
+                <div class="journey-item">
+                    <span class="dot"></span>
+                    <div class="left">
+                        <span class="step">01</span>
+                        <h3>Tráfego</h3>
+                        <p>Meta Ads + Google com linguagem de conversão, não apenas engajamento.</p>
+                        <span class="tag">Prospecção</span>
+                    </div>
+                    <div class="right">
+                        <span class="step">02</span>
+                        <h3>Landing Pages</h3>
+                        <p>Páginas dedicadas por procedimento para capturar intenção desde o primeiro clique.</p>
+                        <span class="tag">Captura</span>
+                    </div>
+                </div>
+
+                <div class="journey-item">
+                    <span class="dot"></span>
+                    <div class="left">
+                        <span class="step">03</span>
+                        <h3>Qualificação</h3>
+                        <p>Automação aplicada ao link da bio e anúncios. Perguntas sobre necessidade e expectativa que separam curiosos de pacientes reais.</p>
+                        <span class="tag">Filtro</span>
+                    </div>
+                    <div class="right">
+                        <span class="step">04</span>
+                        <h3>CRM &amp; Dados</h3>
+                        <p>Histórico completo, follow-up automatizado e dados que retroalimentam o sistema.</p>
+                        <span class="tag">Inteligência</span>
+                    </div>
+                </div>
+
+                <div class="journey-item">
+                    <span class="dot"></span>
+                    <div class="left">
+                        <span class="step">05</span>
+                        <h3>Atendimento</h3>
+                        <p>Equipe preparada com CRM, scripts e cadência definida para máxima conversão.</p>
+                        <span class="tag">Relacionamento</span>
+                    </div>
+                    <div class="right">
+                        <span class="step">06</span>
+                        <h3>Resultado</h3>
+                        <p>Pacientes high ticket com agenda cheia e faturamento previsível.</p>
+                        <span class="tag">Conversão</span>
+                    </div>
+                </div>
+
+                <div class="journey-item highlight">
+                    <span class="dot"></span>
+                    <div class="left">
+                        <span class="step" style="color:#7a2e3b;">⟡</span>
+                        <h3 style="color:#7a2e3b;">Alinhamento Comercial &amp; Marketing</h3>
+                        <p style="max-width:100%;">Treinamento da equipe · Cadência de follow-up · Prazos definidos · Sincronia entre marketing e vendas</p>
+                        <span class="tag wine">Diferencial PAR HUB</span>
+                    </div>
+                    <div class="right">
+                        <p style="font-size:12px;color:#b8a69a;letter-spacing:0.04em;margin-top:4px;">Comunicação via <strong style="color:var(--gold);">Grupo de WhatsApp</strong> para decisões rápidas</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RADAR -->
+            <div class="radar-container">
+                <div class="radar">
+                    <div class="radar-ring"></div>
+                    <div class="radar-ring"></div>
+                    <div class="radar-ring"></div>
+                    <div class="radar-sweep"></div>
+                    <div class="radar-dots">
+                        <span class="radar-dot"></span>
+                        <span class="radar-dot"></span>
+                        <span class="radar-dot"></span>
+                        <span class="radar-dot"></span>
+                        <span class="radar-dot"></span>
+                        <span class="radar-dot"></span>
+                        <span class="radar-dot"></span>
+                        <span class="radar-dot"></span>
+                    </div>
+                    <div class="radar-center"></div>
+                </div>
+            </div>
+            <p class="radar-label">Busca ativa por leads qualificados</p>
+
+            <!-- PROJEÇÃO -->
+            <div class="projection-grid" id="projectionBox">
+                <div class="p-item">
+                    <div class="num" data-count="10">0<small>%</small></div>
+                    <div class="label">Conversão com estrutura<br>parcial (meta inicial)</div>
+                    <div class="revenue">R$ 62k – R$ 69k <small>/mês</small></div>
+                </div>
+                <div class="p-item highlight">
+                    <div class="num" data-count="20">0<small>%</small></div>
+                    <div class="label">Conversão com estrutura<br>completa (meta realista)</div>
+                    <div class="revenue">R$ 124k – R$ 139k <small>/mês</small></div>
+                </div>
+                <div class="p-item">
+                    <div class="num" data-count="30">0<small>%</small></div>
+                    <div class="label">Conversão com estrutura<br>otimizada (meta ambiciosa)</div>
+                    <div class="revenue">R$ 186k – R$ 209k <small>/mês</small></div>
+                </div>
+            </div>
+
+            <p class="projection-note">
+                Projeção baseada em <strong>155 leads/mês</strong> e ticket médio de <strong>R$ 4.000 – R$ 4.500</strong>
+            </p>
+
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============================================================
+    PROSPECÇÃO
+    ============================================================ -->
+    <section class="detail-section section-fade" id="prospeccao">
+        <div class="wrap">
+            <div class="detail-content">
+                <div class="eyebrow center">01 · Prospecção</div>
+                <h2>Tráfego que atrai<br>quem realmente compra</h2>
+                <p class="desc-text">Campanhas Meta Ads reestruturadas com linguagem voltada à conversão — não apenas ao engajamento. Landing pages por procedimento para capturar intenção e qualificar desde o primeiro clique.</p>
+                <div class="detail-divider"></div>
+                <ul>
+                    <li>Gestão de campanhas Meta Ads com foco em conversão</li>
+                    <li>Landing pages dedicadas por procedimento</li>
+                    <li>Fortalecimento do posicionamento no Google (SEO + SRO)</li>
+                    <li>Linguagem alinhada ao público high ticket</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============================================================
+    ATENDIMENTO
+    ============================================================ -->
+    <section class="detail-section section-fade" id="atendimento">
+        <div class="wrap">
+            <div class="detail-content">
+                <div class="eyebrow center">02 · Atendimento &amp; Qualificação</div>
+                <h2>Automação que filtra<br>e qualifica em tempo real</h2>
+                <p class="desc-text">Automação aplicada ao link da bio e anúncios. Perguntas sobre necessidade e expectativa que separam curiosos de pacientes reais — liberando sua equipe para o que importa.</p>
+                <div class="detail-divider"></div>
+                <ul>
+                    <li>Fluxo de qualificação via automação</li>
+                    <li>Aplicado também ao link da bio e anúncios</li>
+                    <li>Perguntas sobre necessidade e expectativa</li>
+                    <li>Auditorias periódicas de cliente oculto</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============================================================
+    RESULTADO
+    ============================================================ -->
+    <section class="detail-section section-fade" id="resultado">
+        <div class="wrap">
+            <div class="detail-content">
+                <div class="eyebrow center">03 · Resultado &amp; Dados</div>
+                <h2>CRM que centraliza<br>e retroalimenta o sistema</h2>
+                <p class="desc-text">Um CRM que centraliza cada contato com histórico completo — e devolve dados reais para o algoritmo do Meta Ads, ensinando-o a trazer mais do perfil que realmente fecha.</p>
+                <div class="detail-divider"></div>
+                <ul>
+                    <li>CRM integrado com histórico completo por lead</li>
+                    <li>Agenda sincronizada, sem conflitos</li>
+                    <li>Dados retroalimentando o Meta Ads</li>
+                    <li>Cadência de follow-up automatizada</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============================================================
+    ALINHAMENTO COMERCIAL
+    ============================================================ -->
+    <section class="detail-section section-fade" style="background:var(--bg);" id="alinhamento">
+        <div class="wrap">
+            <div style="text-align:center;max-width:700px;margin:0 auto;">
+                <div class="eyebrow center">Alinhamento Comercial &amp; Marketing</div>
+                <h2 style="font-size:clamp(24px,5.5vw,36px);margin-top:8px;font-weight:550;letter-spacing:-0.03em;">O elo entre tráfego e fechamento</h2>
+                <p style="color:var(--text-secondary);margin-top:8px;font-size:14px;font-weight:400;">Marketing e vendas sincronizados para maximizar a conversão em cada etapa do funil.</p>
+            </div>
+
+            <div class="align-grid">
+                <div class="align-card">
+                    <div class="tag">Treinamento &amp; Processo</div>
+                    <h3>Equipe preparada para converter</h3>
+                    <ul>
+                        <li>Treinamento completo no uso do CRM</li>
+                        <li>Definição de cadência de follow-up (D1, D3, D7, D15, D30)</li>
+                        <li>Prazos exatos para cada etapa do funil</li>
+                        <li>Scripts de abordagem qualificada</li>
+                    </ul>
+                </div>
+                <div class="align-card">
+                    <div class="tag">Sincronia &amp; Métricas</div>
+                    <h3>Marketing e vendas integrados</h3>
+                    <ul>
+                        <li>Alinhamento semanal entre equipes</li>
+                        <li>Feedback de dados do CRM para otimização de campanhas</li>
+                        <li>Metas compartilhadas e acompanhamento de resultados</li>
+                        <li>Auditoria de cliente oculto para qualidade do atendimento</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="align-whatsapp">
+                <p>Comunicação estratégica em <strong>Grupo de WhatsApp</strong> para decisões rápidas e alinhamento entre todos os envolvidos.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============================================================
+    INVESTIMENTO — SOMENTE R$ 3.000/mês
+    ============================================================ -->
+    <section class="detail-section section-fade" id="investimento">
+        <div class="wrap">
+            <div style="text-align:center;max-width:650px;margin:0 auto;">
+                <div class="eyebrow center">O Investimento</div>
+                <h2 style="font-size:clamp(24px,5.5vw,36px);margin-top:8px;font-weight:550;letter-spacing:-0.03em;">Uma estrutura completa<br>por um valor acessível</h2>
+                <p style="color:var(--text-secondary);margin-top:8px;font-size:14px;font-weight:400;">A PAR HUB entrega um ecossistema completo de tráfego, automação, CRM e consultoria — tudo em um único investimento mensal.</p>
+            </div>
+
+            <div class="invest-grid">
+                <div class="invest-card highlight" style="grid-column:1 / -1;">
+                    <span class="tag">Investimento PAR HUB</span>
+                    <div class="big">R$ 3.000<small>/mês</small></div>
+                    <p>Tráfego pago, landing pages, automação de qualificação, CRM integrado, posicionamento no Google (SEO + SRO), consultoria de posicionamento nas redes sociais e auditoria de cliente oculto — tudo incluso, sem taxa de implementação.</p>
+                </div>
+            </div>
+
+            <div class="invest-total">
+                <span class="label">Investimento mensal PAR HUB</span>
+                <span class="value">R$ 3.000 / mês</span>
+            </div>
+
+            <p style="text-align:center;font-size:12.5px;color:var(--text-muted);margin-top:12px;font-weight:400;">
+                Verba de mídia paga (Meta Ads) é investida separadamente, com conta 100% sua.
+            </p>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============================================================
+    RESUMO
+    ============================================================ -->
+    <section class="detail-section section-fade" id="resumo">
+        <div class="wrap">
+            <div style="text-align:center;max-width:650px;margin:0 auto;">
+                <div class="eyebrow center">Resumo Executivo</div>
+                <h2 style="font-size:clamp(24px,5.5vw,36px);margin-top:8px;font-weight:550;letter-spacing:-0.03em;">O que muda, do clique ao paciente</h2>
+            </div>
+
+            <div class="cmp-grid">
+                <div class="cmp-col before">
+                    <h4>Hoje</h4>
+                    <ul>
+                        <li>Conversão abaixo de 5%</li>
+                        <li>Controle manual por planilha</li>
+                        <li>Leads chegam sem qualificação</li>
+                        <li>Tráfego e atendimento desconectados</li>
+                        <li>Sem rastreio de origem por lead</li>
+                    </ul>
+                </div>
+                <div class="cmp-col after">
+                    <h4>Com a estrutura PAR HUB</h4>
+                    <ul>
+                        <li>Conversão projetada: 10% a 30%</li>
+                        <li>CRM com histórico e auditoria</li>
+                        <li>Automação filtra antes do contato humano</li>
+                        <li>Dados circulando entre marketing e vendas</li>
+                        <li>Landing pages orientadas a fechamento</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="tl-row">
+                    <div class="step">01</div>
+                    <div class="body">
+                        <b>Aprovação da proposta</b>
+                        <span>Formalização e agenda da reunião de onboarding.</span>
+                    </div>
+                </div>
+                <div class="tl-row">
+                    <div class="step">02</div>
+                    <div class="body">
+                        <b>Implementação técnica</b>
+                        <span>CRM, automações e reestruturação do tráfego, com validação sua em cada etapa.</span>
+                    </div>
+                </div>
+                <div class="tl-row">
+                    <div class="step">03</div>
+                    <div class="body">
+                        <b>Dia 21 — operação no ar</b>
+                        <span>Estrutura completa validada e funcionando, pronta para escalar.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============================================================
+    CTA
+    ============================================================ -->
+    <section class="cta section-fade" id="cta">
+        <div class="wrap">
+            <div class="eyebrow center" style="color:var(--gold-light);">Próximo passo</div>
+            <h2>Vamos estruturar sua clínica<br>para crescer com previsibilidade.</h2>
+            <p>Reunião de onboarding para mapear a operação e iniciar as integrações.</p>
+            <a href="#" class="cta-btn">Falar com o time PAR HUB</a>
+
+            <div class="cta-contacts">
+                <a href="https://wa.me/5531985101959" target="_blank" rel="noopener">
+                    <span class="icon">⟡</span> Gregue: (31) 98510-1959
+                </a>
+                <a href="https://wa.me/5531984943305" target="_blank" rel="noopener">
+                    <span class="icon">⟡</span> Matheus: (31) 98494-3305
+                </a>
+                <a href="https://parhubagencia.vercel.app" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.4);">
+                    parhubagencia.vercel.app
+                </a>
+            </div>
+
+            <p style="margin-top:20px;font-size:10.5px;color:rgba(255,255,255,0.2);letter-spacing:0.08em;font-weight:400;">Estrutura pensada para clínicas de alto padrão</p>
+        </div>
+    </section>
+
+    <footer>
+        PAR HUB · Proposta Comercial · Dra. Maria Clara Reis
+    </footer>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script>
+        // Reveal
+        const revealElements = document.querySelectorAll('.journey-item, .projection-grid, .reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in', 'revealed');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.10, rootMargin: '0px 0px -20px 0px' });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Animate numbers
+        function animateNumbers() {
+            const items = document.querySelectorAll('.num[data-count]');
+            items.forEach(item => {
+                const target = parseInt(item.dataset.count);
+                const hasSymbol = item.querySelector('small') !== null;
+                let current = 0;
+                const duration = 1500;
+                const stepTime = 16;
+                const steps = duration / stepTime;
+                const increment = target / steps;
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    if (hasSymbol) {
+                        item.innerHTML = Math.floor(current) + '<small>%</small>';
+                    } else {
+                        item.textContent = Math.floor(current);
+                    }
+                }, stepTime);
+            });
+        }
+
+        const projectionBox = document.getElementById('projectionBox');
+        if (projectionBox) {
+            const projObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateNumbers();
+                        projObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.20 });
+            projObserver.observe(projectionBox);
+        }
+
+        // Fade sections
+        const fadeSections = document.querySelectorAll('.section-fade');
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+        fadeSections.forEach(section => fadeObserver.observe(section));
+
+        // Nav scroll
+        const nav = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 16);
+        }, { passive: true });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    closeMobileMenu();
+                }
+            });
+        });
+
+        // Mobile menu
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        function toggleMobileMenu() {
+            menuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+        }
+
+        function closeMobileMenu() {
+            menuToggle.classList.remove('active');
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', toggleMobileMenu);
+        }
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        mobileMenu.addEventListener('click', function(e) {
+            if (e.target === this) closeMobileMenu();
+        });
+
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (window.innerWidth >= 820) closeMobileMenu();
+            }, 200);
+        });
+    </script>
+
+</body>
+</html>
