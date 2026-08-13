@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <title>PAR HUB × Krarrô — Proposta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #fcfaf8;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #1a1a1a;
+      line-height: 1.5;
+      padding: 40px 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid #eae7e3;
+      padding-bottom: 24px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: #1a1a1a;
+    }
+    .brand span {
+      color: #b4936b;
+    }
+
+    .header-meta {
+      text-align: right;
+    }
+    .client-name {
+      font-size: 22px;
+      font-weight: 550;
+      letter-spacing: -0.02em;
+    }
+    .header-meta .date {
+      font-size: 13px;
+      color: #7a736b;
+      margin-top: 4px;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 16px 0 24px;
+    }
+
+    @media (max-width: 600px) {
+      .values-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    .value-card {
+      background: #ffffff;
+      border: 1px solid #e9e5e0;
+      border-radius: 12px;
+      padding: 28px 24px 24px;
+      transition: border-color 0.15s ease;
+    }
+
+    .value-card .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #b4936b;
+      border: 1px solid #e3d9cf;
+      padding: 2px 12px;
+      border-radius: 40px;
+      background: #fcf9f6;
+    }
+
+    .value-card .price {
+      font-size: 34px;
+      font-weight: 620;
+      letter-spacing: -0.02em;
+      margin-top: 14px;
+      color: #1a1a1a;
+    }
+    .value-card .price small {
+      font-size: 14px;
+      font-weight: 450;
+      color: #7a736b;
+      margin-left: 4px;
+    }
+    .value-card .price .plus {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #9f7b56;
+      margin-top: 6px;
+      letter-spacing: 0;
+    }
+
+    .value-card .desc {
+      font-size: 13px;
+      color: #4d4842;
+      margin-top: 10px;
+      border-top: 1px solid #f0ece8;
+      padding-top: 14px;
+    }
+
+    .total-bar {
+      background: #1a1a1a;
+      color: #ffffff;
+      border-radius: 12px;
+      padding: 20px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .total-bar .label {
+      font-size: 12px;
+      font-weight: 450;
+      letter-spacing: 0.04em;
+      opacity: 0.7;
+      text-transform: uppercase;
+    }
+    .total-bar .value {
+      font-size: 26px;
+      font-weight: 620;
+      letter-spacing: -0.02em;
+    }
+    .total-bar .value small {
+      font-size: 14px;
+      font-weight: 450;
+      opacity: 0.65;
+      margin-left: 4px;
+    }
+
+    .media-note {
+      font-size: 12px;
+      color: #7a736b;
+      text-align: left;
+      padding-left: 4px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #eae7e3;
+      margin: 44px 0 40px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #b4936b;
+      margin-bottom: 4px;
+    }
+
+    .section-headline {
+      font-size: 22px;
+      font-weight: 550;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .section-sub {
+      font-size: 14px;
+      color: #4d4842;
+      margin-bottom: 24px;
+    }
+
+    .service-block {
+      background: #ffffff;
+      border: 1px solid #e9e5e0;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 16px;
+    }
+
+    .service-block .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .service-block .head h3 {
+      font-size: 16px;
+      font-weight: 550;
+      letter-spacing: -0.01em;
+    }
+    .service-block .price-tag {
+      background: #f3efe9;
+      color: #1a1a1a;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 14px;
+      border-radius: 40px;
+      letter-spacing: 0.02em;
+    }
+
+    .service-block ul {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+    .service-block ul li {
+      font-size: 13.5px;
+      color: #4d4842;
+      padding-left: 18px;
+      position: relative;
+    }
+    .service-block ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #b4936b;
+    }
+
+    .steps-grid {
+      display: grid;
+      gap: 10px;
+    }
+    .step-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: #ffffff;
+      border: 1px solid #e9e5e0;
+      border-radius: 10px;
+      padding: 14px 18px;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      background: #f3efe9;
+      color: #1a1a1a;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .step-text strong {
+      font-size: 14px;
+      font-weight: 550;
+    }
+    .step-text span {
+      display: block;
+      font-size: 12.5px;
+      color: #7a736b;
+      margin-top: 2px;
+    }
+
+    .footer {
+      margin-top: 48px;
+      padding-top: 28px;
+      border-top: 1px solid #eae7e3;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+    }
+    .footer .brand-small {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+    .footer .brand-small span {
+      color: #b4936b;
+    }
+    .footer-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+      font-size: 12.5px;
+      color: #4d4842;
+    }
+    .footer-contacts a {
+      color: #1a1a1a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.1s;
+    }
+    .footer-contacts a:hover {
+      border-bottom-color: #b4936b;
+    }
+    .footer-note {
+      font-size: 11px;
+      color: #9e968e;
+      margin-top: 12px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="brand">PAR<span>HUB</span></div>
+    <div class="header-meta">
+      <div class="client-name">Instituto de Beleza Krarrô</div>
+      <div class="date">Proposta Comercial · Rangel Morais da Silva · 13 de agosto de 2026</div>
+    </div>
+  </div>
+
+  <!-- INVESTIMENTO -->
+  <div class="section-title">Investimento</div>
+  <div class="values-grid">
+    <div class="value-card">
+      <span class="tag">Gestão de Tráfego Pago</span>
+      <div class="price">R$ 850 <small>/mês</small></div>
+      <div class="desc">Campanhas Meta Ads, criação de criativos e otimização contínua.</div>
+    </div>
+    <div class="value-card">
+      <span class="tag">Atendente / Vendedora</span>
+      <div class="price">R$ 1.600 <small>/mês</small><span class="plus">+ comissão sobre venda (a definir)</span></div>
+      <div class="desc">Atendimento e vendas no WhatsApp e Instagram, de segunda a sexta, das 8h às 18h.</div>
+    </div>
+  </div>
+
+  <div class="total-bar">
+    <span class="label">Investimento mensal PAR HUB</span>
+    <span class="value">R$ 2.450 <small>/mês + comissão</small></span>
+  </div>
+  <div class="media-note">Verba de mídia paga (Meta Ads) é investida separadamente, diretamente na conta do salão.</div>
+
+  <div class="divider"></div>
+
+  <!-- DETALHES -->
+  <div class="section-title">Escopo</div>
+  <div class="section-headline">O que está incluso</div>
+  <div class="section-sub">Resumo do que foi alinhado na conversa com Rangel para as duas frentes de trabalho.</div>
+
+  <div class="service-block">
+    <div class="head">
+      <h3>Gestão de Tráfego Pago</h3>
+      <span class="price-tag">R$ 850/mês</span>
+    </div>
+    <ul>
+      <li>Campanhas rodando dentro da conta do salão — total transparência</li>
+      <li>Criação e edição de criativos a partir das fotos e vídeos enviados</li>
+      <li>Testes semanais de criativos e públicos, com ajustes contínuos</li>
+      <li>Acompanhamento diário — sem "deixar a campanha rodando sem olhar"</li>
+      <li>Foco em reduzir custo por lead e aumentar a taxa de conversão</li>
+      <li>Campanha já pode contemplar a divulgação da mudança para Venda Nova</li>
+    </ul>
+  </div>
+
+  <div class="service-block">
+    <div class="head">
+      <h3>Atendente / Vendedora</h3>
+      <span class="price-tag">R$ 1.600/mês + comissão</span>
+    </div>
+    <ul>
+      <li>Atendimento humano no WhatsApp e Instagram do salão</li>
+      <li>Horário: segunda a sexta, das 8h às 18h</li>
+      <li>Dupla função — qualifica o lead e conduz até o fechamento da venda</li>
+      <li>Apoiada por IA treinada com as informações e serviços do salão</li>
+      <li>Agendamento direto no CRM/agenda do salão</li>
+      <li>Comissão sobre vendas fechadas — percentual a ser definido em conjunto</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PRÓXIMOS PASSOS -->
+  <div class="section-title">Fluxo</div>
+  <div class="section-headline">Próximos passos</div>
+  <div class="section-sub">Como seguimos a partir da aprovação.</div>
+
+  <div class="steps-grid">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Aprovação da proposta</strong><span>Confirmação dos valores e início imediato, conforme combinado.</span></div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Envio de materiais</strong><span>Salão envia fotos, vídeos e informações dos serviços para treinar o atendimento e os criativos.</span></div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Estrutura no ar</strong><span>Campanhas ajustadas e atendente em operação, já contemplando a nova unidade em Venda Nova.</span></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="brand-small">PAR<span>HUB</span></div>
+    <div class="footer-contacts">
+      <a href="https://wa.me/5531984943305" target="_blank" rel="noopener">Matheus: (31) 98494-3305</a>
+      <a href="https://parhubagencia.vercel.app" target="_blank" rel="noopener">parhubagencia.vercel.app</a>
+    </div>
+    <div class="footer-note">PAR HUB · Proposta Comercial · Instituto de Beleza Krarrô</div>
+  </div>
+
+</div>
+</body>
+</html>
